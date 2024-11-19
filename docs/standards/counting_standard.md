@@ -22,9 +22,9 @@ description: Este documento describe las reglas y guías para contar líneas de 
 | Import múltiple | Sí | N | `import pandas, pyqt5` cuenta como N imports |
 | From import | Sí | 1 | `from module import a,b,c` cuenta como 1 |
 | **Comentarios** |
-| Comentarios en línea | Sí | 1 | `# comentario` |
-| Comentarios con código | Sí | 2 | `print("hola") # comentario` |
-| Docstrings | Sí | 1 | Comentarios multi-línea cuentan como 1 |
+| Comentarios en línea | No | 0 | `# comentario` |
+| Comentarios con código | Solo el código | 1 | `print("hola") # comentario` |
+| Docstrings | No | 0 | Comentarios multi-línea no cuentan |
 | **Código** |
 | Declaraciones simples | Sí | 1 | Una instrucción por línea |
 | Declaraciones múltiples | Sí | N | Una línea con múltiples instrucciones cuenta como N |
