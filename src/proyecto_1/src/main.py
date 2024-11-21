@@ -1,15 +1,16 @@
-"""
-Purpose: Entry point and CLI interface
+from core.file_reader import PythonFileReader
 
-Functions:
-- parse_arguments() -> ArgumentParser
-- main() -> None
-  - Handles command line arguments
-  - Orchestrates workflow between modules
-  - Displays results table
-  - Error handling and user feedback
+def main():
+    reader = PythonFileReader("input.py")
+    is_valid, error = reader.validate()
+    if not is_valid:
+        print(f"Error: {error}")
+    else:
+        lines, error = reader.read_lines()
+        if error:
+            print(f"Error: {error}")
+        else:
+            print(f"Read {lines} lines")
 
-Arguments:
-- file_path: Path to Python file
-- output: Optional JSON output path
-"""
+if __name__ == '__main__':
+    main()
