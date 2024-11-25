@@ -14,14 +14,12 @@ Este documento establece las convenciones para organizar y estructurar las impor
 - Separar grupos con una línea en blanco
 - Ordenar alfabéticamente dentro de cada grupo
 - Imports absolutos antes que relativos
-- Un import por línea
 
 ### Mejores Prácticas
 - Evitar imports circulares
 - No usar import *
 - Mantener imports al inicio del archivo
 - Limitar el uso a módulos específicos
-- Evitar imports dinámicos
 
 ### Ejemplos
 ```python
@@ -32,19 +30,19 @@ import sys
 import numpy as np
 import pandas as pd
 
-from myapp.core import settings
-from myapp.utils import helpers
+from app.core import settings
+from app.utils import helpers
 
 # Wrong
-from myapp.utils import *
-import sys, os
-import pandas as pd, numpy as np
+from app.utils import helpers
+import os
+from app.core import *
 ```
 
 ### Verificación
 - [ ] ¿Grupos separados correctamente?
 - [ ] ¿Orden alfabético en cada grupo?
-- [ ] ¿Un import por línea?
+- [ ] ¿Módulos concretos en lugar de *?
 - [ ] ¿Sin imports circulares o wildcards?
 
 ## 2. Agrupación de Imports
@@ -54,10 +52,8 @@ import pandas as pd, numpy as np
 - Mantener imports relacionados juntos
 - Usar alias consistentes y estándar
 - Evitar imports redundantes
-- Máximo 3 niveles de profundidad en imports
 
 ### Mejores Prácticas
-- Usar alias estándar (np, pd, plt)
 - Evitar imports anidados
 - Preferir imports explícitos
 - Mantener consistencia en todo el proyecto
@@ -68,12 +64,13 @@ import pandas as pd, numpy as np
 # Correct
 import numpy as np
 import pandas as pd
+import (scipy, sklearn, tensorflow)
 from matplotlib import pyplot as plt
 
-from myapp.models import (
-    User,
-    Profile,
-    Settings
+from aplicacion.models import (
+    Usuario,
+    Perfil,
+    Configuracion
 )
 
 # Wrong
@@ -107,11 +104,11 @@ from numpy.random import *
 ### Ejemplos
 ```python
 # Correct
-from myproject.utils.helpers import format_date
-from myproject.core.models import User
+from miproyecto.utils.helpers import formatear_fecha
+from miproyecto.core.models import Usuario
 
 # Wrong
-from ...utils.helpers import format_date
+from ...utils.helpers import formatear_fecha
 from .models import *
 ```
 
@@ -146,9 +143,9 @@ import matplotlib.pyplot as plt
 import tensorflow as tf
 
 # Wrong
-import numpy as numpy_lib
-import pandas as data
-import matplotlib.pyplot as graph
+import numpy as lib_numpy
+import pandas as datos
+import matplotlib.pyplot as grafico
 ```
 
 ### Verificación

@@ -26,10 +26,9 @@ description: Este documento describe las reglas y guías para contar líneas de 
 | Comentarios con código | Solo el código | 1 | `print("hola") # comentario` |
 | Docstrings | No | 0 | Comentarios multi-línea no cuentan |
 | **Código** |
-| Declaraciones simples | Sí | 1 | Una instrucción por línea |
-| Declaraciones múltiples | Sí | N | Una línea con múltiples instrucciones cuenta como N |
-| Líneas vacías | No | 0 | Espacios en blanco no cuentan |
+| Asignaciones simples | Sí | 1 | Una instrucción por línea |
 | Asignaciones multiples | Sí | N | `x, y, z = 1, 2, 3  # 3 LOC` |
+| Líneas vacías | No | 0 | Espacios en blanco no cuentan |
 | **Estructuras de Control** |
 | Definición de función | Sí | 1 | `def funcion():` |
 | Definición de clase | Sí | 1 | `class MiClase:` |
@@ -45,10 +44,12 @@ description: Este documento describe las reglas y guías para contar líneas de 
 
 | Caso                     | Conteo        | Ejemplo/Comentarios                                                                 |
 |--------------------------|---------------|------------------------------------------------------------------------------------|
-| **Declaraciones Multilínea** |               |                                                                                    |
-| Listas/Diccionarios multilínea | 1 por línea   | checkboxes = [<br>    self.checkbox1,    *# 4 LOC total*<br>    self.checkbox2,<br>    self.checkbox3<br>] |
-| Operaciones multilínea    | 1 por línea   | resultado = (x + y +   *# 2 LOC total*<br>            z + 5)        |
-| Strings multilínea        | 1 por línea   | Cada línea física dentro del string cuenta                                        |
+| **Asignaciones Multilínea** |               |                                                                                    |
+| Listas/Diccionarios | 1  | checkboxes = [<br>    self.checkbox1,    *# 1 LOC*<br>    self.checkbox2,<br>    self.checkbox3<br>] |
+| Comprehensions | 1 | results = [<br>    x * 2    *# 1 LOC*<br>    for x in range(10)   <br>] |
+| Generadores | 1 | results = (<br>    x * 2    *# 1 LOC*<br>    for x in range(10)   <br>) |
+| Operaciones    | 1   | resultado = (x + y +   *# 1 LOC total*<br>            z + 5)        |
+| Strings        | 1   | mensaje = "Este es un mensaje \ *# 1 LOC*<br>    muy largo que continúa \ <br> en múltiples líneas" |
 
 
 ## 4. Reglas Adicionales
@@ -57,7 +58,7 @@ description: Este documento describe las reglas y guías para contar líneas de 
    - Cada línea física separada por `\` cuenta como 1 LOC
    - Ejemplo:
      ```python
-     resultado = valor1 + \   # 2 LOC
+     resultado = valor1 + \   # 1 LOC
                 valor2
      ```
 
@@ -66,7 +67,7 @@ description: Este documento describe las reglas y guías para contar líneas de 
    - Ejemplo:
      ```python
      mi_tupla = (
-         valor1,          # 4 LOC total
+         valor1,          # 1 LOC total
          valor2,
          valor3
      )

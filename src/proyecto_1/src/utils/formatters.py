@@ -1,9 +1,9 @@
 """
 Functions:
-- format_table(metrics: FileMetrics) -> str
+- format_table(metrics: MetricasArchivo) -> str
   Creates ASCII table for display
   
-- format_json(metrics: FileMetrics) -> str
+- format_json(metrics: MetricasArchivo) -> str
   Pretty prints JSON format
   
 - format_error(error: Exception) -> str

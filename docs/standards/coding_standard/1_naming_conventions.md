@@ -12,28 +12,28 @@ Este documento establece las reglas fundamentales para nombrar elementos en cód
 - Usar snake_case para nombres de variables
 - Nombres descriptivos pero concisos
 - Evitar nombres de una sola letra excepto en loops
-- Usar nombres en inglés
+- Usar nombres en español
 - Nombres deben ser sustantivos o frases nominales
 
 ### Mejores Prácticas
 - Nombres que indiquen el propósito o contenido
 - Evitar abreviaturas no estándar
-- Prefijo 'is_' o 'has_' para booleanos
+- Prefijo 'es_' o 'tiene_' para booleanos
 - Usar plural para colecciones
 - Evitar nombres que se diferencien solo por mayúsculas
 
 ### Ejemplos
 ```python
-# Correct
-user_name = "John"
-is_active = True
-items_count = 42
-students_list = ["Ana", "Bob"]
+# Correcto
+nombre_usuario = "Juan"
+esta_activo = True
+contador_elementos = 42
+lista_estudiantes = ["Ana", "Bob"]
 
-# Wrong
-userName = "John"  # camelCase
-x = "John"        # no descriptive
-Usuario = "John"  # Spanish
+# Incorrecto
+userName = "Juan"  # camelCase
+x = "Juan"        # no descriptivo
+user = "Juan"     # inglés
 ```
 
 ### Verificación
@@ -48,28 +48,28 @@ Usuario = "John"  # Spanish
 ### Instrucciones
 - Usar snake_case
 - Nombres deben ser verbos o frases verbales
-- Máximo 30 caracteres
 - Documentar parámetros con type hints
 - Métodos mágicos limitados a __init__, __str__, __repr__
 
 ### Mejores Prácticas
 - Nombres que describan la acción
+- Máximo 30 caracteres
 - Prefijos comunes: get_, set_, is_, has_, validate_
 - Un solo propósito por función
 - Evitar argumentos posicionales ambiguos
 
 ### Ejemplos
 ```python
-# Correct
-def calculate_total(prices: list[float]) -> float:
-    return sum(prices)
+# Correcto
+def calcular_total(precios: list[float]) -> float:
+    return sum(precios)
 
-def is_valid_user(user_id: str) -> bool:
-    return user_id.isalnum()
+def es_usuario_valido(id_usuario: str) -> bool:
+    return id_usuario.isalnum()
 
-# Wrong
-def calc(): # no descriptive
-def ProcessData(): # PascalCase
+# Incorrecto
+def calc(): # no descriptivo
+def ProcessData(): # PascalCase y en inglés
 ```
 
 ### Verificación
@@ -95,18 +95,18 @@ def ProcessData(): # PascalCase
 
 ### Ejemplos
 ```python
-# Correct
-class UserAccount:
-    def __init__(self, username: str):
-        self.username = username
+# Correcto
+class CuentaUsuario:
+    def __init__(self, nombre_usuario: str):
+        self.nombre_usuario = nombre_usuario
 
-class FileParser:
-    """Handles parsing of different file formats."""
+class AnalizadorArchivo:
+    """Maneja el análisis de diferentes formatos de archivo."""
     pass
 
-# Wrong
-class user_account: # snake_case
-class data: # too generic
+# Incorrecto
+class user_account: # snake_case y en inglés
+class datos: # muy genérico
 ```
 
 ### Verificación
@@ -130,14 +130,14 @@ class data: # too generic
 
 ### Ejemplos
 ```python
-# Correct
-MAX_CONNECTIONS = 100
-DEFAULT_TIMEOUT_MS = 5000
-API_BASE_URL = "https://api.example.com"
+# Correcto
+CONEXIONES_MAXIMAS = 100
+TIEMPO_ESPERA_MS = 5000
+URL_BASE_API = "https://api.ejemplo.com"
 
-# Wrong
-MaxConnections = 100 # PascalCase
-timeout = 5000 # not constant-like
+# Incorrecto
+MaxConnections = 100 # PascalCase y en inglés
+tiempo_espera = 5000 # no parece constante
 ```
 
 ### Verificación

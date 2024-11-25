@@ -19,8 +19,6 @@ Usage:
     is_valid, error = is_valid_python_file("script.py")
 """
 
-import os
-
 from pathlib import Path
 from typing import Union
 

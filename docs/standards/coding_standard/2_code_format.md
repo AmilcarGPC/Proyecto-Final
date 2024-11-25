@@ -17,23 +17,22 @@ Este documento define las reglas estándar de formato para código Python, enfoc
 
 ### Mejores Prácticas
 - Configurar el editor para convertir tabs a espacios
-- Mantener un máximo de 3 niveles de indentación
 - Usar indentación vertical para mejorar legibilidad
 - Evitar líneas en blanco con espacios
 
 ### Ejemplos
 ```python
-# Correct
-def my_function():
-    if condition:
-        do_something()
-        for item in items:
-            process(item)
+# Correcto
+def mi_funcion():
+    if condicion:
+        hacer_algo()
+        for elemento in elementos:
+            procesar(elemento)
 
-# Wrong
-def my_function():
-  if condition:    # 2 spaces
-        do_something()    # indentation mixing
+# Incorrecto
+def mi_funcion():
+  if condicion:    # 2 espacios
+        hacer_algo()    # mezcla de identaciones
 ```
 
 ### Verificación
@@ -42,13 +41,13 @@ def my_function():
 - [ ] ¿Mantiene consistencia?
 - [ ] ¿Máximo 3 niveles?
 
-## 2. Longitud Máxima de Línea
+## 2. Características de una Línea
 
 ### Instrucciones
 - Límite estricto de 80 caracteres por línea
-- 72 caracteres para comentarios/docstrings
-- Usar paréntesis para continuación de líneas
+- Usar paréntesis para continuación de líneas o \ al final
 - Romper líneas antes de operadores
+- No usar punto y coma (;) para combinar múltiples instrucciones
 
 ### Mejores Prácticas
 - Usar paréntesis para dividir expresiones largas
@@ -58,25 +57,28 @@ def my_function():
 
 ### Ejemplos
 ```python
-# Correct
-long_function_name(
-    parameter1, parameter2,
-    parameter3, parameter4
+# Correcto
+nombre_funcion_larga(parametro1, parametro2, parametro3,
+    parametro4
 )
 
-total = (first_variable
-         + second_variable
-         + third_variable)
+total = primera_variable + \
+        segunda_variable + \
+        tercera_variable
 
-# Wrong
-long_function_name(parameter1, parameter2, parameter3, parameter4)  # > 80 chars
+a = 1
+b = 2
 
-total = first_variable + second_variable + third_variable  # > 80 chars
+# Incorrecto
+nombre_funcion_larga(parametro1, parametro2, parametro3, parametro4, parametro5, parametro6)  # > 80 chars
+
+total = primera_variable + segunda_variable + tercera_variable + cuarta_variable  # > 80 chars
+
+a = 1; b = 2  # múltiples instrucciones en una línea
 ```
 
 ### Verificación
 - [ ] ¿Líneas <= 80 caracteres?
-- [ ] ¿Comentarios <= 72 caracteres?
 - [ ] ¿Usa paréntesis para continuación?
 - [ ] ¿Alineación correcta?
 
@@ -97,24 +99,30 @@ total = first_variable + second_variable + third_variable  # > 80 chars
 
 ### Ejemplos
 ```python
-# Correct
+# Correcto
 x = 1
 y = 2
 
-def function1():
+def funcion1():
     pass
 
 
-def function2():
+def funcion2():
     pass
 
-# Wrong
+lista = [1, 2, 3]
+diccionario = {'a': 1, 'b': 2}
+
+# Incorrecto
 x=1
 y=2
-def function1() :
+def funcion1() :
     pass
-def function2():
+def funcion2():
     pass
+
+lista=[1,2,3]
+diccionario={'a':1,'b':2}
 ```
 
 ### Verificación
@@ -139,19 +147,31 @@ def function2():
 
 ### Ejemplos
 ```python
-class MyClass:
-    def method1(self):
+# Correcto
+class MiClase:
+    def metodo1(self):
         return True
 
-    def method2(self):
+    def metodo2(self):
         return False
 
 
-def top_level_function():
+def funcion_alto_nivel():
     pass
 
 
-def another_function():
+def otra_funcion():
+    pass
+
+# Incorrecto
+class MiClase:
+    def metodo1(self):
+        return True
+    def metodo2(self):    # falta línea en blanco
+        return False
+def funcion_alto_nivel():    # faltan dos líneas en blanco
+    pass
+def otra_funcion():    # faltan dos líneas en blanco
     pass
 ```
 
@@ -160,39 +180,3 @@ def another_function():
 - [ ] ¿Una línea entre métodos?
 - [ ] ¿Bloques lógicos separados?
 - [ ] ¿Sin líneas excesivas?
-
-## 5. Uso de Paréntesis
-
-### Instrucciones
-- Usar paréntesis para claridad
-- No usar paréntesis innecesarios
-- Paréntesis para continuación de líneas
-- Mantener consistencia en expresiones
-
-### Mejores Prácticas
-- Usar para operaciones complejas
-- Alinear paréntesis de cierre
-- Mantener legibilidad
-- Evitar anidación excesiva
-
-### Ejemplos
-```python
-# Correct
-if (long_condition_a and 
-    long_condition_b):
-    pass
-
-result = (value_one
-          + value_two
-          + value_three)
-
-# Wrong
-if (x == 1):  # unnecessary parentheses
-    pass
-```
-
-### Verificación
-- [ ] ¿Uso necesario de paréntesis?
-- [ ] ¿Alineación correcta?
-- [ ] ¿Expresiones claras?
-- [ ] ¿Sin anidación excesiva?

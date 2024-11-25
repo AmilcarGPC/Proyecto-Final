@@ -1,8 +1,10 @@
+# src/models/nodes.py
 from enum import Enum
 from typing import List, Optional
+from dataclasses import dataclass
 
 class NodeType(Enum):
-    ROOT = "root"
+    ROOT = "raiz"
     IMPORT = "import"
     ASSIGNMENT = "assignment"
     FUNCTION = "function"
@@ -39,14 +41,10 @@ class NodeType(Enum):
     RAISE = "raise"
     ASSERT = "assert"
 
-class Node:
-    def __init__(self, type: NodeType, content: str, indent_level: int):
-        self.type = type
-        self.content = content
-        self.indent_level = indent_level
-        self.children: List[Node] = []
-        self.parent: Optional[Node] = None
-
-    def add_child(self, child: 'Node'):
-        child.parent = self
-        self.children.append(child)
+@dataclass
+class ExpressionInfo:
+    type: NodeType
+    nested_expressions: List['ExpressionInfo']
+    start_pos: int
+    end_pos: int  
+    expression: str

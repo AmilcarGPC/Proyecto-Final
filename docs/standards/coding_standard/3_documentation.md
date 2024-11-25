@@ -13,22 +13,23 @@ Este documento establece los estándares de documentación para el código Pytho
    - Descripciones: 1 línea por elemento
 
 2. **Estructura**
+   - Las comillas triples de apertura y cierre de un docstring deben estar solas en su línea
    - No se permiten múltiples párrafos
    - Un solo ejemplo por docstring
    - Usar solo plantillas definidas
 
 3. **Vocabulario Permitido**
    Para descripciones, usar solo los siguientes verbos:
-   - Calculates/Calculate
-   - Processes/Process
-   - Validates/Validate
-   - Returns/Return
-   - Gets/Get
-   - Sets/Set
-   - Creates/Create
-   - Updates/Update
-   - Deletes/Delete
-   - Checks/Check
+   - Calcula/Calcular
+   - Procesa/Procesar
+   - Valida/Validar
+   - Retorna/Retornar
+   - Obtiene/Obtener
+   - Establece/Establecer
+   - Crea/Crear
+   - Actualiza/Actualizar
+   - Elimina/Eliminar
+   - Verifica/Verificar
 
 
 ## 1. Docstrings para Módulos
@@ -37,24 +38,24 @@ Este documento establece los estándares de documentación para el código Pytho
 Seguir el siguiente formato:
 ```python
 """
-Module name: nombre_archivo.py
+Nombre del módulo: nombre_archivo.py
 Ruta: [Ruta del archivo]
-Description: [Descripción breve del propósito del módulo]
-Project: [Nombre del proyecto al que pertenece]
-Author: [Nombre del desarrollador principal]
-Organization: Equipo 3
-License: MIT
-Date Created: AAAA-MM-DD
-Last Update: AAAA-MM-DD
+Descripción: [Descripción breve del propósito del módulo]
+Proyecto: [Nombre del proyecto al que pertenece]
+Autor: [Nombre del desarrollador principal]
+Organización: Equipo 3
+Licencia: MIT
+Fecha de Creación: AAAA-MM-DD
+Última Actualización: AAAA-MM-DD
 
-Dependencies:
+Dependencias:
     - [paquete] >= [versión]
     - [paquete] >= [versión]
 
-Usage:
+Uso:
     [Instrucciones de cómo utilizar este módulo, optimizadas para su reutilización]
 
-Notes:
+Notas:
     [Información adicional importante]
 """
 ```
@@ -81,37 +82,38 @@ Notes:
 
 ### Ejemplos
 ```python
-# Correct
+# Correcto
 """
-Module name: open_file.py
-Route: src/program1/open_file.py
-Description: Opens a file and determines if it is a .py file.
-Project: Physical and Logical Line Counting System in Python
-Author: Ana Martínez
-Organization: Equipo 3
-License: MIT
-Date Created: 16-11-2024
-Last Update: 18-11-2024
+Nombre del módulo: abrir_archivo.py
+Ruta: src/programa1/abrir_archivo.py
+Descripción: Abre un archivo y determina si es un archivo .py
+Proyecto: Sistema de Conteo de Líneas Físicas y Lógicas en Python
+Autor: Ana Martínez
+Organización: Equipo 3
+Licencia: MIT
+Fecha de Creación: 16-11-2024
+Última Actualización: 18-11-2024
 
-Dependencies:
+Dependencias:
     - pandas >= 1.5.0
     - numpy >= 1.23.0
     - matplotlib >= 3.5.0
 
-Usage:
-    As module:
-        from open_file import process_file.
-        file = process_file(“file.csv”)
+Uso:
+    Como módulo:
+        from abrir_archivo import procesar_archivo
+        archivo = procesar_archivo("archivo.csv")
 
-Notes:
-    - Input files must be in .py format, otherwise an error will be displayed.
-    - the module returns the file in txt format if it is .py
+Notas:
+    - Los archivos de entrada deben estar en formato .py
+    - El módulo retorna el archivo en formato txt si es .py
 """
 
-# Wrong
+# Incorrecto
 """
-csv stuff - handles files and does things with them
-made by john on 1/1/24
+cosas de archivos - maneja archivos y hace cosas
+hecho por pepe el 1/1/24
+version 1.0
 """
 ```
 
@@ -162,32 +164,33 @@ Example:
 
 ### Ejemplos
 ```python
-# Correct
-def calculate_average(numbers: list[float]) -> float:
-    """Calculate the average of a list of numbers.
+# Correcto
+def calcular_promedio(numeros: list[float]) -> float:
+    """
+    Calcula el promedio de una lista de números.
 
     Args:
-        numbers (List[float]): List of numerical values to average.
-            Must be non-empty list of integers or floats.
+        numeros (List[float]): Lista de valores numéricos para promediar.
+            Debe ser una lista no vacía de enteros o flotantes.
 
     Returns:
-        float: The arithmetic mean of the input numbers.
+        float: La media aritmética de los números de entrada.
 
     Raises:
-        ValueError: If the list is empty.
-        TypeError: If any element is not a number.
+        ValueError: Si la lista está vacía.
+        TypeError: Si algún elemento no es un número.
 
     Example:
-        >>> calculate_average([1.0, 2.0, 3.0])
+        >>> calcular_promedio([1.0, 2.0, 3.0])
         2.0
     """
-    if not numbers:
-        raise ValueError("List cannot be empty")
-    return sum(numbers) / len(numbers)
+    if not numeros:
+        raise ValueError("La lista no puede estar vacía")
+    return sum(numeros) / len(numeros)
 
-# Wrong
-def calc_avg(nums):
-    """averages numbers"""
+# Incorrecto
+def calc_prom(nums):
+    """hace el promedio"""
     return sum(nums)/len(nums)
 ```
 
@@ -226,7 +229,7 @@ Example:
 | **[Descripción breve]** | Propósito de la clase en una línea | `A class to represent a basic bank account` |
 | **[Descripción detallada]** | Explicación de funcionalidad (max 2 líneas) | `Handles basic operations like deposits and withdrawals while maintaining a current balance` |
 | **Attributes** | Un atributo por línea con tipo y descripción | `balance (float): Current balance in the account` |
-| **Methods** | Un método por línea con args, tipo retorno y descripción | `deposit(amount: float) -> None: Adds the specified amount to balance` |
+| **Methods** | Un método (público) por línea con args, tipo retorno y descripción | `deposit(amount: float) -> None: Adds the specified amount to balance` |
 | **Example** | 3 líneas máximo: instanciación, uso y salida | `>>> account = BankAccount("12345", "John Doe")`<br>`>>> account.deposit(100.0)`<br>`>>> account.balance`<br>`100.0` |
 
 ### Mejores Prácticas
@@ -238,36 +241,37 @@ Example:
 
 ### Ejemplos
 ```python
-# Correct
-class BankAccount:
-    """A class to represent a basic bank account.
+# Correcto
+class CuentaBancaria:
+    """
+    Una clase para representar una cuenta bancaria básica.
 
-    Handles basic operations like deposits and withdrawals while
-    maintaining a current balance.
+    Maneja operaciones básicas como depósitos y retiros mientras
+    mantiene un saldo actual.
 
     Attributes:
-        account_number (str): Unique identifier for the account
-        balance (float): Current balance in the account
-        owner (str): Name of the account holder
+        numero_cuenta (str): Identificador único de la cuenta
+        saldo (float): Saldo actual en la cuenta
+        propietario (str): Nombre del titular de la cuenta
 
     Example:
-        >>> account = BankAccount("12345", "John Doe")
-        >>> account.deposit(100.0)
-        >>> account.balance
+        >>> cuenta = CuentaBancaria("12345", "Juan Pérez")
+        >>> cuenta.depositar(100.0)
+        >>> cuenta.saldo
         100.0
     """
 
-    def __init__(self, account_number: str, owner: str):
-        self.account_number = account_number
-        self.owner = owner
-        self.balance = 0.0
+    def __init__(self, numero_cuenta: str, propietario: str):
+        self.numero_cuenta = numero_cuenta
+        self.propietario = propietario
+        self.saldo = 0.0
 
-# Wrong
-class Account:
-    """handles money stuff"""
-    def __init__(self, num, own):
+# Incorrecto
+class Cuenta:
+    """maneja dinero y esas cosas"""
+    def __init__(self, num, prop):
         self.num = num
-        self.own = own
+        self.prop = prop
 ```
 
 ### Verificación
@@ -284,28 +288,33 @@ class Account:
 - Explicar el "por qué" no el "qué"
 - Mantener el mismo nivel de indentación
 - Usar # seguido de un espacio
+- Evitar los docstrings como comentarios en línea usando ; """ o ; ''' 
 
 ### Mejores Prácticas
 - Evitar comentarios obvios
 - Actualizar cuando el código cambia
-- Usar inglés consistentemente
+- Usar español consistentemente
 - Mantener máximo 72 caracteres
 - Comentar decisiones importantes
 
 ### Ejemplos
 ```python
 # Correct
-def process_data(data: list) -> list:
-    # Skip first row as it contains headers
-    filtered_data = data[1:]
+def procesar_datos(datos: list) -> list:
+    # Omitir primera fila ya que contiene encabezados
+    datos_filtrados = datos[1:]
     
-    # Using 0.15 as threshold based on statistical analysis
-    return [x for x in filtered_data if x > 0.15]
+    # Usando 0.15 como umbral basado en análisis estadístico
+    return [x for x in datos_filtrados if x > 0.15]
 
-# Wrong
-def process(d):
-    f = d[1:]  # gets data
-    return [x for x in f if x > 0.15]  # returns filtered
+esta_listo = True # Flag definido por DRS-123...
+
+# Incorrecto
+def procesar(d):
+    f = d[1:]  # obtiene datos
+    return [x for x in f if x > 0.15]  # filtra cosas
+
+esta_activo = True; """ Flag definido por DRS-123... """
 ```
 
 ### Verificación

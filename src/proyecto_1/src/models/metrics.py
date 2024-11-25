@@ -1,20 +1,14 @@
-class FileMetrics:
-    """Data class to store file metrics
+# models/file_metrics.py
+from dataclasses import dataclass
+from datetime import datetime
+
+@dataclass
+class MetricasArchivo:
+    nombre_archivo: str
+    lineas_logicas: int
+    lineas_fisicas: int
+    marca_tiempo: str = None
     
-    Attributes:
-    - file_name: str
-    - physical_loc: int
-    - logical_loc: int
-    - analysis_date: datetime
-    
-    Methods:
-    - to_dict() -> dict
-      Converts metrics to JSON-compatible dictionary
-    
-    - from_dict(data: dict) -> FileMetrics
-      Creates instance from dictionary
-    
-    Properties:
-    - is_valid: bool
-      Checks if metrics are within valid ranges
-"""
+    def __post_init__(self):
+        if self.marca_tiempo is None:
+            self.marca_tiempo = datetime.now().isoformat()

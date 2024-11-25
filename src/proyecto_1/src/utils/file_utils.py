@@ -17,7 +17,7 @@ Usage:
     from utils.file_utils import read_text_file
     content, error = read_text_file("C:/example.txt")
 """
-
+import json
 from pathlib import Path
 from typing import Union, List, Optional, Tuple
 import re
@@ -129,3 +129,14 @@ def format_long_lines(lines: List[str]) -> None:
             formatted_lines.append(line)
 
     return formatted_lines
+
+def leer_json(file_path: Union[str, Path]) -> dict:
+    with open(file_path, 'r') as f:
+        return json.load(f)
+    
+def escribir_json(
+        file_path: Union[str, Path], 
+        data: dict) -> None:
+    """Write data to JSON file"""
+    with open(file_path, 'w') as f:
+        json.dump(data, f, indent=4)

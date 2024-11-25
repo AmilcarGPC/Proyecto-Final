@@ -9,24 +9,14 @@ class NodeTypeAnalyzer:
         self._in_method = False
         self._current_class = None
 
-    def _check_docstring(self, line: str) -> Optional[NodeType]:
-        if self._in_docstring:
-            if line.endswith('"""') or line.endswith("'''"):
-                self._in_docstring = False
-                return self._get_docstring_type()
-            return NodeType.COMMENT
-        
+    def _get_docstring_type(self, line: str) -> NodeType:
         if line.startswith('"""') or line.startswith("'''"):
-            self._in_docstring = True
-            return self._get_docstring_type()
+            if self._is_module_level:
+                return NodeType.MODULE_DOCSTRING
+            elif self._in_class:
+                return NodeType.CLASS_DOCSTRING
+            return NodeType.FUNCTION_DOCSTRING
         return None
-
-    def _get_docstring_type(self) -> NodeType:
-        if self._is_module_level:
-            return NodeType.MODULE_DOCSTRING
-        elif self._in_class:
-            return NodeType.CLASS_DOCSTRING
-        return NodeType.FUNCTION_DOCSTRING
 
     def _check_definitions(self, line: str) -> Optional[NodeType]:
         if line.startswith('def '):
@@ -57,7 +47,7 @@ class NodeTypeAnalyzer:
                 return node_type
         return None
     
-    def _check_special_operations(self, line: str) -> Optional[NodeType]:
+    def check_special_operations(self, line: str) -> Optional[NodeType]:
         if line.startswith('with '):
             return NodeType.WITH
         if line.startswith('try:'):
@@ -70,7 +60,7 @@ class NodeTypeAnalyzer:
             return NodeType.TERNARY
         return None
     
-    def _check_comprehensions(self, line: str) -> Optional[NodeType]:
+    def check_comprehensions(self, line: str) -> Optional[NodeType]:
         if '[' in line and ']' in line and 'for' in line:
             return NodeType.LIST_COMPREHENSION
         if '{' in line and '}' in line and ':' in line and 'for' in line:
@@ -95,10 +85,10 @@ class NodeTypeAnalyzer:
         return None
     
     def _check_decorators_and_properties(self, line: str) -> Optional[NodeType]:
-        if line.startswith('@'):
-            return NodeType.DECORATOR
         if '@property' in line:
             return NodeType.PROPERTY
+        if line.startswith('@'):
+            return NodeType.DECORATOR
         return None
 
     def _check_constants_and_imports(self, line: str) -> Optional[NodeType]:
@@ -107,21 +97,25 @@ class NodeTypeAnalyzer:
         if line.startswith('import ') or line.startswith('from '):
             return NodeType.IMPORT
         return None
+    
+    def _remove_async_prefix(self, line: str) -> str:
+        if line.startswith('async '):
+            return line[6:].strip()  # 6 = len('async ')
+        return None
 
     def get_node_type(self, line: str) -> NodeType:
         line = line.strip()
-        
-        # Existing checks
-        docstring_type = self._check_docstring(line)
+
+        async_prefix = self._remove_async_prefix(line)
+        if async_prefix:
+            return self.get_node_type(async_prefix)
+
+        docstring_type = self._get_docstring_type(line)
         if docstring_type:
             return docstring_type
 
         if line.startswith('#'):
             return NodeType.COMMENT
-        
-        decorator_import_type = self._check_decorators_and_properties(line)
-        if decorator_import_type:
-            return decorator_import_type
         
         const_prop_type = self._check_constants_and_imports(line)
         if const_prop_type:
@@ -136,17 +130,21 @@ class NodeTypeAnalyzer:
             return control_flow_type
 
         # New checks
-        comprehension_type = self._check_comprehensions(line)
+        comprehension_type = self.check_comprehensions(line)
         if comprehension_type:
             return comprehension_type
 
-        special_op_type = self._check_special_operations(line)
+        special_op_type = self.check_special_operations(line)
         if special_op_type:
             return special_op_type
 
         flow_control_type = self._check_jump_statements(line)
         if flow_control_type:
             return flow_control_type
+        
+        decorator_import_type = self._check_decorators_and_properties(line)
+        if decorator_import_type:
+            return decorator_import_type
 
         # Default cases
         if '=' in line:

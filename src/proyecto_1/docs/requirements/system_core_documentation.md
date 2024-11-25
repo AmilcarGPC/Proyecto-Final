@@ -127,9 +127,9 @@ src/
 ├── main.py                 # Entry point - command line interface
 ├── core/
 │   ├── __init__.py
-│   ├── file_reader.py     # Handles file reading and basic validation
-│   ├── logical_counter.py # Implements logical LOC counting rules
-│   └── json_handler.py    # Manages JSON storage and retrieval
+│   ├── lector_archivo.py     # Handles file reading and basic validation
+│   ├── contador_logico.py # Implements logical LOC counting rules
+│   └── almacenamiento_metricas.py    # Manages JSON storage and retrieval
 ├── models/
 │   ├── __init__.py
 │   └── metrics.py         # Data models for storing metrics and results
@@ -151,22 +151,22 @@ src/
 - Punto de entrada para la aplicación.  
 - Maneja los argumentos de línea de comandos.  
 - Orquesta el flujo entre módulos.  
-- Dependencias: core.file_reader, core.logical_counter, core.json_handler.  
+- Dependencias: core.lector_archivo, core.contador_logico, core.almacenamiento_metricas.  
 
 #### 5.2.2 Módulos Core  
-`core/file_reader.py`  
+`core/lector_archivo.py`  
 - Responsable de leer archivos Python.  
 - Validación básica de archivos.  
 - Retorna el contenido del archivo para su procesamiento.  
 - Dependencias: utils.validators.  
 
-`core/logical_counter.py`  
+`core/contador_logico.py`  
 - Implementa reglas lógicas para el conteo de LOC (líneas de código lógico).  
 - Procesa el contenido del archivo línea por línea.  
 - Retorna un objeto de métricas.  
 - Dependencias: models.metrics.  
 
-`core/json_handler.py`  
+`core/almacenamiento_metricas.py`  
 - Administra el almacenamiento y recuperación en formato JSON.  
 - Crea/actualiza el historial de métricas.  
 - Dependencias: models.metrics.  

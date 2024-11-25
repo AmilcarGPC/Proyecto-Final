@@ -13,70 +13,52 @@ Este documento establece las prácticas fundamentales de codificación en Python
 - Preferir estructuras simples y lineales
 - Evitar anidamiento excesivo
 - Mantener bloques de código compactos
-- Usar estructuras estándar de control de flujo
+- Usar estructuras estándar de control de flujo (`if`, `for`, `while`, ...)
 - Limitar operador ternario a una línea
-- Match/case: máximo 5 casos
+- Preferir elif sobre else + if
+- Los bloques if/for/while deben estar en múltiples líneas
 
 ### Mejores Prácticas
-- Máximo 3 niveles de anidamiento
 - Evitar else en loops
 - Un break/continue por función
-- Preferir elif sobre else + if
 - Mantener flujo de control lineal
 
 ### Ejemplos
 ```python
-# Correct
-for item in items:
-    if not item.is_valid():
-        continue
-    process_item(item)
+# Correcto
+valor = x if condicion else y
 
-value = x if condition else y
-
-match status:
-    case "active":
-        process_active()
-    case "inactive":
-        process_inactive()
-    case _:
-        process_default()
-
-if value < 0:
-    return "negative"
-elif value > 0:
-    return "positive"
+if valor < 0:
+    return "negativo"
+elif valor > 0:
+    return "positivo"
 else:
-    return "zero"
+    return "cero"
 
-# Wrong
-for item in items:
-    if item.is_valid():
-        process_item(item)
-    else:
-        continue  # unnecessary else
+if x > 5:
+    print(x)
+for i in range(3):
+    print(i)
+while x < 10:
+    x += 1
 
-value = x if a > b else y if b > c else z  # nested ternary
+# Incorrecto
+valor = x if a > b else y if b > c else z  # ternario anidado
 
-match status:  # Too many cases
-    case "a": pass
-    case "b": pass
-    case "c": pass
-    case "d": pass
-    case "e": pass
-    case "f": pass
-
-if value < 0:
-    return "negative"
+if valor < 0:
+    return "negativo"
 else:
-    if value > 0:  # Should use elif instead
-        return "positive"
+    if valor > 0:  # debería usar elif
+        return "positivo"
     else:
-        return "zero"
+        return "cero"
+
+if x > 5: print(x)
+for i in range(3): print(i)
+while x < 10: x += 1
 ```
 
 ### Verificación
-- [ ] ¿Anidamiento <= 3 niveles?
 - [ ] ¿Sin else en loops?
 - [ ] ¿Un solo break/continue?
 - [ ] ¿Ternarios simples?
@@ -87,36 +69,25 @@ else:
 - Usar try/except específicos
 - Limitar excepciones por bloque
 - Documentar excepciones personalizadas
-- Evitar suppressión general de errores
+- Los bloques try/except deben estar en múltiples líneas
 
 ### Mejores Prácticas
-- Máximo 3 excepciones por bloque
-- No usar except sin tipo
 - Mantener bloques try pequeños
-- Usar context managers para recursos
 
 ### Ejemplos
 ```python
-# Correct
+# Correcto
 try:
-    value = process_data(raw_data)
-except ValueError as e:
-    logger.error(f"Invalid data: {e}")
-except KeyError as e:
-    logger.error(f"Missing key: {e}")
-except Exception as e:
-    logger.critical(f"Unexpected error: {e}")
-    raise
+    x = 1 / 0
+except ZeroDivisionError:
+    x = None
 
-# Wrong
-try:
-    # A lot of code here...
-except:  # Captures everything without discriminating
-    pass
+# Incorrecto
+try: x = 1 / 0
+except ZeroDivisionError: x = None
 ```
 
 ### Verificación
-- [ ] ¿≤ 3 excepciones por bloque?
 - [ ] ¿Excepciones específicas?
 - [ ] ¿Bloques try concisos?
 - [ ] ¿Manejo apropiado de errores?
@@ -126,60 +97,37 @@ except:  # Captures everything without discriminating
 ### Instrucciones
 - Mantener funciones simples y enfocadas
 - Limitar parámetros y complejidad
-- Limitar los With statements a máximo 2 niveles
 - Evitar efectos secundarios
 - Documentar comportamiento claramente
 - No usar lambda functions
-- Evitar closures
-- Limitar *args/**kwargs a casos específicos
-- Limitar map/filter a casos simples
-- No usar reduce()
+- Las definiciones de funciones deben estar en múltiples líneas
+- Los bloques with deben estar en múltiples líneas
 
 ### Mejores Prácticas
-- Máximo 2 decoradores por función
 - Un nivel de funciones anidadas
 - Usar *args/**kwargs con moderación
 
 ### Ejemplos
 ```python
-# Correct
-@validate_input
-@log_execution
-def process_data(data: list) -> dict:
-    result = {}
-    for item in data:
-        result[item.id] = item.value
-    return result
+# Correcto
+def es_par(x: int) -> bool:
+    return x % 2 == 0
 
-def insert_data(*args, **kwargs):  # Justified use for wrappers
-    pass
+def funcion():
+    return 42
 
-with open('file1.txt') as f1, open('file2.txt') as f2:
-    process_files(f1, f2)
+with open("archivo.txt", "r") as archivo:
+    datos = archivo.read()
 
-# Wrong
-def process(data):
-    def nested1():
-        def nested2():  # Too much nesting
-            pass
-    return lambda x: x * 2  # Lambda prohibited
+# Incorrecto
+es_par = lambda x: x % 2 == 0 
 
-def outer():
-    x = 1
-    def closure():  # Closure prohibited
-        return x
-    return closure
+def funcion(): return 42
 
-with open('f1.txt') as f1:
-    with open('f2.txt') as f2:
-        with open('f3.txt') as f3:  # Too many levels
-            pass
-
-from functools import reduce  # reduce() prohibited
+with open("archivo.txt", "r") as archivo: datos = archivo.read()
 ```
 
 ### Verificación
-- [ ] ¿≤ 2 decoradores?
 - [ ] ¿Sin lambdas?
 - [ ] ¿Anidamiento simple?
 - [ ] ¿Documentación clara?
@@ -196,18 +144,17 @@ from functools import reduce  # reduce() prohibited
 
 ### Mejores Prácticas
 - Diccionarios con un nivel de anidamiento
-- Usar collections.Counter y defaultdict con moderación, 1 por módulo como máximo
 - Evitar tuplas nombradas y tipos genéricos anidados
 
 ### Ejemplos
 ```python
-# Correct
-numbers = [x for x in range(10) if x % 2 == 0]
-settings = {"debug": True, "config": {"port": 8000}}
+# Correcto
+numeros = [x for x in range(10) if x % 2 == 0]
+configuracion = {"depurar": True, "config": {"puerto": 8000}}
 
-# Wrong
-matrix = [[x for x in range(5)] for y in range(5)]  # Nested
-deep = {"a": {"b": {"c": 1}}}  # Too much nesting
+# Incorrecto
+matriz = [[x for x in range(5)] for y in range(5)]  # Anidado
+profundo = {"a": {"b": {"c": 1}}}  # Demasiado anidamiento
 ```
 
 ### Verificación
@@ -216,48 +163,7 @@ deep = {"a": {"b": {"c": 1}}}  # Too much nesting
 - [ ] ¿Uso moderado de collections?
 - [ ] ¿Sin tipos complejos?
 
-## 5. Logging y Debugging
-
-### Instrucciones
-- Usar logging library en lugar de print
-- Establecer niveles de log apropiados
-- Mantener mensajes informativos
-- Evitar logging excesivo
-
-### Mejores Prácticas
-- Un logger por módulo
-- Mensajes claros y estructurados
-- No usar print para debugging
-- Remover código de debug en producción
-
-### Ejemplos
-```python
-# Correct
-import logging
-
-logger = logging.getLogger(__name__)
-
-def process_order(order_id: str) -> None:
-    logger.info(f"Processing order {order_id}")
-    try:
-        order = get_order(order_id)
-        logger.debug(f"Order details: {order}")
-    except OrderNotFound as e:
-        logger.error(f"Order {order_id} not found: {e}")
-
-# Wrong
-def process_order(order_id):
-    print(f"Processing {order_id}")  # Use print for logging
-    print(locals())  # Debug with print
-```
-
-### Verificación
-- [ ] ¿Usa logging library?
-- [ ] ¿Niveles apropiados?
-- [ ] ¿Sin prints?
-- [ ] ¿Mensajes claros?
-
-## 6. Asincronía y Concurrencia
+## 5. Asincronía y Concurrencia
 
 ### Instrucciones
 - Limitar uso de asyncio
@@ -267,22 +173,21 @@ def process_order(order_id):
 
 ### Mejores Prácticas
 - Un nivel de anidación async
-- Usar context managers async
 - Evitar callbacks complejos
 - Mantener tareas independientes
 
 ### Ejemplos
 ```python
-# Correct
-async def fetch_data(url: str) -> dict:
-    async with aiohttp.ClientSession() as session:
-        async with session.get(url) as response:
-            return await response.json()
+# Correcto
+async def obtener_datos(url: str) -> dict:
+    async with aiohttp.ClientSession() as sesion:
+        async with sesion.get(url) as respuesta:
+            return await respuesta.json()
 
-# Wrong
-async def complex_operation():
-    async def nested():  # Excessive nesting
-        async def deeper():  # Prohibited
+# Incorrecto
+async def operacion_compleja():
+    async def anidada():  # Anidamiento excesivo
+        async def mas_profunda():  # Prohibido
             pass
 ```
 
@@ -290,42 +195,8 @@ async def complex_operation():
 - [ ] ¿Anidación simple?
 - [ ] ¿Uso justificado?
 - [ ] ¿Documentación clara?
-- [ ] ¿Context managers apropiados?
 
-## 7. Metaprogramación y Reflection
-
-### Instrucciones
-- Evitar metaprogramación compleja
-- No usar eval() o exec()
-- Limitar uso de getattr/setattr
-- Prohibir monkey patching
-
-### Mejores Prácticas
-- Máximo 3 usos de getattr/setattr por clase
-- No usar globals()/locals()
-- Evitar metaclases y descriptores
-- No modificar clases en runtime
-
-### Ejemplos
-```python
-# Correct
-def get_attribute(obj: object, attr_name: str) -> Any:
-    if hasattr(obj, attr_name):
-        return getattr(obj, attr_name)
-    return None
-
-# Wrong
-result = eval(user_input)  # Prohibited
-globals()['dynamic_var'] = 42  # Prohibited
-```
-
-### Verificación
-- [ ] ¿Sin eval/exec?
-- [ ] ¿Sin modificación runtime?
-- [ ] ¿Uso limitado de getattr?
-- [ ] ¿Sin metaclases?
-
-## 8. Tipos y Type Hints
+## 6. Tipos y Type Hints
 
 ### Instrucciones
 - Usar type hints básicos
@@ -341,13 +212,13 @@ globals()['dynamic_var'] = 42  # Prohibited
 
 ### Ejemplos
 ```python
-# Correct
-def process_items(items: List[str]) -> Dict[str, int]:
-    return {item: len(item) for item in items}
+# Correcto
+def procesar_elementos(elementos: List[str]) -> Dict[str, int]:
+    return {elemento: len(elemento) for elemento in elementos}
 
-# Wrong
-from typing import TypeVar, Generic  # Prohibited
-T = TypeVar('T')  # Prohibited
+# Incorrecto
+from typing import TypeVar, Generic  # Prohibido
+T = TypeVar('T')  # Prohibido
 ```
 
 ### Verificación
@@ -356,58 +227,56 @@ T = TypeVar('T')  # Prohibited
 - [ ] ¿Tipos estándar?
 - [ ] ¿Documentación clara?
 
-## 9. Clases y Herencia
+## 7. Clases y Herencia
 
 ### Instrucciones
 - Usar herencia simple únicamente
 - Prohibir herencia múltiple y mixins
 - Limitar uso de propiedades
 - Mantener interfaces simples
-- Máximo 2 responsabilidades por clase
-- Interfaces limitadas a 3 métodos máximo
 - Solo permitido el patrón Factory
 - Prohibida la inyección de dependencias compleja (más de 2 niveles)
 
 ### Mejores Prácticas
-- Properties solo para getters/setters simples
 - Clases abstractas solo para interfaces básicas
-- Evitar jerarquías profundas (máximo 2 niveles)
 - Documentar herencia claramente
 - Una responsabilidad principal y una de soporte máximo
 - Usar constructor injection para dependencias simples
+- Seguir este orden para métodos de clase:
+    1. Docstring de clase
+    2. Métodos dunder (__init__, __str__, etc)
+    3. Métodos de clase (@classmethod)
+    4. Métodos estáticos (@staticmethod)
+    5. Propiedades (@property)
+    6. Métodos públicos
+    7. Métodos "protegidos" (_)
+    8. Métodos "privados" (__)
 
 ### Ejemplos
 ```python
 # Correct
-class ReportFactory: # Factory Pattern
+class FabricaReporte:
     def __init__(self, config: dict):
-        self.template_path = config["template_path"]
+        self.ruta_plantilla = config["ruta_plantilla"]
     
-    def create_report(self, type: str) -> Report:
-        if type == "pdf":
-            return PDFReport(self.template_path)
-        elif type == "excel":
-            return ExcelReport(self.template_path)
-        raise ValueError("Unknown report type")
+    def crear_reporte(self, tipo: str) -> Reporte:
+        if tipo == "pdf":
+            return ReportePDF(self.ruta_plantilla)
+        elif tipo == "excel":
+            return ReporteExcel(self.ruta_plantilla)
+        raise ValueError("Tipo de reporte desconocido")
 
-class Report(ABC): # Simple Interface (maximum 3 methods)
+class Report(ABC): # Simple Interface
     @abstractmethod
-    def generate(self) -> bytes: pass
+    def generar(self) -> bytes: pass
     
     @abstractmethod
-    def save(self, path: str) -> None: pass
+    def guardar(self, path: str) -> None: pass
 
 # Wrong
-class Repository(ABC):
-    def create(self): pass
-    def read(self): pass
-    def update(self): pass
-    def delete(self): pass  # Too many methods in interface, exceeds the limit
-
-# Complex injection prohibited
-class Service:
-    def __init__(self, repo, cache, logger, validator, formatter):
-        pass  # Too many dependencies
+class Servicio:
+    def __init__(self, repo, cache, logger, validador, formateador):
+        pass  # Inyección compleja prohibida
 ```
 
 ### Verificación
@@ -416,7 +285,7 @@ class Service:
 - [ ] ¿Properties simples?
 - [ ] ¿Interfaces básicas?
 
-## 10. Formateado de Strings
+## 8. Formateado de Strings
 
 ### Instrucciones
 - Usar f-strings como método preferido
@@ -426,28 +295,24 @@ class Service:
 
 ### Mejores Prácticas
 - F-strings para casos simples
-- Template strings: máximo 2 niveles, 100 caracteres
 - Mantener strings legibles
 - Documentar strings complejos
 
 ### Ejemplos
 ```python
-# Correct
-name = "John"
-age = 30
-message = f"Name: {name}, Age: {age}"
+# Correcto
+nombre = "Juan"
+edad = 30
+mensaje = f"Nombre: {nombre}, Edad: {edad}"
 
-# Template con límites
-template = "Name: ${name}\nAge: ${age}"
-result = template.substitute(name=name, age=age)
+plantilla = "Nombre: ${nombre}\nEdad: ${edad}"
+resultado = plantilla.substitute(nombre=nombre, edad=edad)
 
-# Wrong
-message = "Name: %s, Age: %d" % (name, age)  # % formatting prohibited
-complex_template = "${outer${inner${deepest}}}"  # Too many levels
+# Incorrecto
+mensaje = "Nombre: %s, Edad: %d" % (nombre, edad)  # formato % prohibido
+plantilla_compleja = "${exterior${interior${profundo}}}"  # Demasiados niveles
 ```
 
 ### Verificación
 - [ ] ¿Sin % formatting?
-- [ ] ¿Template strings <= 2 niveles?
-- [ ] ¿Template strings <= 100 caracteres?
 - [ ] ¿Uso preferente de f-strings?
