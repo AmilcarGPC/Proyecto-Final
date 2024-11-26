@@ -8,10 +8,29 @@ description: Este documento describe las reglas y guías para contar líneas de 
 
 | Campo | Valor | Notas |
 |-------|-------|-------|
-| Tipo de conteo | Físico | Se cuenta cada línea física independientemente |
-| Versión | 1.1 | Incluye guías rápidas y checklists |
-| Última actualización | 16/11/2024 |  |
+| Tipos de conteo | Físico y Lógico | Se soportan ambos tipos de conteo |
+| Versión | 1.2 | Incluye conteo lógico |
+| Última actualización | 24-11-2024 |  |
 | Herramientas recomendadas | Tarea 1 | Para conteo automático |
+
+### 1.1 Estructuras Lógicas
+
+Para el conteo lógico, se consideran como estructuras independientes:
+
+- Definiciones de funciones y métodos
+- Definiciones de clases 
+- Estructuras `if` (`elif` y `else` no son consideradas independientes)
+- Bucles `for` y `while`
+- Expresiones `match` (`case` no es considerada independientes)
+- Comprensiones (`list`, `dict`, `set`)
+- Expresiones generadoras
+- Operadores ternarios
+- Bloques `with`
+- Bloques `try` (`except` y `finally` no son consideradas independientes)
+- Propiedades (`@property`)
+- Decoradores (`@`)
+
+Cada estructura lógica cuenta como una unidad, sin importar su extensión física en líneas de código.
 
 ## 2. Reglas de Conteo por Tipo de Sentencia
 
@@ -80,6 +99,4 @@ description: Este documento describe las reglas y guías para contar líneas de 
 ## 5. Exclusiones
 ❌ Líneas vacías o espacios en blanco <br>
 ❌ Líneas de shebang o encoding <br>
-❌ Lineas auto-generadas <br>
 ❌ Docstrings de módulos al inicio del archivo <br>
-❌ Cabeceras de licencia <br>

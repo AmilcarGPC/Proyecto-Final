@@ -50,6 +50,7 @@ user = "Juan"     # inglés
 - Nombres deben ser verbos o frases verbales
 - Documentar parámetros con type hints
 - Métodos mágicos limitados a __init__, __str__, __repr__
+- Funciones estándar (main, init) en inglés
 
 ### Mejores Prácticas
 - Nombres que describan la acción

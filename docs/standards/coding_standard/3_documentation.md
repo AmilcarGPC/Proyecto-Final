@@ -49,13 +49,13 @@ Fecha de Creación: AAAA-MM-DD
 Última Actualización: AAAA-MM-DD
 
 Dependencias:
-    - [paquete] >= [versión]
-    - [paquete] >= [versión]
+    - [paquete] >= [versión (opcional)]
+    - [paquete] >= [versión (opcional)]
 
 Uso:
     [Instrucciones de cómo utilizar este módulo, optimizadas para su reutilización]
 
-Notas:
+Notas (opcional):
     [Información adicional importante]
 """
 ```
@@ -109,12 +109,15 @@ Notas:
     - El módulo retorna el archivo en formato txt si es .py
 """
 
+import pandas as pd
 # Incorrecto
 """
 cosas de archivos - maneja archivos y hace cosas
 hecho por pepe el 1/1/24
 version 1.0
 """
+
+import pandas as pd
 ```
 
 ### Verificación

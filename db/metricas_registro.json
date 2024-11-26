@@ -1,0 +1,97 @@
+{
+    "test_1.py": {
+        "nombre_archivo": "test_1.py",
+        "lineas_logicas": 35,
+        "lineas_fisicas": 92
+    },
+    "test_2.py": {
+        "nombre_archivo": "test_2.py",
+        "lineas_logicas": 8,
+        "lineas_fisicas": 19
+    },
+    "test_6.py": {
+        "nombre_archivo": "test_6.py",
+        "lineas_logicas": 8,
+        "lineas_fisicas": 23
+    },
+    "test_8.py": {
+        "nombre_archivo": "test_8.py",
+        "lineas_logicas": 3,
+        "lineas_fisicas": 8
+    },
+    "test_12.py": {
+        "nombre_archivo": "test_12.py",
+        "lineas_logicas": 3,
+        "lineas_fisicas": 12
+    },
+    "longitud_lineas.py": {
+        "nombre_archivo": "longitud_lineas.py",
+        "lineas_logicas": 0,
+        "lineas_fisicas": 1
+    },
+    "node_types.py": {
+        "nombre_archivo": "node_types.py",
+        "lineas_logicas": 0,
+        "lineas_fisicas": 6
+    },
+    "analizador_cadenas.py": {
+        "nombre_archivo": "analizador_cadenas.py",
+        "lineas_logicas": 43,
+        "lineas_fisicas": 115
+    },
+    "analizador_comprehension.py": {
+        "nombre_archivo": "analizador_comprehension.py",
+        "lineas_logicas": 25,
+        "lineas_fisicas": 56
+    },
+    "analizador_corchetes.py": {
+        "nombre_archivo": "analizador_corchetes.py",
+        "lineas_logicas": 13,
+        "lineas_fisicas": 35
+    },
+    "analizador_expresiones.py": {
+        "nombre_archivo": "analizador_expresiones.py",
+        "lineas_logicas": 5,
+        "lineas_fisicas": 15
+    },
+    "analizador_ternario.py": {
+        "nombre_archivo": "analizador_ternario.py",
+        "lineas_logicas": 29,
+        "lineas_fisicas": 79
+    },
+    "buscar_y_extraer_anidados.py": {
+        "nombre_archivo": "buscar_y_extraer_anidados.py",
+        "lineas_logicas": 20,
+        "lineas_fisicas": 50
+    },
+    "main.py": {
+        "nombre_archivo": "main.py",
+        "lineas_logicas": 12,
+        "lineas_fisicas": 48
+    },
+    "nodo.py": {
+        "nombre_archivo": "nodo.py",
+        "lineas_logicas": 30,
+        "lineas_fisicas": 72
+    },
+    "arbol_sintactico.py": {
+        "nombre_archivo": "arbol_sintactico.py",
+        "lineas_logicas": 3,
+        "lineas_fisicas": 8
+    },
+    "verificador_estandar_codigo.py": {
+        "nombre_archivo": "verificador_estandar_codigo.py",
+        "lineas_logicas": 30,
+        "lineas_fisicas": 72
+    },
+    "contador_fisico.py": {
+        "nombre_archivo": "contador_fisico.py",
+        "lineas_logicas": 15,
+        "lineas_fisicas": 35
+    },
+    "contador_logico.py": {
+        "nombre_archivo": "contador_logico.py",
+        "lineas_logicas": 7,
+        "lineas_fisicas": 14
+    }
+}

@@ -22,10 +22,10 @@ Este documento establece las pautas para optimización y rendimiento del código
 
 ### Ejemplos
 ```python
-# Correct
-users = []  # List for sequential iteration
-cache = {}  # Dict for key-based search
-unique_ids = set()  # Set for fast lookups
+# Correcto
+users = []  # Lista para iteración secuencial
+cache = {}  # Diccionario para búsqueda por clave
+unique_ids = set()  # Set para búsquedas rápidas
 ```
 
 ### Verificación
