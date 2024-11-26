@@ -11,9 +11,9 @@ Last Update: 18-11-2024
 
 Dependencies:
     - typing.List
-    - models.nodes.Node
-    - models.nodes.NodeType
-    - utils.node_analyzer.NodeTypeAnalyzer
+    - models.nodos.Node
+    - models.nodos.TipoNodo
+    - utils.node_analyzer.TipoNodoAnalyzer
     - config.node_types.PARENT_NODE_TYPES
 
 Usage:
@@ -26,8 +26,8 @@ Notes:
 from typing import List
 
 from core.arbol.nodo import Nodo
-from models.nodes import NodeType
-from utils.node_analyzer import NodeTypeAnalyzer
+from models.nodos import TipoNodo
+from utils.node_analyzer import TipoNodoAnalyzer
 from utils.line_formatter import LineFormatter
 from config.node_types import PARENT_NODE_TYPES
 from core.analizadores.analizador_cadenas import AnalizadorCadenas
@@ -35,7 +35,7 @@ from core.analizadores.analizador_cadenas import AnalizadorCadenas
 class TreeBuilder:
     def __init__(self, multilines_worth_1: bool = True):
         self.multilines_worth_1 = multilines_worth_1
-        self.type_analyzer = NodeTypeAnalyzer()
+        self.type_analyzer = TipoNodoAnalyzer()
         self.multiline_buffer = []
         self.open_delimiters = 0
         self.in_multiline_string = False
@@ -134,7 +134,7 @@ class TreeBuilder:
         return self._analyze_delimiters(line)
     
     def build(self, lines: List[str]) -> Nodo:
-        raiz = Nodo(NodeType.ROOT, "raiz", -1)
+        raiz = Nodo(TipoNodo.ROOT, "raiz", -1)
         current_parent = raiz
         indent_stack = [(raiz, -1)]
         i = 0
@@ -185,5 +185,5 @@ class TreeBuilder:
 
         return raiz
 
-    def _can_have_children(self, node_type: NodeType) -> bool:
+    def _can_have_children(self, node_type: TipoNodo) -> bool:
         return node_type in PARENT_NODE_TYPES

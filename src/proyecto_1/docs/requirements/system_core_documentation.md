@@ -132,7 +132,7 @@ src/
 │   └── almacenamiento_metricas.py    # Manages JSON storage and retrieval
 ├── models/
 │   ├── __init__.py
-│   └── metrics.py         # Data models for storing metrics and results
+│   └── metricas.py         # Data models for storing metricas and results
 ├── utils/
 │   ├── __init__.py
 │   ├── validators.py      # Input validation functions
@@ -164,15 +164,15 @@ src/
 - Implementa reglas lógicas para el conteo de LOC (líneas de código lógico).  
 - Procesa el contenido del archivo línea por línea.  
 - Retorna un objeto de métricas.  
-- Dependencias: models.metrics.  
+- Dependencias: models.metricas.  
 
 `core/almacenamiento_metricas.py`  
 - Administra el almacenamiento y recuperación en formato JSON.  
 - Crea/actualiza el historial de métricas.  
-- Dependencias: models.metrics.  
+- Dependencias: models.metricas.  
 
 #### 5.2.3 Modelos  
-`models/metrics.py`  
+`models/metricas.py`  
 - Estructuras de datos para métricas.  
 - Objetos inmutables para los resultados.  
 - Sin dependencias.  

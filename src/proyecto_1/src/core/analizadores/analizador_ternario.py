@@ -13,8 +13,8 @@ Dependencias:
     - core.analizadores.analizador_cadenas.AnalizadorCadenas
     - core.analizadores.analizador_corchetes.AnalizadorCorchetes
     - core.analizadores.buscar_y_extraer_anidados.BuscarYExtraerAnidados
-    - models.nodes.ExpressionInfo
-    - utils.node_analyzer.NodeTypeAnalyzer
+    - models.nodos.InformacionExpresion
+    - utils.node_analyzer.TipoNodoAnalyzer
 
 Uso:
     from core.analizadores.analizador_ternario import AnalizadorTernario
@@ -31,8 +31,8 @@ from typing import List, Optional
 from core.analizadores.analizador_cadenas import AnalizadorCadenas
 from core.analizadores.analizador_corchetes import AnalizadorCorchetes
 from core.analizadores.buscar_y_extraer_anidados import BuscarYExtraerAnidados
-from models.nodes import ExpressionInfo, NodeType
-from utils.node_analyzer import NodeTypeAnalyzer
+from models.nodos import InformacionExpresion, TipoNodo
+from utils.node_analyzer import TipoNodoAnalyzer
 
 
 class AnalizadorTernario:
@@ -45,30 +45,30 @@ class AnalizadorTernario:
     Attributes:
         analizador_cadenas (AnalizadorCadenas): Analiza cadenas de texto
         analizador_corchetes (AnalizadorCorchetes): Procesa pares de corchetes
-        analizador_tipo (NodeTypeAnalyzer): Analiza tipos de nodos
+        analizador_tipo (TipoNodoAnalyzer): Analiza tipos de nodos
         buscar_y_extraer_anidados (BuscarYExtraerAnidados): Extrae expresiones
 
     Methods:
-        analizar_ternario(codigo: str, posicion_inicial: int) -> Optional[ExpressionInfo]:
+        analizar_ternario(codigo: str, posicion_inicial: int) -> Optional[InformacionExpresion]:
             Determina si una expresión ternaria contiene anidaciones
 
     Example:
         >>> analizador = AnalizadorTernario()
         >>> info = analizador.analizar_ternario("x if y else z")
         >>> info.tipo
-        NodeType.TERNARY
+        TipoNodo.TERNARY
     """
     def __init__(self):
         self.analizador_cadenas = AnalizadorCadenas()
         self.analizador_corchetes = AnalizadorCorchetes()
-        self.analizador_tipo = NodeTypeAnalyzer()
+        self.analizador_tipo = TipoNodoAnalyzer()
         self.buscar_y_extraer_anidados = BuscarYExtraerAnidados()
 
     def analizar_ternario(
             self,
             codigo: str,
             posicion_inicial: int = 0
-        ) -> Optional[ExpressionInfo]:
+        ) -> Optional[InformacionExpresion]:
         """
         Analiza una expresión ternaria y extrae su información, así como sus anidados.
 
@@ -77,7 +77,7 @@ class AnalizadorTernario:
             posicion_inicial (int): Posición donde empezar búsqueda
 
         Returns:
-            Optional[ExpressionInfo]: Información de la expresión o None
+            Optional[InformacionExpresion]: Información de la expresión o None
 
         Example:
             >>> analizar_ternario("x if y else z", 0)
@@ -194,12 +194,12 @@ class AnalizadorTernario:
             codigo[posiciones['else'] + 6:], 0
         )
         return posiciones['else'] + 6 + (
-            ternario_anidado.end_pos if ternario_anidado else 0
+            ternario_anidado.posicion_final if ternario_anidado else 0
         )
 
     def _procesar_expresiones_anidadas(
             self, codigo: str, posiciones: dict, posicion_final: int
-        ) -> List[ExpressionInfo]:
+        ) -> List[InformacionExpresion]:
         """
         Extrae todas las expresiones anidadas del ternario.
 
@@ -209,7 +209,7 @@ class AnalizadorTernario:
             posicion_final (int): Posición final de la expresión
 
         Returns:
-            List[ExpressionInfo]: Lista de expresiones anidadas encontradas
+            List[InformacionExpresion]: Lista de expresiones anidadas encontradas
         """
         expresiones = []
         self._agregar_expresiones_condicion(
@@ -225,33 +225,33 @@ class AnalizadorTernario:
 
     def _crear_expression_info(
             self, codigo: str, inicio: int, fin: int, 
-            expresiones_anidadas: List[ExpressionInfo]
-        ) -> ExpressionInfo:
+            expresiones_anidadas: List[InformacionExpresion]
+        ) -> InformacionExpresion:
         """
-        Crea un objeto ExpressionInfo con la información del ternario.
+        Crea un objeto InformacionExpresion con la información del ternario.
 
         Args:
             codigo (str): Código fuente analizado
             inicio (int): Posición inicial
             fin (int): Posición final
-            expresiones_anidadas (List[ExpressionInfo]): Expresiones encontradas
+            expresiones_anidadas (List[InformacionExpresion]): Expresiones encontradas
 
         Returns:
-            ExpressionInfo: Objeto con información del ternario
+            InformacionExpresion: Objeto con información del ternario
         """
-        return ExpressionInfo(
-            type=NodeType.TERNARY,
-            nested_expressions=expresiones_anidadas,
-            start_pos=inicio,
-            end_pos=fin,
-            expression=codigo[inicio:fin]
+        return InformacionExpresion(
+            tipo=TipoNodo.TERNARY,
+            expresiones_anidadas=expresiones_anidadas,
+            posicion_inicial=inicio,
+            posicion_final=fin,
+            expresion=codigo[inicio:fin]
         )
     
     def _agregar_expresiones_condicion(
             self,
             codigo: str,
             posiciones: dict,
-            expresiones: List[ExpressionInfo]
+            expresiones: List[InformacionExpresion]
         ) -> None:
         """
         Agrega expresiones anidadas encontradas en la condición del ternario.
@@ -259,7 +259,7 @@ class AnalizadorTernario:
         Args:
             codigo (str): Código fuente a analizar
             posiciones (dict): Diccionario con posiciones de operadores
-            expresiones (List[ExpressionInfo]): Lista donde agregar expresiones
+            expresiones (List[InformacionExpresion]): Lista donde agregar expresiones
         """
         try:
             segmento = codigo[posiciones['if'] + 4:posiciones['else']]
@@ -271,7 +271,7 @@ class AnalizadorTernario:
             self,
             codigo: str,
             posiciones: dict,
-            expresiones: List[ExpressionInfo]
+            expresiones: List[InformacionExpresion]
         ) -> None:
         """
         Agrega expresiones anidadas encontradas en el valor antes del if.
@@ -279,7 +279,7 @@ class AnalizadorTernario:
         Args:
             codigo (str): Código fuente a analizar
             posiciones (dict): Diccionario con posiciones de operadores
-            expresiones (List[ExpressionInfo]): Lista donde agregar expresiones
+            expresiones (List[InformacionExpresion]): Lista donde agregar expresiones
         """
         try:
             segmento = codigo[:posiciones['if']]
@@ -292,7 +292,7 @@ class AnalizadorTernario:
             codigo: str,
             posiciones: dict,
             posicion_final: int,
-            expresiones: List[ExpressionInfo]
+            expresiones: List[InformacionExpresion]
         ) -> None:
         """
         Agrega expresiones anidadas encontradas en la parte else del ternario.
@@ -301,7 +301,7 @@ class AnalizadorTernario:
             codigo (str): Código fuente a analizar
             posiciones (dict): Diccionario con posiciones de operadores
             posicion_final (int): Posición final de la expresión
-            expresiones (List[ExpressionInfo]): Lista donde agregar expresiones
+            expresiones (List[InformacionExpresion]): Lista donde agregar expresiones
         """
         try:
             expresion_else = codigo[posiciones['else'] + 6:posicion_final]
@@ -313,7 +313,7 @@ class AnalizadorTernario:
         except Exception:
             return
         
-    def _encontrar_expresiones(self, codigo: str) -> List[ExpressionInfo]:
+    def _encontrar_expresiones(self, codigo: str) -> List[InformacionExpresion]:
         """
         Busca expresiones anidadas en el código.
 
@@ -321,7 +321,7 @@ class AnalizadorTernario:
             codigo (str): Código fuente a analizar
 
         Returns:
-            List[ExpressionInfo]: Lista de expresiones encontradas
+            List[InformacionExpresion]: Lista de expresiones encontradas
 
         Example:
             >>> _encontrar_expresiones("x if y else z")

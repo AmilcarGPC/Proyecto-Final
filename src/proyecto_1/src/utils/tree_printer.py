@@ -1,41 +1,83 @@
 """
-Module name: tree_printer.py
-Route: src/utils/tree_printer.py
-Description: Print the tree structure of a Python file represented as a syntax tree.
-Project: LOC Counter System
-Author: Amílcar Pérez
-Organization: Equipo 3
-License: MIT
-Date Created: 17-11-2024
-Last Update: 17-11-2024
+Nombre del módulo: impresion_arbol.py
+Ruta: src/utils/impresion_arbol.py
+Descripción: Imprime la estructura de árbol de un archivo Python representado como árbol sintáctico.
+Proyecto: Sistema de Conteo de Líneas Físicas y Lógicas en Python
+Autor: Amílcar Pérez
+Organización: Equipo 3
+Licencia: MIT
+Fecha de Creación: 17-11-2024
+Última Actualización: 17-11-2024
 
-Dependencies:
-    - models.nodes.Node
+Dependencias:
+    - models.nodos.Nodo
 
-Usage:
-    from utils.tree_printer import TreePrinter
-    TreePrinter.imprimir_arbol(raiz)
+Uso:
+    from utils.impresion_arbol import ImpresionArbol
 
-Notes:
-    - Tree must be built using the TreeBuilder class.
+    ImpresionArbol.imprimir_arbol(raiz)
+
+Notas:
+    - El árbol debe ser construido usando la clase TreeBuilder
+"""
+
+.
+
+"""
+Nombre del módulo: impresion_arbol.py
+Ruta: src/utils/impresion_arbol.py
+Descripción: Imprime la estructura de árbol de un archivo Python representado como árbol sintáctico.
+[... resto del docstring del módulo igual ...]
+
+Uso:
+    from utils.impresion_arbol import imprimir_arbol
+    
+    imprimir_arbol(raiz)
 """
 
 from core.arbol.nodo import Nodo
 
-class TreePrinter:
-    @staticmethod
-    def imprimir_arbol(raiz: Nodo):
-        def _print_node(nodo: Nodo, prefix: str = "", is_last: bool = True):
-            connector = "└── " if is_last else "├── "
-            print(f"{prefix}{connector}[{nodo.tipo.value}] {nodo.contenido}")
-            
-            child_prefix = prefix + ("    " if is_last else "│   ")
-            
-            for i, hijo in enumerate(nodo.hijos):
-                is_last_child = i == len(nodo.hijos) - 1
-                _print_node(hijo, child_prefix, is_last_child)
 
-        print("Python File Tree:")
-        for i, hijo in enumerate(raiz.hijos):
-            is_last = i == len(raiz.hijos) - 1
-            _print_node(hijo, "", is_last)
+def _imprimir_nodo(
+    nodo: Nodo, 
+    prefijo: str = "", 
+    es_ultimo: bool = True
+) -> None:
+    """
+    Imprime un nodo individual del árbol con su formato.
+
+    Args:
+        nodo (Nodo): Nodo a imprimir
+        prefijo (str): Caracteres de indentación. Por defecto ""
+        es_ultimo (bool): Si es el último hijo. Por defecto True
+
+    Example:
+        >>> _imprimir_nodo(nodo, "", True)
+        └── [assignment] x = 1
+    """
+    conector = "└── " if es_ultimo else "├── "
+    print(f"{prefijo}{conector}[{nodo.tipo.value}] {nodo.contenido}")
+    
+    prefijo_hijo = prefijo + ("    " if es_ultimo else "│   ")
+    
+    for i, hijo in enumerate(nodo.hijos):
+        es_ultimo_hijo = i == len(nodo.hijos) - 1
+        _imprimir_nodo(hijo, prefijo_hijo, es_ultimo_hijo)
+
+
+def imprimir_arbol(raiz: Nodo) -> None:
+    """
+    Imprime la estructura completa del árbol.
+
+    Args:
+        raiz (Nodo): Nodo raíz del árbol a imprimir
+
+    Example:
+        >>> imprimir_arbol(raiz)
+        Árbol del Archivo Python:
+        └── [function] def main():
+    """
+    print("Árbol del Archivo Python:")
+    for i, hijo in enumerate(raiz.hijos):
+        es_ultimo = i == len(raiz.hijos) - 1
+        _imprimir_nodo(hijo, "", es_ultimo)

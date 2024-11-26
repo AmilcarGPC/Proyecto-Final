@@ -22,7 +22,7 @@ def print_results(result):
     print(f"{Fore.GREEN}File processed successfully!{Style.RESET_ALL}")
     print(f"Physical lines: {result.lineas_fisicas}")
     print(f"Logical lines: {result.lineas_logicas}")
-    print(f"{Fore.GREEN}Metrics saved to storage.{Style.RESET_ALL}")
+    print(f"{Fore.GREEN}metricas saved to storage.{Style.RESET_ALL}")
 
 def main() -> None:
     init()

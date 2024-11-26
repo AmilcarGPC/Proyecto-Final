@@ -11,7 +11,7 @@ Fecha de Creación: 18/11/2024
 
 Dependencias:
     - typing
-    - models.nodes.NodeType
+    - models.nodos.TipoNodo
 
 Uso:
     from core.arbol.nodo import Nodo
@@ -22,7 +22,7 @@ Notas:
 """
 from typing import List, Optional
 
-from models.nodes import NodeType
+from models.nodos import TipoNodo
 
 
 class Nodo:
@@ -30,7 +30,7 @@ class Nodo:
     Representa un nodo en el árbol sintáctico del analizador.
 
     Attributes:
-        tipo (NodeType): Tipo de nodo según la enumeración NodeType
+        tipo (TipoNodo): Tipo de nodo según la enumeración TipoNodo
         contenido (str): Contenido textual del nodo
         nivel_indentacion (int): Nivel de indentación del nodo
         hijos (List[Nodo]): Lista de nodos hijos
@@ -41,13 +41,13 @@ class Nodo:
             Agrega un nodo hijo a la lista de hijos.
 
     Example:
-        >>> nodo = Nodo(NodeType.FUNCION, "def ejemplo():", 0)
-        >>> nodo_hijo = Nodo(NodeType.CODIGO, "    return None", 1)
+        >>> nodo = Nodo(TipoNodo.FUNCION, "def ejemplo():", 0)
+        >>> nodo_hijo = Nodo(TipoNodo.CODIGO, "    return None", 1)
         >>> nodo.agregar_hijo(nodo_hijo)
     """
     def __init__(
             self,
-            tipo: NodeType,
+            tipo: TipoNodo,
             contenido: str,
             nivel_indentacion: int
         ):

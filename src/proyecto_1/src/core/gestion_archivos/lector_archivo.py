@@ -27,7 +27,7 @@ from pathlib import Path
 from typing import Union, Optional
 
 from utils.validators import is_valid_python_file
-from utils.file_utils import read_text_file
+from utils.archivo_utils import leer_archivo_texto
 
 
 class LectorArchivoPython:
@@ -83,5 +83,5 @@ class LectorArchivoPython:
         if not es_valido:
             return [], error
         
-        self._contenido, error = read_text_file(self.ruta_archivo)
+        self._contenido, error = leer_archivo_texto(self.ruta_archivo)
         return self._contenido, error

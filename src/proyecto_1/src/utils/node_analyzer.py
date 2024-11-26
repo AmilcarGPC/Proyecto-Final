@@ -1,7 +1,7 @@
-from models.nodes import NodeType
+from models.nodos import TipoNodo
 from typing import Optional
 
-class NodeTypeAnalyzer:
+class TipoNodoAnalyzer:
     def __init__(self):
         self._in_docstring = False
         self._in_class = False
@@ -9,93 +9,93 @@ class NodeTypeAnalyzer:
         self._in_method = False
         self._current_class = None
 
-    def _get_docstring_type(self, line: str) -> NodeType:
+    def _get_docstring_type(self, line: str) -> TipoNodo:
         if line.startswith('"""') or line.startswith("'''"):
             if self._is_module_level:
-                return NodeType.MODULE_DOCSTRING
+                return TipoNodo.MODULE_DOCSTRING
             elif self._in_class:
-                return NodeType.CLASS_DOCSTRING
-            return NodeType.FUNCTION_DOCSTRING
+                return TipoNodo.CLASS_DOCSTRING
+            return TipoNodo.FUNCTION_DOCSTRING
         return None
 
-    def _check_definitions(self, line: str) -> Optional[NodeType]:
+    def _check_definitions(self, line: str) -> Optional[TipoNodo]:
         if line.startswith('def '):
             self._is_module_level = False
             if self._in_class:
                 self._in_method = True
-                return NodeType.METHOD
-            return NodeType.FUNCTION
+                return TipoNodo.METHOD
+            return TipoNodo.FUNCTION
         if line.startswith('class '):
             self._in_class = True
             self._in_method = False
             self._current_class = line
-            return NodeType.CLASS
+            return TipoNodo.CLASS
         return None
 
-    def _check_conditional_statements(self, line: str) -> Optional[NodeType]:
+    def _check_conditional_statements(self, line: str) -> Optional[TipoNodo]:
         control_flow_map = {
-            'if ': NodeType.IF,
-            'elif ': NodeType.ELIF,
-            'else:': NodeType.ELSE,
-            'for ': NodeType.FOR,
-            'while ': NodeType.WHILE,
-            'match ': NodeType.MATCH,
-            'case ': NodeType.CASE,
+            'if ': TipoNodo.IF,
+            'elif ': TipoNodo.ELIF,
+            'else:': TipoNodo.ELSE,
+            'for ': TipoNodo.FOR,
+            'while ': TipoNodo.WHILE,
+            'match ': TipoNodo.MATCH,
+            'case ': TipoNodo.CASE,
         }
         for start, node_type in control_flow_map.items():
             if line.startswith(start):
                 return node_type
         return None
     
-    def check_special_operations(self, line: str) -> Optional[NodeType]:
+    def check_special_operations(self, line: str) -> Optional[TipoNodo]:
         if line.startswith('with '):
-            return NodeType.WITH
+            return TipoNodo.WITH
         if line.startswith('try:'):
-            return NodeType.TRY
+            return TipoNodo.TRY
         if line.startswith('except'):
-            return NodeType.EXCEPT
+            return TipoNodo.EXCEPT
         if line.startswith('finally:'):
-            return NodeType.FINALLY
+            return TipoNodo.FINALLY
         if ' if ' in line and ' else ' in line and not line.startswith('if '):
-            return NodeType.TERNARY
+            return TipoNodo.TERNARY
         return None
     
-    def check_comprehensions(self, line: str) -> Optional[NodeType]:
+    def check_comprehensions(self, line: str) -> Optional[TipoNodo]:
         if '[' in line and ']' in line and 'for' in line:
-            return NodeType.LIST_COMPREHENSION
+            return TipoNodo.LIST_COMPREHENSION
         if '{' in line and '}' in line and ':' in line and 'for' in line:
-            return NodeType.DICT_COMPREHENSION
+            return TipoNodo.DICT_COMPREHENSION
         if '{' in line and '}' in line and 'for' in line:
-            return NodeType.SET_COMPREHENSION
+            return TipoNodo.SET_COMPREHENSION
         if '(' in line and ')' in line and 'for' in line:
-            return NodeType.GENERATOR_EXPRESSION
+            return TipoNodo.GENERATOR_EXPRESSION
         return None
 
-    def _check_jump_statements(self, line: str) -> Optional[NodeType]:
+    def _check_jump_statements(self, line: str) -> Optional[TipoNodo]:
         if line.startswith('return '):
-            return NodeType.RETURN
+            return TipoNodo.RETURN
         if line.startswith('break'):
-            return NodeType.BREAK
+            return TipoNodo.BREAK
         if line.startswith('continue'):
-            return NodeType.CONTINUE
+            return TipoNodo.CONTINUE
         if line.startswith('raise '):
-            return NodeType.RAISE
+            return TipoNodo.RAISE
         if line.startswith('assert '):
-            return NodeType.ASSERT
+            return TipoNodo.ASSERT
         return None
     
-    def _check_decorators_and_properties(self, line: str) -> Optional[NodeType]:
+    def _check_decorators_and_properties(self, line: str) -> Optional[TipoNodo]:
         if '@property' in line:
-            return NodeType.PROPERTY
+            return TipoNodo.PROPERTY
         if line.startswith('@'):
-            return NodeType.DECORATOR
+            return TipoNodo.DECORATOR
         return None
 
-    def _check_constants_and_imports(self, line: str) -> Optional[NodeType]:
+    def _check_constants_and_imports(self, line: str) -> Optional[TipoNodo]:
         if line.isupper() and '=' in line:
-            return NodeType.CONSTANT
+            return TipoNodo.CONSTANT
         if line.startswith('import ') or line.startswith('from '):
-            return NodeType.IMPORT
+            return TipoNodo.IMPORT
         return None
     
     def _remove_async_prefix(self, line: str) -> str:
@@ -103,7 +103,7 @@ class NodeTypeAnalyzer:
             return line[6:].strip()  # 6 = len('async ')
         return None
 
-    def get_node_type(self, line: str) -> NodeType:
+    def get_node_type(self, line: str) -> TipoNodo:
         line = line.strip()
 
         async_prefix = self._remove_async_prefix(line)
@@ -115,7 +115,7 @@ class NodeTypeAnalyzer:
             return docstring_type
 
         if line.startswith('#'):
-            return NodeType.COMMENT
+            return TipoNodo.COMMENT
         
         const_prop_type = self._check_constants_and_imports(line)
         if const_prop_type:
@@ -148,5 +148,5 @@ class NodeTypeAnalyzer:
 
         # Default cases
         if '=' in line:
-            return NodeType.ASSIGNMENT
-        return NodeType.EXPRESSION
+            return TipoNodo.ASSIGNMENT
+        return TipoNodo.EXPRESSION

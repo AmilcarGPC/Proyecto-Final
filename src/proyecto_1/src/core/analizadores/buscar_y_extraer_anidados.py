@@ -14,7 +14,7 @@ Dependencias:
     - core.analizadores.analizador_corchetes.AnalizadorCorchetes
     - core.analizadores.analizador_ternario.AnalizadorTernario
     - core.constantes.CORCHETES
-    - models.nodes.ExpressionInfo
+    - models.nodos.InformacionExpresion
 
 Uso:
     from core.analizadores.buscar_y_extraer_anidados import BuscarYExtraerAnidados
@@ -31,7 +31,7 @@ from typing import List
 from core.analizadores.analizador_cadenas import AnalizadorCadenas
 from core.analizadores.analizador_corchetes import AnalizadorCorchetes
 from core.constantes import CORCHETES
-from models.nodes import ExpressionInfo
+from models.nodos import InformacionExpresion
 
 
 class BuscarYExtraerAnidados:
@@ -46,9 +46,9 @@ class BuscarYExtraerAnidados:
         analizador_corchetes (AnalizadorCorchetes): Procesa pares de corchetes
 
     Methods:
-        extraer_expresiones_anidadas(codigo: str, posicion_for: int, posicion_final: int) -> List[ExpressionInfo]:
+        extraer_expresiones_anidadas(codigo: str, posicion_for: int, posicion_final: int) -> List[InformacionExpresion]:
             Extrae expresiones anidadas del código dado.
-        buscar_comprehensions_anidadas(codigo: str) -> List[ExpressionInfo]:
+        buscar_comprehensions_anidadas(codigo: str) -> List[InformacionExpresion]:
             Busca comprehensions anidadas en una cadena de texto.
     Example:
         >>> analizador = BuscarYExtraerAnidados()
@@ -60,7 +60,7 @@ class BuscarYExtraerAnidados:
 
     def extraer_expresiones_anidadas(
             self, codigo: str, posicion_for: int, posicion_final: int
-        ) -> List[ExpressionInfo]:
+        ) -> List[InformacionExpresion]:
         """
         Extrae expresiones anidadas del código dado.
 
@@ -70,7 +70,7 @@ class BuscarYExtraerAnidados:
             posicion_final (int): Posición final del análisis
 
         Returns:
-            List[ExpressionInfo]: Lista de expresiones anidadas encontradas
+            List[InformacionExpresion]: Lista de expresiones anidadas encontradas
 
         Example:
             >>> extraer_expresiones_anidadas("[x for x in range(5)]", 1, 10)
@@ -111,7 +111,7 @@ class BuscarYExtraerAnidados:
                 )
         return expresiones_anidadas
 
-    def buscar_comprehensions_anidadas(self, codigo: str) -> List[ExpressionInfo]:
+    def buscar_comprehensions_anidadas(self, codigo: str) -> List[InformacionExpresion]:
         """
         Busca comprehensions anidadas en el código.
 
@@ -119,7 +119,7 @@ class BuscarYExtraerAnidados:
             codigo (str): Código fuente a analizar
 
         Returns:
-            List[ExpressionInfo]: Lista de comprehensions encontradas
+            List[InformacionExpresion]: Lista de comprehensions encontradas
 
         Example:
             >>> buscar_comprehensions_anidadas("[x for x in [y for y in range(5)]]")
@@ -145,14 +145,14 @@ class BuscarYExtraerAnidados:
                     )
                     
                     if posicion_for != -1:
-                        expresion_comprehension = ExpressionInfo(
-                            type=self._obtener_tipo_comprehension(
+                        expresion_comprehension = InformacionExpresion(
+                            tipo=self._obtener_tipo_comprehension(
                                 codigo[posicion_actual]
                             ),
-                            start_pos=posicion_actual,
-                            end_pos=posicion_final + 1,
-                            expression=segmento,
-                            nested_expressions=self.extraer_expresiones_anidadas(
+                            posicion_inicial=posicion_actual,
+                            posicion_final=posicion_final + 1,
+                            expresion=segmento,
+                            expresiones_anidadas=self.extraer_expresiones_anidadas(
                                 segmento,
                                 posicion_for,
                                 len(segmento)
@@ -164,7 +164,7 @@ class BuscarYExtraerAnidados:
             posicion_actual += 1
         return expresiones_anidadas
 
-    def _buscar_ternarios_anidados(self, codigo: str) -> List[ExpressionInfo]:
+    def _buscar_ternarios_anidados(self, codigo: str) -> List[InformacionExpresion]:
         """
         Busca operadores ternarios anidados en el código.
 
@@ -172,7 +172,7 @@ class BuscarYExtraerAnidados:
             codigo (str): Código fuente a analizar
 
         Returns:
-            List[ExpressionInfo]: Lista de expresiones ternarias encontradas
+            List[InformacionExpresion]: Lista de expresiones ternarias encontradas
 
         Example:
             >>> _buscar_ternarios_anidados("x if y else z")

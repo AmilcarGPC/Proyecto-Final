@@ -10,7 +10,7 @@ Fecha de Creación: 18/11/2024
 Última Actualización: 18/11/2024
 
 Dependencias:
-    - models.nodes.NodeType
+    - models.nodos.TipoNodo
 
 Uso:
     from core.constantes import CORCHETES, TIPOS_COMPREHENSION
@@ -22,7 +22,7 @@ Notas:
     - Mapea símbolos de apertura con sus correspondientes cierres
     - Define tipos de expresiones de comprensión según su símbolo
 """
-from models.nodes import NodeType
+from models.nodos import TipoNodo
 
 # Mapeo de símbolos de apertura con sus correspondientes cierres
 CORCHETES = {
@@ -31,9 +31,9 @@ CORCHETES = {
     '{': '}'
 }
 
-# Mapeo de símbolos con tipos NodeType de expresiones de comprensión
+# Mapeo de símbolos con tipos TipoNodo de expresiones de comprensión
 TIPOS_COMPREHENSION = {
-    '[': NodeType.LIST_COMPREHENSION,
-    '{': NodeType.SET_COMPREHENSION,
-    '(': NodeType.GENERATOR_EXPRESSION
+    '[': TipoNodo.LIST_COMPREHENSION,
+    '{': TipoNodo.SET_COMPREHENSION,
+    '(': TipoNodo.GENERATOR_EXPRESSION
 }

@@ -14,8 +14,8 @@ Dependencias:
     - core.analizadores.analizador_cadenas.AnalizadorCadenas
     - core.analizadores.buscar_y_extraer_anidados.BuscarYExtraerAnidados
     - core.constantes.CORCHETES, TIPOS_COMPREHENSION
-    - models.nodes.ExpressionInfo, NodeType
-    - utils.node_analyzer.NodeTypeAnalyzer
+    - models.nodos.InformacionExpresion, TipoNodo
+    - utils.node_analyzer.TipoNodoAnalyzer
 
 Uso:
     from core.analizadores.analizador_comprehension import AnalizadorComprehension
@@ -31,8 +31,8 @@ from core.analizadores.analizador_corchetes import AnalizadorCorchetes
 from core.analizadores.buscar_y_extraer_anidados import BuscarYExtraerAnidados
 from core.analizadores.analizador_cadenas import AnalizadorCadenas
 from core.constantes import TIPOS_COMPREHENSION, CORCHETES
-from models.nodes import ExpressionInfo, NodeType
-from utils.node_analyzer import NodeTypeAnalyzer
+from models.nodos import InformacionExpresion, TipoNodo
+from utils.node_analyzer import TipoNodoAnalyzer
 
 
 class AnalizadorComprehension:
@@ -45,26 +45,26 @@ class AnalizadorComprehension:
     Attributes:
         analizador_cadenas (AnalizadorCadenas): Analiza cadenas de texto
         analizador_corchetes (AnalizadorCorchetes): Procesa pares de corchetes
-        analizador_tipo (NodeTypeAnalyzer): Determina tipos de nodos
+        analizador_tipo (TipoNodoAnalyzer): Determina tipos de nodos
         buscar_y_extraer (BuscarYExtraerAnidados): Extrae expresiones anidadas
 
     Methods:
-        procesar_comprehension(codigo: str, posicion_inicial: int) -> ExpressionInfo | None:
+        procesar_comprehension(codigo: str, posicion_inicial: int) -> InformacionExpresion | None:
             Determina si una expresión comprehension o generator contiene anidaciones
 
     Example:
         >>> analizador = AnalizadorComprehension()
         >>> info = analizador.procesar_comprehension("[x for x in range(5)]", 0)
         >>> info
-        NodeType.LIST_COMPREHENSION
+        TipoNodo.LIST_COMPREHENSION
     """
     def __init__(self):
         self.analizador_cadenas = AnalizadorCadenas()
         self.analizador_corchetes = AnalizadorCorchetes()
-        self.analizador_tipo = NodeTypeAnalyzer()
+        self.analizador_tipo = TipoNodoAnalyzer()
         self.buscar_y_extraer = BuscarYExtraerAnidados()
 
-    def procesar_comprehension(self, codigo: str, posicion_inicial: int = 0) -> ExpressionInfo | None:
+    def procesar_comprehension(self, codigo: str, posicion_inicial: int = 0) -> InformacionExpresion | None:
         """
         Procesa una expresión de comprensión y extrae su información, así como sus anidados.
 
@@ -73,11 +73,11 @@ class AnalizadorComprehension:
             posicion_inicial (int): Posición donde inicia la búsqueda
 
         Returns:
-            ExpressionInfo | None: Información de la expresión o None si no es válida
+            InformacionExpresion | None: Información de la expresión o None si no es válida
 
         Example:
             >>> self.procesar_comprehension("[x for x in range(5)]", 0)
-            ExpressionInfo(type=NodeType.LIST_COMPREHENSION, ...)
+            InformacionExpresion(tipo=TipoNodo.LIST_COMPREHENSION, ...)
         """
         try:
             if not (self.analizador_tipo.check_comprehensions(codigo)):
@@ -117,19 +117,19 @@ class AnalizadorComprehension:
                 posicion_final
             )
 
-            return ExpressionInfo(
-                type=self._encontrar_tipo_principal(codigo),
-                nested_expressions=expresiones_anidadas,
-                start_pos=posicion_inicial,
-                end_pos=posicion_final,
-                expression=codigo[posicion_inicial:posicion_final]
+            return InformacionExpresion(
+                tipo=self._encontrar_tipo_principal(codigo),
+                expresiones_anidadas=expresiones_anidadas,
+                posicion_inicial=posicion_inicial,
+                posicion_final=posicion_final,
+                expresion=codigo[posicion_inicial:posicion_final]
             )
         except IndexError:
             return None
         except ValueError:
             return None
         
-    def _encontrar_tipo_principal(self, codigo: str) -> NodeType:
+    def _encontrar_tipo_principal(self, codigo: str) -> TipoNodo:
         """
         Determina el tipo de comprehension basado en sus caracteres.
 
@@ -137,11 +137,11 @@ class AnalizadorComprehension:
             codigo (str): Código fuente a analizar
 
         Returns:
-            NodeType: Tipo de comprehension encontrado
+            TipoNodo: Tipo de comprehension encontrado
 
         Example:
             >>> self._encontrar_tipo_principal("[x for x in range(5)]")
-            NodeType.LIST_COMPREHENSION
+            TipoNodo.LIST_COMPREHENSION
         """
         for caracter in codigo:
             if caracter in TIPOS_COMPREHENSION:

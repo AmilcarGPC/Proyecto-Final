@@ -1,0 +1,38 @@
+{
+    "test_1.py": {
+        "nombre_archivo": "test_1.py",
+        "lineas_logicas": 35,
+        "lineas_fisicas": 92,
+        "marca_tiempo": "2024-11-25T17:20:19.362364"
+    },
+    "test_2.py": {
+        "nombre_archivo": "test_2.py",
+        "lineas_logicas": 8,
+        "lineas_fisicas": 19,
+        "marca_tiempo": "2024-11-25T15:22:38.317951"
+    },
+    "test_6.py": {
+        "nombre_archivo": "test_6.py",
+        "lineas_logicas": 8,
+        "lineas_fisicas": 23,
+        "marca_tiempo": "2024-11-25T15:23:25.380132"
+    },
+    "test_8.py": {
+        "nombre_archivo": "test_8.py",
+        "lineas_logicas": 3,
+        "lineas_fisicas": 8,
+        "marca_tiempo": "2024-11-25T15:23:34.553531"
+    },
+    "test_9.py": {
+        "nombre_archivo": "test_9.py",
+        "lineas_logicas": 0,
+        "lineas_fisicas": 1,
+        "marca_tiempo": "2024-11-25T15:24:29.586865"
+    },
+    "archivo_utils.py": {
+        "nombre_archivo": "archivo_utils.py",
+        "lineas_logicas": 7,
+        "lineas_fisicas": 19,
+        "marca_tiempo": "2024-11-25T17:44:08.762504"
+    }
+}

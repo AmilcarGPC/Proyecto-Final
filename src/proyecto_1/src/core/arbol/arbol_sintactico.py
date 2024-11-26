@@ -11,7 +11,7 @@ Fecha de Creación: 18/11/2024
 
 Dependencias:
     - utils.tree_builder.TreeBuilder
-    - utils.tree_printer.TreePrinter
+    - utils.tree_printer.ImpresionArbol
 
 Uso:
     from core.arbol import ArbolArchivoPython
@@ -22,7 +22,7 @@ Notas:
     - Implementa representación jerárquica del código fuente
 """
 from utils.tree_builder import TreeBuilder
-from utils.tree_printer import TreePrinter
+from utils.tree_printer import ImpresionArbol
 
 
 class ArbolArchivoPython:
@@ -50,4 +50,4 @@ class ArbolArchivoPython:
         """
         Imprime la estructura del árbol en consola.
         """
-        TreePrinter.imprimir_arbol(self.raiz)
+        ImpresionArbol.imprimir_arbol(self.raiz)

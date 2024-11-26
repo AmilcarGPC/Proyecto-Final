@@ -28,8 +28,8 @@ Notas:
 import os
 from typing import List, Optional
 
-from models.metrics import MetricasArchivo
-from utils.file_utils import leer_json, escribir_json
+from models.metricas import MetricasArchivo
+from utils.archivo_utils import leer_json, escribir_json
 
 
 class AlmacenamientoMetricas:
@@ -54,7 +54,7 @@ class AlmacenamientoMetricas:
         >>> almacen = AlmacenamientoMetricas("metricas.json")
         >>> almacen.guardar_metricas(metricas)
     """
-    def __init__(self, ruta_almacenamiento: str = "metrics_storage.json"):
+    def __init__(self, ruta_almacenamiento: str = "metricas_storage.json"):
         self.ruta_almacenamiento = ruta_almacenamiento
         self._asegurar_archivo_almacenamiento()
 

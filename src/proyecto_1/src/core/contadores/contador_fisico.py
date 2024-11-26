@@ -13,7 +13,7 @@ Dependencias:
     - typing.List
     - core.arbol.nodo.Nodo
     - config.node_types.COMMENT_NODE_TYPES, VALID_CODE_NODE_TYPES
-    - models.nodes.NodeType
+    - models.nodos.TipoNodo
 
 Uso:
     from core.contadores.contador_fisico import ContadorLineasFisicas
@@ -29,7 +29,7 @@ from typing import List
 
 from core.arbol.nodo import Nodo
 from config.node_types import COMMENT_NODE_TYPES, VALID_CODE_NODE_TYPES
-from models.nodes import NodeType
+from models.nodos import TipoNodo
 
 
 class ContadorLineasFisicas:
@@ -81,9 +81,9 @@ class ContadorLineasFisicas:
         """
         contador = 0
             
-        if nodo.tipo == NodeType.IMPORT:
+        if nodo.tipo == TipoNodo.IMPORT:
             contador += ContadorLineasFisicas._procesar_importacion(nodo)
-        elif nodo.tipo == NodeType.ASSIGNMENT:
+        elif nodo.tipo == TipoNodo.ASSIGNMENT:
             contador += ContadorLineasFisicas._procesar_asignacion(nodo)
         elif nodo.tipo in COMMENT_NODE_TYPES:
             contador += 0

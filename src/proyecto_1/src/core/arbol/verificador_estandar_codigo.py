@@ -14,7 +14,7 @@ Dependencias:
     - core.analizadores.analizador_expresiones.AnalizadorExpresiones
     - core.arbol.nodo.Nodo
     - config.node_types.PARENT_NODE_TYPES, COMMENT_NODE_TYPES, NO_NESTED_ALLOWED
-    - models.nodes.NodeType
+    - models.nodos.TipoNodo
 
 Uso:
     from core.arbol.verificador_estandar_codigo import VerificadorEstandarCodigo
@@ -29,7 +29,7 @@ from core.analizadores.analizador_cadenas import AnalizadorCadenas
 from core.analizadores.analizador_expresiones import AnalizadorExpresiones
 from core.arbol.nodo import Nodo
 from config.node_types import PARENT_NODE_TYPES, COMMENT_NODE_TYPES, NO_NESTED_ALLOWED
-from models.nodes import NodeType
+from models.nodos import TipoNodo
 
 
 class VerificadorEstandarCodigo:
@@ -78,7 +78,7 @@ class VerificadorEstandarCodigo:
             False "No se permiten expresiones lambda"
         """
         try:
-            if nodo.tipo == NodeType.ROOT and len(nodo.hijos) == 0:
+            if nodo.tipo == TipoNodo.ROOT and len(nodo.hijos) == 0:
                 return False, "El archivo debe tener al menos una línea de código"
 
             if nodo.tipo in PARENT_NODE_TYPES and len(nodo.hijos) == 0:
@@ -160,7 +160,7 @@ class VerificadorEstandarCodigo:
         if nodo.tipo in NO_NESTED_ALLOWED:
             resultado = AnalizadorExpresiones().analizar(nodo.contenido, 
                                                          nodo.tipo)
-            if len(resultado.nested_expressions) > 0:
+            if len(resultado.expresiones_anidadas) > 0:
                 return True
         return False
 

@@ -10,7 +10,7 @@ Fecha de Creación: 18/11/2024
 Última Actualización: 18/11/2024
 
 Dependencias:
-    - models.nodes.NodeType
+    - models.nodos.TipoNodo
 
 Uso:
     from config.node_types import PARENT_NODE_TYPES, LOGICAL_NODE_TYPES
@@ -18,93 +18,93 @@ Uso:
 Notas:
     - Utiliza los tipos de nodos definidos para el árbol de análisis de código Python
 """
-from models.nodes import NodeType
+from models.nodos import TipoNodo
 
 # Tipos de nodos que pueden contener otros nodos
 PARENT_NODE_TYPES = {
-    NodeType.ROOT,
-    NodeType.FUNCTION, 
-    NodeType.CLASS, 
-    NodeType.METHOD,
-    NodeType.IF, 
-    NodeType.ELIF, 
-    NodeType.ELSE, 
-    NodeType.FOR, 
-    NodeType.WHILE, 
-    NodeType.MATCH, 
-    NodeType.CASE,
-    NodeType.WITH,
-    NodeType.TRY,
-    NodeType.EXCEPT,
-    NodeType.FINALLY
+    TipoNodo.ROOT,
+    TipoNodo.FUNCTION, 
+    TipoNodo.CLASS, 
+    TipoNodo.METHOD,
+    TipoNodo.IF, 
+    TipoNodo.ELIF, 
+    TipoNodo.ELSE, 
+    TipoNodo.FOR, 
+    TipoNodo.WHILE, 
+    TipoNodo.MATCH, 
+    TipoNodo.CASE,
+    TipoNodo.WITH,
+    TipoNodo.TRY,
+    TipoNodo.EXCEPT,
+    TipoNodo.FINALLY
 }
 
 # Tipos de nodos considerados como estructuras lógicas
 LOGICAL_NODE_TYPES = {
-    NodeType.FUNCTION,
-    NodeType.METHOD,
-    NodeType.CLASS,
-    NodeType.IF,
-    NodeType.FOR,
-    NodeType.WHILE,
-    NodeType.MATCH,
-    NodeType.LIST_COMPREHENSION,
-    NodeType.DICT_COMPREHENSION,
-    NodeType.SET_COMPREHENSION,
-    NodeType.GENERATOR_EXPRESSION,
-    NodeType.TERNARY,
-    NodeType.WITH,
-    NodeType.TRY,
-    NodeType.PROPERTY,
-    NodeType.DECORATOR,
+    TipoNodo.FUNCTION,
+    TipoNodo.METHOD,
+    TipoNodo.CLASS,
+    TipoNodo.IF,
+    TipoNodo.FOR,
+    TipoNodo.WHILE,
+    TipoNodo.MATCH,
+    TipoNodo.LIST_COMPREHENSION,
+    TipoNodo.DICT_COMPREHENSION,
+    TipoNodo.SET_COMPREHENSION,
+    TipoNodo.GENERATOR_EXPRESSION,
+    TipoNodo.TERNARY,
+    TipoNodo.WITH,
+    TipoNodo.TRY,
+    TipoNodo.PROPERTY,
+    TipoNodo.DECORATOR,
 }
 
 # Tipos de nodos que el estándar no permite anidar
 NO_NESTED_ALLOWED = {
-    NodeType.TERNARY,
-    NodeType.LIST_COMPREHENSION,
-    NodeType.DICT_COMPREHENSION,
-    NodeType.SET_COMPREHENSION,
-    NodeType.GENERATOR_EXPRESSION
+    TipoNodo.TERNARY,
+    TipoNodo.LIST_COMPREHENSION,
+    TipoNodo.DICT_COMPREHENSION,
+    TipoNodo.SET_COMPREHENSION,
+    TipoNodo.GENERATOR_EXPRESSION
 }
 
 # Tipos de nodos especificos para comentarios y documentación
 COMMENT_NODE_TYPES = {
-    NodeType.MODULE_DOCSTRING,
-    NodeType.FUNCTION_DOCSTRING,
-    NodeType.CLASS_DOCSTRING,
-    NodeType.COMMENT,
-    NodeType.INLINE_COMMENT
+    TipoNodo.MODULE_DOCSTRING,
+    TipoNodo.FUNCTION_DOCSTRING,
+    TipoNodo.CLASS_DOCSTRING,
+    TipoNodo.COMMENT,
+    TipoNodo.INLINE_COMMENT
 }
 
 # Tipos de nodos que representan código válido para contar líneas físicas
 VALID_CODE_NODE_TYPES = {
-    NodeType.FUNCTION,
-    NodeType.CLASS,
-    NodeType.IF,
-    NodeType.ELIF,
-    NodeType.ELSE,
-    NodeType.FOR,
-    NodeType.WHILE,
-    NodeType.MATCH,
-    NodeType.CASE,
-    NodeType.EXPRESSION,
-    NodeType.LIST_COMPREHENSION,
-    NodeType.DICT_COMPREHENSION,
-    NodeType.SET_COMPREHENSION,
-    NodeType.GENERATOR_EXPRESSION,
-    NodeType.TERNARY,
-    NodeType.WITH,
-    NodeType.TRY,
-    NodeType.EXCEPT,
-    NodeType.FINALLY,
-    NodeType.CONSTANT,
-    NodeType.METHOD,
-    NodeType.PROPERTY,
-    NodeType.DECORATOR,
-    NodeType.RETURN,
-    NodeType.BREAK,
-    NodeType.CONTINUE,
-    NodeType.RAISE,
-    NodeType.ASSERT
+    TipoNodo.FUNCTION,
+    TipoNodo.CLASS,
+    TipoNodo.IF,
+    TipoNodo.ELIF,
+    TipoNodo.ELSE,
+    TipoNodo.FOR,
+    TipoNodo.WHILE,
+    TipoNodo.MATCH,
+    TipoNodo.CASE,
+    TipoNodo.EXPRESSION,
+    TipoNodo.LIST_COMPREHENSION,
+    TipoNodo.DICT_COMPREHENSION,
+    TipoNodo.SET_COMPREHENSION,
+    TipoNodo.GENERATOR_EXPRESSION,
+    TipoNodo.TERNARY,
+    TipoNodo.WITH,
+    TipoNodo.TRY,
+    TipoNodo.EXCEPT,
+    TipoNodo.FINALLY,
+    TipoNodo.CONSTANT,
+    TipoNodo.METHOD,
+    TipoNodo.PROPERTY,
+    TipoNodo.DECORATOR,
+    TipoNodo.RETURN,
+    TipoNodo.BREAK,
+    TipoNodo.CONTINUE,
+    TipoNodo.RAISE,
+    TipoNodo.ASSERT
 }

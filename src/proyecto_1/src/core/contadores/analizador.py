@@ -37,7 +37,7 @@ from core.gestion_archivos.lector_archivo import LectorArchivoPython
 from core.gestion_archivos.almacenamiento_metricas import AlmacenamientoMetricas
 from core.arbol.arbol_sintactico import ArbolArchivoPython
 from core.arbol.verificador_estandar_codigo import VerificadorEstandarCodigo
-from models.metrics import MetricasArchivo
+from models.metricas import MetricasArchivo
 from utils.line_formatter import LineFormatter
 
 
@@ -98,6 +98,7 @@ class AnalizadorCodigo:
         >>> resultado = analizador.analizar_archivo("script.py", "script.py")
     """
     def __init__(self):
+        self.arbol = None
         self.almacenamiento = AlmacenamientoMetricas()
         self.formateador = LineFormatter()
         self.contador_fisico = ContadorLineasFisicas()
@@ -218,6 +219,7 @@ class AnalizadorCodigo:
         """
         arbol = ArbolArchivoPython(codigo)
         self._validar_arbol_sintaxis(arbol)
+        self.arbol = arbol
         
         return MetricasArchivo(
             nombre_archivo=nombre_archivo,
