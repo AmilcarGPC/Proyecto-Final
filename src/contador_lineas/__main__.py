@@ -175,7 +175,7 @@ def main() -> None:
     args = procesar_argumentos()
     almacen = AlmacenamientoMetricas()
 
-    if args.tc:
+    if args.tc and not args.ruta_archivo:   
         display_metrics_table(almacen.obtener_todas_las_metricas())
         return
 
@@ -186,6 +186,8 @@ def main() -> None:
 
     try:
         procesar_archivo(args.ruta_archivo, almacen, args.t, args.formato)
+        if args.tc:   
+            display_metrics_table(almacen.obtener_todas_las_metricas())
     except ExcepcionAnalizador as e:
         print(f"{Fore.RED}{str(e)}{Style.RESET_ALL}")
     except Exception as e:
