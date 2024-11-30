@@ -56,7 +56,7 @@ class AlmacenamientoMetricas:
         >>> almacen.guardar_metricas(metricas)
     """
     
-    def __init__(self, ruta_almacenamiento: str = "db/metricas_registro.json"):
+    def __init__(self, ruta_almacenamiento: str = "db/contador_lineas_registro.json"):
         self.ruta_almacenamiento = ruta_almacenamiento
         self._asegurar_archivo_almacenamiento()
 
