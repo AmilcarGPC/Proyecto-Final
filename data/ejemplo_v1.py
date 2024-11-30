@@ -1,0 +1,2 @@
+def kafka():
+    return "kafka"

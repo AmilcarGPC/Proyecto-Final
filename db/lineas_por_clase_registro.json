@@ -1,0 +1,49 @@
+{
+    "test_1.py": {
+        "nombre_archivo": "test_1.py",
+        "clases": [
+            {
+                "nombre_clase": "Token",
+                "cantidad_metodos": 2,
+                "lineas_fisicas": 6
+            },
+            {
+                "nombre_clase": "Lexer",
+                "cantidad_metodos": 5,
+                "lineas_fisicas": 30
+            },
+            {
+                "nombre_clase": "Parser",
+                "cantidad_metodos": 5,
+                "lineas_fisicas": 42
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 14
+            }
+        ],
+        "total_lineas_fisicas": 92
+    },
+    "nodos.py": {
+        "nombre_archivo": "nodos.py",
+        "clases": [
+            {
+                "nombre_clase": "TipoNodo(Enum)",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 37
+            },
+            {
+                "nombre_clase": "InformacionExpresion",
+                "cantidad_metodos": 1,
+                "lineas_fisicas": 9
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 4
+            }
+        ],
+        "total_lineas_fisicas": 50
+    }
+}
