@@ -116,7 +116,10 @@ def escribir_python(
         with open(ruta_archivo, 'w', encoding=codificacion) as archivo:
             for i, linea in enumerate(lineas):
                 if linea != '\n':
-                    archivo.write(linea + '\n')  # Escribir la línea actual
+                    if linea.endswith('\n'):
+                        archivo.write(linea)
+                    else:
+                        archivo.write(linea + '\n')  # Escribir la línea actual
                 else:
                     archivo.write('\n')
         return None

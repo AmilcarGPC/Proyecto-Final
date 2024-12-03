@@ -6,3 +6,4 @@ result = (valor1 + valor2 + valor3 + valor4 # Este comentario romperá la contin
 def funcion(
     param1,  # Este comentario podría causar error de sintaxis
     param2):
+    return 0

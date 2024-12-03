@@ -24,5 +24,10 @@
             }
         ],
         "total_lineas_fisicas": 93
+    },
+    "ejemplo_v1.py": {
+        "nombre_archivo": "ejemplo_v1.py",
+        "lineas_logicas": 1,
+        "lineas_fisicas": 3
     }
 }

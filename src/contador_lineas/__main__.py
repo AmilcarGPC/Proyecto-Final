@@ -152,6 +152,7 @@ def procesar_archivo(
     if formatear:
         ruta_base = Path(ruta_archivo)
         ruta_formateada = ruta_base.parent / f"{ruta_base.stem}_formateado{ruta_base.suffix}"
+        print(analizador.codigo)
         error = escribir_python(ruta_formateada, analizador.codigo)
         if error:
             print(f"{Fore.RED}{error}{Style.RESET_ALL}")
