@@ -41,6 +41,7 @@ from analizador_cambios.core.arbol.arbol_sintactico import ArbolArchivoPython
 from analizador_cambios.core.arbol.verificador_estandar_codigo import VerificadorEstandarCodigo
 from analizador_cambios.models.metricas import MetricasClase, MetricasArchivo
 from analizador_cambios.utils.formateador_linea import FormateadorLinea
+from analizador_cambios.utils.impresion_arbol import imprimir_arbol
 
 
 class ExcepcionAnalizador(Exception):

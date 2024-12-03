@@ -96,7 +96,6 @@ class TreeBuilder:
                 else:
                     self.string_delimiter = "'''"
  
-                print(f"STRING DELIMITER: {self.string_delimiter} | {stripped} ")
                 if stripped[3:].endswith(self.string_delimiter):
                     self.in_multiline_string = False
                     self.string_delimiter = None
@@ -167,11 +166,9 @@ class TreeBuilder:
             j = i
 
             #print(f"LINEA: {line} | {self._analyze_docstring(line)}")
-            print(f"{self.in_multiline_string}")
             if not self._analyze_docstring(line):
                 self.tree_2_lines[numero_nodo] = [i]
                 node_type = self.type_analyzer.get_node_type(line)
-                print(f"TIPO: {node_type}")
                 indent = len(lines[i]) - len(lines[i].lstrip())
                 new_node = Nodo(node_type, lines[i].strip(), indent, numero_nodo)
                 current_parent.agregar_hijo(new_node)
@@ -182,7 +179,6 @@ class TreeBuilder:
                 while i + 1 < len(lines) and not self._analyze_docstring(lines[i + 1]):
                     i += 1
                     self.tree_2_lines[numero_nodo] = [i]
-                    print(f"HUEVO: {lines[i]}")
                     indent = len(lines[i]) - len(lines[i].lstrip())
                     new_node = Nodo(node_type, lines[i].strip(), indent, numero_nodo)
                     current_parent.agregar_hijo(new_node)

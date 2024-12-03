@@ -45,5 +45,27 @@
             }
         ],
         "total_lineas_fisicas": 50
+    },
+    "ejemplo_v1.py": {
+        "nombre_archivo": "ejemplo_v1.py",
+        "clases": [
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 6
+            }
+        ],
+        "total_lineas_fisicas": 6
+    },
+    "ejemplo_v2.py": {
+        "nombre_archivo": "ejemplo_v2.py",
+        "clases": [
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 6
+            }
+        ],
+        "total_lineas_fisicas": 6
     }
 }

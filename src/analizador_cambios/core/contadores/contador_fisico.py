@@ -82,7 +82,7 @@ class ContadorLineasFisicas:
             4
         """
         contador = 0
-        #old = contador
+        # old = contador
         if nodo.tipo == TipoNodo.IMPORT:
             contador += ContadorLineasFisicas._procesar_importacion(nodo)
         elif nodo.tipo == TipoNodo.ASSIGNMENT:
@@ -92,7 +92,7 @@ class ContadorLineasFisicas:
         elif nodo.tipo in VALID_CODE_NODE_TYPES:
             contador += 1
         
-        #print(f"contenido: {nodo.contenido} - vale: {contador - old}")
+        # print(f"{nodo.contenido} # - vale: {contador - old}")
             
         for hijo in nodo.hijos:
             contador += ContadorLineasFisicas._contar_lineas_nodo(hijo)

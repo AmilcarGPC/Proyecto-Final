@@ -1,2 +1,6 @@
-def kafa():
-    print("Hola desde kafa")
+x = 0
+json() 
+print(x)
+if self.loli: 
+    print("hola")
+    return 0

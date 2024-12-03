@@ -24,19 +24,28 @@ class EscribirCambios:
 
         # Crear comentarios en las líneas modificadas
         for cambio in cambios:
-            if cambio.tipo == TipoCambio.MODIFICADO:
-                for linea in mapeo2[cambio.posicion]:
-                    codigo1[linea] = f"{codigo1[linea].rstrip('\n')} # ELIMINADO\n"
-                    codigo2[linea] = f"{codigo2[linea].rstrip("\n")} # MODIFICADOA (PARCIALMENTE NUEVA)\n"
-            elif cambio.tipo == TipoCambio.ELIMINADO:
-                print(f"Eliminado: {cambio.posicion}")
-                print(f"mapeo1: {mapeo1[cambio.posicion]}")
-                for linea in mapeo1[cambio.posicion]:
-                    print(f"a eliminar: {linea}")
-                    codigo1[linea] = f"{codigo1[linea].rstrip("\n")} # ELIMINADO\n"
-            elif cambio.tipo == TipoCambio.AGREGADO:
-                for linea in mapeo2[cambio.posicion]:
-                    print(f"a añadir: {linea}")
-                    codigo2[linea] = f"{codigo2[linea].rstrip("\n")} # AGREGADO (TOTALMENTE NUEVA)\n"
+            if cambio.tipo == TipoCambio.BORRADA:
+                    linea = mapeo1[cambio.posicion][-1]
+                    ajuste = f" (las {len(mapeo1[cambio.posicion])} líneas previas cuentan como 1)\n" if len(mapeo1[cambio.posicion]) > 1 else f"\n"
+                    codigo1[linea] = f"{codigo1[linea].rstrip()} # ELIMINADA" + ajuste
+            elif cambio.tipo == TipoCambio.AGREGADA:
+                    linea = mapeo2[cambio.posicion][-1]
+                    ajuste = f" (las {len(mapeo2[cambio.posicion])} líneas previas cuentan como 1)\n" if len(mapeo2[cambio.posicion]) > 1 else f"\n"
+                    if cambio.medida_de_cambio != 100:
+                        codigo2[linea] = f"{codigo2[linea].rstrip()} # AGREGADA PEQUEÑA MODIFICACIÓN DEL {cambio.medida_de_cambio}%" + ajuste
+                    else:
+                        codigo2[linea] = f"{codigo2[linea].rstrip()} # AGREGADA TOTALMENTE NUEVA" + ajuste
 
         return codigo1, codigo2
+    
+    def _verificar_no_backslash(self, linea: str):
+        """
+        Verifica si una línea de código termina con un backslash.
+
+        Args:
+            linea (str): Línea de código a verificar
+
+        Returns:
+            bool: True si termina con backslash, False si no
+        """
+        return linea.rstrip().endswith("\\")

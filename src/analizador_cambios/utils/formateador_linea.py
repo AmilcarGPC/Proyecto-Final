@@ -41,6 +41,22 @@ class FormateadorLinea:
         >>> formateador.formatear_linea("def funcion(param1, param2, param3):")
         ['def funcion( \\', '    param2, \\', '    param3):']
     """
+    @staticmethod
+    def _extraer_codigo_y_comentario(linea: str) -> tuple[str, str]:
+        """
+        Separa el código del comentario en una línea.
+        
+        Args:
+            linea (str): Línea completa de código
+            
+        Returns:
+            tuple[str, str]: (código sin comentario, comentario)
+        """
+        pos_hash = AnalizadorCadenas.encontrar_sin_comillas(linea, '#', 0)
+        if pos_hash == -1:
+            return linea, ''
+        
+        return linea[:pos_hash].rstrip(), linea[pos_hash:]
 
     @staticmethod
     def formatear_linea(linea: str) -> list[str]:
@@ -57,31 +73,36 @@ class FormateadorLinea:
             >>> formatear_linea("def funcion(param1, param2)")
             ['def funcion(', '        param1,', '        param2):']
         """
-        indentacion = len(linea) - len(linea.lstrip())
-        indentacion_str = ' ' * indentacion
-
-        if linea.strip().startswith(('from ', 'import ')):
-            return FormateadorLinea._formatear_importacion(
-                linea, 
-                indentacion_str
-            )
-
+        codigo, comentario = FormateadorLinea._extraer_codigo_y_comentario(linea)
+    
         if len(linea) <= LONGITUD_MAXIMA_LINEA:
             return [linea]
-
-        if linea.strip().startswith('def ') and '(' in linea:
-            return FormateadorLinea._formatear_definicion_funcion(
-                linea, 
-                indentacion_str
-            )
-
-        if '=' in linea:
-            return FormateadorLinea._formatear_asignacion(
-                linea, 
-                indentacion_str
-            )
-
-        return FormateadorLinea._formatear_generico(linea, indentacion_str)
+                
+        indentacion = len(codigo) - len(codigo.lstrip())
+        indentacion_str = ' ' * indentacion
+        
+        # Formatear el código
+        if codigo.strip().startswith(('from ', 'import ')):
+            formateado = FormateadorLinea._formatear_importacion(codigo, indentacion_str)
+        elif codigo.strip().startswith('def ') and '(' in codigo:
+            formateado = FormateadorLinea._formatear_definicion_funcion(codigo, indentacion_str)
+        elif '=' in codigo:
+            formateado = FormateadorLinea._formatear_asignacion(codigo, indentacion_str)
+        else:
+            formateado = FormateadorLinea._formatear_generico(codigo, indentacion_str)
+        
+        # Manejar el comentario de forma segura
+        if comentario:
+            if '\\' in formateado[-1]:  # Si hay continuación de línea
+                formateado.append(indentacion_str + comentario)  # Comentario en nueva línea
+            else:
+                ultima_linea = formateado[-1].rstrip()
+                if len(ultima_linea + ' ' + comentario) <= LONGITUD_MAXIMA_LINEA:
+                    formateado[-1] = ultima_linea + ' ' + comentario
+                else:
+                    formateado.append(indentacion_str + comentario)
+        
+        return formateado
     
     @staticmethod
     def _formatear_importacion(linea: str, indentacion: str) -> list[str]:
@@ -108,7 +129,7 @@ class FormateadorLinea:
                 if not elemento:
                     continue
 
-                if len(linea_actual + elemento) <= LONGITUD_MAXIMA_LINEA:
+                if len(linea_actual + ', ' + elemento) + 3 <= LONGITUD_MAXIMA_LINEA:
                     linea_actual += ((', ' if linea_actual != 'import ' 
                                       else '')
                                      + elemento)
@@ -219,7 +240,6 @@ class FormateadorLinea:
                     formateado.append(f"{indentacion_args}{argumento}")
 
             formateado.append(f"{indentacion}{resto}")
-            print(f"FORMATEADO 1: {formateado}")
             return formateado
 
         return FormateadorLinea._formatear_generico(linea, indentacion)
@@ -245,7 +265,7 @@ class FormateadorLinea:
         formateado = []
 
         for palabra in palabras:
-            if len(linea_actual) + len(palabra) + 1 <= LONGITUD_MAXIMA_LINEA:
+            if len(linea_actual) + len(palabra) + 2 <= LONGITUD_MAXIMA_LINEA:
                 linea_actual += ((' ' if linea_actual != indentacion else '') 
                                  + palabra)
             else:
@@ -254,5 +274,4 @@ class FormateadorLinea:
 
         if linea_actual.strip():
             formateado.append(linea_actual)
-        print(f"FORMATEADO 2: {formateado}")
         return formateado

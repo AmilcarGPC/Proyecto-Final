@@ -39,6 +39,8 @@ from analizador_cambios.core.gestion_archivos.almacenamiento_metricas import (
 from analizador_cambios.utils.archivo_utils import escribir_python
 from analizador_cambios.utils.formatters import display_metrics_table
 
+from analizador_cambios.core.arbol.comparador_principal import ComparadorVersiones
+from analizador_cambios.core.gestion_archivos.escribir_cambios import EscribirCambios
 
 def obtener_nombre_archivo(ruta_archivo: str) -> str:
     """
@@ -73,15 +75,21 @@ def procesar_argumentos() -> argparse.Namespace:
         description="Sistema de Conteo de Líneas Físicas y Lógicas en Python"
     )
     analizador.add_argument(
-        "ruta_archivo",
+        "ruta_archivo_1",
         type=str,
         nargs='?',
-        help="Ruta del archivo Python a analizar"
+        help="Ruta del primer archivo Python a analizar"
+    )
+    analizador.add_argument(
+        "ruta_archivo_2",
+        type=str,
+        nargs='?',
+        help="Ruta del segundo archivo Python a analizar"
     )
     analizador.add_argument(
         "-t",
         action="store_true",
-        help="Mostrar tabla de métricas del archivo procesado"
+        help="Mostrar tabla de métricas de los archivos procesados"
     )
     analizador.add_argument(
         "-tc",
@@ -89,9 +97,9 @@ def procesar_argumentos() -> argparse.Namespace:
         help="Mostrar tabla de métricas de todos los archivos procesados"
     )
     analizador.add_argument(
-        "--formato",
-        action="store_true",
-        help="Guardar versión formateada del archivo"
+        "-cc",
+        action="store_true", 
+        help="Mostrar conteo de cambios entre archivos"
     )
     return analizador.parse_args()
 
@@ -123,46 +131,59 @@ def validar_argumentos(args: argparse.Namespace) -> tuple[bool, str]:
         >>> print(es_valido, error)
         True, ""
     """
-    if not args.tc and not args.ruta_archivo:
-        return False, "Error: Se requiere el archivo cuando no se usa -tc"
+    if not args.tc:
+        if not (args.ruta_archivo_1 and args.ruta_archivo_2):
+            return False, "Error: Se requieren dos archivos cuando no se usa -tc"
     return True, ""
 
 
-def procesar_archivo(
-        ruta_archivo: str,
+def procesar_archivos(
+        ruta_archivo_1: str,
+        ruta_archivo_2: str,
         almacen: AlmacenamientoMetricas,
         mostrar_tabla: bool,
-        formatear: bool = False) -> None:
+        mostrar_cambios: bool) -> None:
     """
-    Procesa un archivo individual y muestra resultados.
-
-    Args:
-        ruta_archivo (str): Ruta del archivo a procesar
-        almacen (AlmacenamientoMetricas): Almacenamiento de métricas
-        mostrar_tabla (bool): Mostrar tabla de métricas
-        formatear (bool): Guardar archivo formateado
-
-    Example:
-        >>> procesar_archivo("archivo.py", AlmacenamientoMetricas(), True)
+    Procesa dos archivos, los compara y guarda resultados
     """
-    nombre_archivo = obtener_nombre_archivo(ruta_archivo)
-    analizador = AnalizadorCodigo()
-    resultado = analizador.analizar_archivo(ruta_archivo, nombre_archivo)
+    nombre_archivo_1 = obtener_nombre_archivo(ruta_archivo_1)
+    nombre_archivo_2 = obtener_nombre_archivo(ruta_archivo_2) # 30
+    
+    analizador1 = AnalizadorCodigo()
+    analizador2 = AnalizadorCodigo()
+    
+    resultado1 = analizador1.analizar_archivo(ruta_archivo_1, nombre_archivo_1)
+    resultado2 = analizador2.analizar_archivo(ruta_archivo_2, nombre_archivo_2)
 
-    if formatear:
-        ruta_base = Path(ruta_archivo)
-        ruta_formateada = ruta_base.parent / f"{ruta_base.stem}_formateado{ruta_base.suffix}"
-        error = escribir_python(ruta_formateada, analizador.codigo)
-        if error:
-            print(f"{Fore.RED}{error}{Style.RESET_ALL}")
-        else:
-            print(f"{Fore.GREEN}Archivo formateado guardado en: {ruta_formateada}{Style.RESET_ALL}")
+    # Realizar comparación
+    comparador = ComparadorVersiones()
+    cambios = comparador.comparar_archivos(analizador1.arbol, analizador2.arbol)
+    
+    # Escribir archivos comentados
+    escritor = EscribirCambios()
+    codigo_1, codigo_2 = escritor.escribir(analizador1, analizador2, cambios)
+    
+    ruta_1 = Path(ruta_archivo_1)
+    ruta_2 = Path(ruta_archivo_2)
+    
+    ruta_comentada_1 = ruta_1.parent / f"{ruta_1.stem}_comentado{ruta_1.suffix}"
+    ruta_comentada_2 = ruta_2.parent / f"{ruta_2.stem}_comentado{ruta_2.suffix}"
+    
+    escribir_python(ruta_comentada_1, codigo_1)
+    escribir_python(ruta_comentada_2, codigo_2)
 
     if mostrar_tabla:
         display_metrics_table([
-            almacen.cargar_metricas(nombre_archivo)
+            almacen.cargar_metricas(nombre_archivo_1),
+            almacen.cargar_metricas(nombre_archivo_2)
         ])
 
+    if mostrar_cambios:
+        agregados, modificados, eliminados = comparador.contar_cambios(cambios)
+        print(f"\nConteo de cambios:")
+        print(f"{Fore.GREEN}Líneas añadidas nuevas: {agregados}")
+        print(f"{Fore.YELLOW}Líneas añadidas modificadas: {modificados}")
+        print(f"{Fore.RED}Líneas eliminadas: {eliminados}{Style.RESET_ALL}\n")
 
 def main() -> None:
     """
@@ -175,17 +196,23 @@ def main() -> None:
     args = procesar_argumentos()
     almacen = AlmacenamientoMetricas()
 
-    if args.tc and not args.ruta_archivo:
+    if args.tc and not (args.ruta_archivo_1 or args.ruta_archivo_2):
         display_metrics_table(almacen.obtener_todas_las_metricas())
         return
 
-    es_valido, mensaje_error = validar_argumentos(args)
+    es_valido, mensaje_error = validar_argumentos(args) #60
     if not es_valido:
         print(f"{Fore.RED}{mensaje_error}{Style.RESET_ALL}")
         return
 
     try:
-        procesar_archivo(args.ruta_archivo, almacen, args.t, args.formato)
+        procesar_archivos(
+            args.ruta_archivo_1, 
+            args.ruta_archivo_2, 
+            almacen, 
+            args.t,
+            args.cc
+        )
         if args.tc:
             display_metrics_table(almacen.obtener_todas_las_metricas())
     except ExcepcionAnalizador as e:

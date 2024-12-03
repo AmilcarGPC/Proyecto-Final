@@ -14,7 +14,8 @@ class Lexer:
 
     def advance(self):
         self.pos += 1
-        self.current_char = self.text[self.pos] if self.pos < len(self.text) else None
+        self.current_char = self.text[self.pos] if self.pos < len(self.text) \
+        else None
 
     def skip_whitespace(self):
         while self.current_char and self.current_char.isspace():
@@ -22,7 +23,8 @@ class Lexer:
 
     def number(self):
         result = ''
-        while self.current_char and (self.current_char.isdigit() or self.current_char == '.'):
+        while self.current_char and (self.current_char.isdigit() or \
+        self.current_char == '.'):
             result += self.current_char
             self.advance()
         return float(result) if '.' in result else int(result)
@@ -46,11 +48,12 @@ class Parser:
         self.lexer = lexer
         self.current_token = self.lexer.get_next_token()
 
-    def eat(self, token_type):
-        if self.current_token.type == token_type:
-            self.current_token = self.lexer.get_next_token()
-        else:
-            raise ValueError(f"Expected token {token_type}, got {self.current_token.type}")
+    def eat(self, token_type): # ELIMINADA
+        if self.current_token.type == token_type: # ELIMINADA
+            self.current_token = self.lexer.get_next_token() # ELIMINADA
+        else: # ELIMINADA
+            raise ValueError(f"Expected token {token_type}, got \
+            {self.current_token.type}") # ELIMINADA (las 2 líneas previas cuentan como 1)
 
     def factor(self):
         token = self.current_token
