@@ -179,7 +179,7 @@ class BuscarYExtraerAnidados:
         Example:
             >>> _buscar_ternarios_anidados("x if y else z")
         """
-        from core.analizadores.analizador_ternario import AnalizadorTernario
+        from contador_lineas.core.analizadores.analizador_ternario import AnalizadorTernario
         
         expresion_ternaria = AnalizadorTernario().analizar_ternario(codigo)
         if not expresion_ternaria:
