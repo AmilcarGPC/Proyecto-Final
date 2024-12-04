@@ -23,6 +23,7 @@ Uso:
     comparador = ComparadorArboles()
     cambios = comparador.comparar(arbol1, arbol2)
 """
+
 from difflib import SequenceMatcher
 from typing import List
 

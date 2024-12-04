@@ -25,7 +25,7 @@ Notes:
 """
 from typing import List
 
-from contador_lineas.core.arbol.nodo import Nodo # ELIMINADA
+from contador_lineas.core.arbol.nodo import Nodo # BORRADA
 from contador_lineas.models.nodos import TipoNodo
 from contador_lineas.utils.node_analyzer import TipoNodoAnalyzer
 from contador_lineas.config.node_types import PARENT_NODE_TYPES
@@ -155,7 +155,7 @@ class TreeBuilder:
         return self.open_delimiters == 0 and not line.rstrip().endswith('\\')
     
     def build(self, lines: List[str]) -> Nodo:
-        raiz = Nodo(TipoNodo.ROOT, "raiz", -1) # ELIMINADA
+        raiz = Nodo(TipoNodo.ROOT, "raiz", -1) # BORRADA
         current_parent = raiz
         indent_stack = [(raiz, -1)]
         i = 0
@@ -163,9 +163,9 @@ class TreeBuilder:
         while i < len(lines):
             line = lines[i]
             
-            if not line.strip(): # ELIMINADA
-                i += 1 # ELIMINADA
-                continue # ELIMINADA
+            if not line.strip(): # BORRADA
+                i += 1 # BORRADA
+                continue # BORRADA
             
             # Format long lines
             if len(line) > 1:
@@ -174,15 +174,15 @@ class TreeBuilder:
 
             if not self._analyze_docstring(line):
                 node_type = self.type_analyzer.get_node_type(line)
-                indent = len(lines[i]) - len(lines[i].lstrip()) # ELIMINADA
-                new_node = Nodo(node_type, lines[i].strip(), indent) # ELIMINADA
+                indent = len(lines[i]) - len(lines[i].lstrip()) # BORRADA
+                new_node = Nodo(node_type, lines[i].strip(), indent) # BORRADA
                 current_parent.agregar_hijo(new_node)
 
                 while i + 1 < len(lines) and not \
                 self._analyze_docstring(lines[i + 1]):
                     i += 1
-                    indent = len(lines[i]) - len(lines[i].lstrip()) # ELIMINADA
-                    new_node = Nodo(node_type, lines[i].strip(), indent) # ELIMINADA
+                    indent = len(lines[i]) - len(lines[i].lstrip()) # BORRADA
+                    new_node = Nodo(node_type, lines[i].strip(), indent) # BORRADA
                     current_parent.agregar_hijo(new_node)
                 
                 if i + 1 < len(lines):
@@ -210,8 +210,8 @@ class TreeBuilder:
             else:
                 node_type = self.type_analyzer.get_node_type(line)
 
-            indent = len(lines[j]) - len(lines[j].lstrip()) # ELIMINADA
-            new_node = Nodo(node_type, line.strip(), indent) # ELIMINADA
+            indent = len(lines[j]) - len(lines[j].lstrip()) # BORRADA
+            new_node = Nodo(node_type, line.strip(), indent) # BORRADA
 
             while indent_stack and indent <= indent_stack[-1][1]:
                 indent_stack.pop()

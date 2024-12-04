@@ -25,7 +25,7 @@ Notes:
 """
 from typing import List
 
-from analizador_cambios.core.arbol.nodo import Nodo # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.83%
+from analizador_cambios.core.arbol.nodo import Nodo # AÑADIDA EN UN 0.83%
 from contador_lineas.models.nodos import TipoNodo
 from contador_lineas.utils.node_analyzer import TipoNodoAnalyzer
 from contador_lineas.config.node_types import PARENT_NODE_TYPES
@@ -36,7 +36,7 @@ from contador_lineas.core.analizadores.analizador_cadenas import (
 class TreeBuilder:
     def __init__(self, multilines_worth_1: bool = True):
         self.multilines_worth_1 = multilines_worth_1
-        self.tree_2_lines = {} # AGREGADA TOTALMENTE NUEVA
+        self.tree_2_lines = {} # AÑADIDA EN UN 100%
         self.type_analyzer = TipoNodoAnalyzer()
         self.multiline_buffer = []
         self.open_delimiters = 0
@@ -156,21 +156,21 @@ class TreeBuilder:
         return self.open_delimiters == 0 and not line.rstrip().endswith('\\')
     
     def build(self, lines: List[str]) -> Nodo:
-        raiz = Nodo(TipoNodo.ROOT, "raiz", -1, -1) # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.95%
+        raiz = Nodo(TipoNodo.ROOT, "raiz", -1, -1) # AÑADIDA EN UN 0.95%
         current_parent = raiz
         indent_stack = [(raiz, -1)]
         i = 0
         j = 0
-        numero_nodo = 0 # AGREGADA TOTALMENTE NUEVA
-        posicion_linea = [0] # AGREGADA TOTALMENTE NUEVA
-        previous_indent = -1 # AGREGADA TOTALMENTE NUEVA
+        numero_nodo = 0 # AÑADIDA EN UN 100%
+        posicion_linea = [0] # AÑADIDA EN UN 100%
+        previous_indent = -1 # AÑADIDA EN UN 100%
         
         while i < len(lines):
             line = lines[i]
             
-            # if not line.strip(): # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.95%
-            #    i += 1 # AGREGADA TOTALMENTE NUEVA
-            #    continue # AGREGADA TOTALMENTE NUEVA
+            # if not line.strip(): # AÑADIDA EN UN 0.95%
+            #    i += 1 # AÑADIDA EN UN 100%
+            #    continue # AÑADIDA EN UN 100%
             
             # Format long lines
             if len(line) > 1:
@@ -178,62 +178,62 @@ class TreeBuilder:
             j = i
 
             if not self._analyze_docstring(line):
-                self.tree_2_lines[numero_nodo] = [i] # AGREGADA TOTALMENTE NUEVA
+                self.tree_2_lines[numero_nodo] = [i] # AÑADIDA EN UN 100%
                 node_type = self.type_analyzer.get_node_type(line)
-                if node_type == TipoNodo.WHITE_SPACE: # AGREGADA TOTALMENTE NUEVA
-                    indent = previous_indent # AGREGADA TOTALMENTE NUEVA
-                else: # AGREGADA TOTALMENTE NUEVA
-                    indent = len(lines[i]) - len(lines[i].lstrip()) # AGREGADA TOTALMENTE NUEVA
-                    previous_indent = indent # AGREGADA TOTALMENTE NUEVA
-                    # Update previous indent for non-white space # AGREGADA TOTALMENTE NUEVA
+                if node_type == TipoNodo.WHITE_SPACE: # AÑADIDA EN UN 100%
+                    indent = previous_indent # AÑADIDA EN UN 100%
+                else: # AÑADIDA EN UN 100%
+                    indent = len(lines[i]) - len(lines[i].lstrip()) # AÑADIDA EN UN 100%
+                    previous_indent = indent # AÑADIDA EN UN 100%
+                    # Update previous indent for non-white space # AÑADIDA EN UN 100%
                 new_node = Nodo(
                     node_type,
                     lines[i].strip(),
                     indent,
                     numero_nodo
-                ) # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.87% (las 6 líneas previas cuentan como 1)
+                ) # AÑADIDA EN UN 0.87% (las 6 líneas previas cuentan como 1)
                 current_parent.agregar_hijo(new_node)
-                numero_nodo += 1 # AGREGADA TOTALMENTE NUEVA
+                numero_nodo += 1 # AÑADIDA EN UN 100%
 
                 while i + 1 < len(lines) and not \
                 self._analyze_docstring(lines[i + 1]):
                     i += 1
-                    self.tree_2_lines[numero_nodo] = [i] # AGREGADA TOTALMENTE NUEVA
-                    if node_type == TipoNodo.WHITE_SPACE: # AGREGADA TOTALMENTE NUEVA
-                        indent = previous_indent # AGREGADA TOTALMENTE NUEVA
-                    else: # AGREGADA TOTALMENTE NUEVA
-                        indent = len(lines[i]) - len(lines[i].lstrip()) # AGREGADA TOTALMENTE NUEVA
-                        previous_indent = indent # AGREGADA TOTALMENTE NUEVA
-                        # Update previous indent for non-white space # AGREGADA TOTALMENTE NUEVA
+                    self.tree_2_lines[numero_nodo] = [i] # AÑADIDA EN UN 100%
+                    if node_type == TipoNodo.WHITE_SPACE: # AÑADIDA EN UN 100%
+                        indent = previous_indent # AÑADIDA EN UN 100%
+                    else: # AÑADIDA EN UN 100%
+                        indent = len(lines[i]) - len(lines[i].lstrip()) # AÑADIDA EN UN 100%
+                        previous_indent = indent # AÑADIDA EN UN 100%
+                        # Update previous indent for non-white space # AÑADIDA EN UN 100%
                     new_node = Nodo(
                         node_type,
                         lines[i].strip(),
                         indent,
                         numero_nodo
-                    ) # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.87% (las 6 líneas previas cuentan como 1)
+                    ) # AÑADIDA EN UN 0.87% (las 6 líneas previas cuentan como 1)
                     current_parent.agregar_hijo(new_node)
-                    numero_nodo += 1 # AGREGADA TOTALMENTE NUEVA
+                    numero_nodo += 1 # AÑADIDA EN UN 100%
                 
                 if i + 1 < len(lines):
                     i += 1
-                    posicion_linea = [i] # AGREGADA TOTALMENTE NUEVA
+                    posicion_linea = [i] # AÑADIDA EN UN 100%
 
                 line = lines[i]
             elif not self._analyze_delimiters(line.strip()):
-                multilines = [i] # AGREGADA TOTALMENTE NUEVA
+                multilines = [i] # AÑADIDA EN UN 100%
 
                 self.multiline_buffer = [line.strip()[:-1] if \
                 line.strip().endswith('\\') else line.strip()]
                 while i + 1 < len(lines) and not \
                 self._analyze_delimiters(lines[i + 1].strip()):
                     i += 1
-                    multilines.append(i) # AGREGADA TOTALMENTE NUEVA
+                    multilines.append(i) # AÑADIDA EN UN 100%
                     self.multiline_buffer.append(lines[i].strip()[:-1] if \
                     lines[i].strip().endswith('\\') else lines[i].strip())
 
                 if i + 1 < len(lines):
                     i += 1
-                    multilines.append(i) # AGREGADA TOTALMENTE NUEVA
+                    multilines.append(i) # AÑADIDA EN UN 100%
                     self.multiline_buffer.append(lines[i].strip())
                 # Join multiline statement
                 line = ' '.join(self.multiline_buffer)
@@ -241,19 +241,19 @@ class TreeBuilder:
                 self.open_delimiters = 0
 
                 node_type = self.type_analyzer.get_node_type(line)
-                posicion_linea = multilines # AGREGADA TOTALMENTE NUEVA
+                posicion_linea = multilines # AÑADIDA EN UN 100%
             else:
                 node_type = self.type_analyzer.get_node_type(line)
-                posicion_linea =  [i] # AGREGADA TOTALMENTE NUEVA
+                posicion_linea =  [i] # AÑADIDA EN UN 100%
 
-            if node_type == TipoNodo.WHITE_SPACE: # AGREGADA TOTALMENTE NUEVA
-                indent = previous_indent # AGREGADA TOTALMENTE NUEVA
-            else: # AGREGADA TOTALMENTE NUEVA
-                indent = len(lines[j]) - len(lines[j].lstrip()) # AGREGADA TOTALMENTE NUEVA
-                previous_indent = indent # AGREGADA TOTALMENTE NUEVA
-                # Update previous indent for non-white space # AGREGADA TOTALMENTE NUEVA
+            if node_type == TipoNodo.WHITE_SPACE: # AÑADIDA EN UN 100%
+                indent = previous_indent # AÑADIDA EN UN 100%
+            else: # AÑADIDA EN UN 100%
+                indent = len(lines[j]) - len(lines[j].lstrip()) # AÑADIDA EN UN 100%
+                previous_indent = indent # AÑADIDA EN UN 100%
+                # Update previous indent for non-white space # AÑADIDA EN UN 100%
                 
-            new_node = Nodo(node_type, line.strip(), indent, numero_nodo) # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.88%
+            new_node = Nodo(node_type, line.strip(), indent, numero_nodo) # AÑADIDA EN UN 0.88%
 
             while indent_stack and indent <= indent_stack[-1][1]:
                 indent_stack.pop()
@@ -262,8 +262,8 @@ class TreeBuilder:
 
             current_parent.agregar_hijo(new_node)
             
-            self.tree_2_lines[numero_nodo] = posicion_linea # AGREGADA TOTALMENTE NUEVA
-            numero_nodo += 1 # AGREGADA TOTALMENTE NUEVA
+            self.tree_2_lines[numero_nodo] = posicion_linea # AÑADIDA EN UN 100%
+            numero_nodo += 1 # AÑADIDA EN UN 100%
 
             if self._can_have_children(node_type):
                 current_parent = new_node
