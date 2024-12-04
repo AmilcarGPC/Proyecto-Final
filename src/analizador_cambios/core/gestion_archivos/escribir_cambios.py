@@ -191,7 +191,7 @@ class EscribirCambios:
             >>> _obtener_ajuste_multilinea([1, 2, 3])
             ' (las 3 líneas previas cuentan como 1)\n'
         """
-        # Para cambios que afectan múltiples líneas, agregamos una nota 
+        # Para cambios que afectan múltiples líneas, agregamos una nota
         # explicativa para clarificar que se cuentan como una sola modificación
         if len(mapeo_nodo) > 1:
             return f" (las {len(mapeo_nodo)} líneas previas cuentan como 1)\n"
