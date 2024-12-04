@@ -21,7 +21,7 @@ Notas:
     Python
 """
 
-from contador_lineas.models.nodos import TipoNodo # ELIMINADA
+from contador_lineas.models.nodos import TipoNodo # BORRADA
 
 # Tipos de nodos que pueden contener otros nodos
 PARENT_NODE_TYPES = {

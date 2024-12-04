@@ -24,8 +24,8 @@ Notas:
     - Ignora comentarios y docstrings
 """
 
-from analizador_cambios.core.arbol.nodo import Nodo # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.83%
-from analizador_cambios.config.node_types import LOGICAL_NODE_TYPES # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.87%
+from analizador_cambios.core.arbol.nodo import Nodo # AÑADIDA EN UN 0.83%
+from analizador_cambios.config.node_types import LOGICAL_NODE_TYPES # AÑADIDA EN UN 0.87%
 
 
 class ContadorLineasLogicas:

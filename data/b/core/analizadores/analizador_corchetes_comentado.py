@@ -29,7 +29,7 @@ Notas:
     - Retorna -1 si no encuentra el par correspondiente
 """
 
-from analizador_cambios.core.constantes import CORCHETES # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.84%
+from analizador_cambios.core.constantes import CORCHETES # AÑADIDA EN UN 0.84%
 
 
 class AnalizadorCorchetes:

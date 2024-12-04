@@ -125,11 +125,11 @@ class TreeBuilder:
             return self.open_delimiters == 0 and not line.rstrip().endswith('\\')
         
         if self.multilines_worth_1:
-            self.open_delimiters += (AnalizadorCadenas.contar_sin_comillas(line, '(') + 
-                     AnalizadorCadenas.contar_sin_comillas(line, '[') + 
+            self.open_delimiters += (AnalizadorCadenas.contar_sin_comillas(line, '(') +
+                     AnalizadorCadenas.contar_sin_comillas(line, '[') +
                      AnalizadorCadenas.contar_sin_comillas(line, '{'))
-            self.open_delimiters -= (AnalizadorCadenas.contar_sin_comillas(line, ')') + 
-                      AnalizadorCadenas.contar_sin_comillas(line, ']') + 
+            self.open_delimiters -= (AnalizadorCadenas.contar_sin_comillas(line, ')') +
+                      AnalizadorCadenas.contar_sin_comillas(line, ']') +
                       AnalizadorCadenas.contar_sin_comillas(line, '}'))
               
         return self.open_delimiters == 0 and not line.rstrip().endswith('\\')

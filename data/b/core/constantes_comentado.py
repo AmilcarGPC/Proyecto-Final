@@ -23,7 +23,7 @@ Notas:
     - Define tipos de expresiones de comprensión según su símbolo
 """
 
-from analizador_cambios.models.nodos import TipoNodo # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.83%
+from analizador_cambios.models.nodos import TipoNodo # AÑADIDA EN UN 0.83%
 
 # Mapeo de símbolos de apertura con sus correspondientes cierres
 CORCHETES = {

@@ -28,12 +28,12 @@ Notas:
 
 from typing import List
 
-from contador_lineas.core.arbol.nodo import Nodo # ELIMINADA
+from contador_lineas.core.arbol.nodo import Nodo # BORRADA
 from contador_lineas.config.node_types import (
     COMMENT_NODE_TYPES,
     VALID_CODE_NODE_TYPES
-) # ELIMINADA (las 4 líneas previas cuentan como 1)
-from contador_lineas.models.nodos import TipoNodo # ELIMINADA
+) # BORRADA (las 4 líneas previas cuentan como 1)
+from contador_lineas.models.nodos import TipoNodo # BORRADA
 
 
 class ContadorLineasFisicas:

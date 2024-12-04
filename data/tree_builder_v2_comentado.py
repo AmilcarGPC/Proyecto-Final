@@ -140,13 +140,13 @@ class TreeBuilder:
             line.rstrip().endswith('\\')
         
         if self.multilines_worth_1:
-            self.open_delimiters + = (
+            self.open_delimiters += (
                 AnalizadorCadenas.contar_sin_comillas(line,
                 '('
             ) +
                      AnalizadorCadenas.contar_sin_comillas(line, '[') + 
                      AnalizadorCadenas.contar_sin_comillas(line, '{'))
-            self.open_delimiters - = (
+            self.open_delimiters -= (
                 AnalizadorCadenas.contar_sin_comillas(line,
                 ')'
             ) +

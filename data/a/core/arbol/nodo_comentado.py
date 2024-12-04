@@ -23,7 +23,7 @@ Notas:
 
 from typing import List, Optional
 
-from contador_lineas.models.nodos import TipoNodo # ELIMINADA
+from contador_lineas.models.nodos import TipoNodo # BORRADA
 
 
 class Nodo:
@@ -52,7 +52,7 @@ class Nodo:
             tipo: TipoNodo,
             contenido: str,
             nivel_indentacion: int
-        ): # ELIMINADA (las 6 líneas previas cuentan como 1)
+        ): # BORRADA (las 6 líneas previas cuentan como 1)
         self.tipo = tipo
         self.contenido = contenido
         self.nivel_indentacion = nivel_indentacion

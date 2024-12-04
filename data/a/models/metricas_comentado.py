@@ -39,5 +39,5 @@ class MetricasArchivo:
     """
     
     nombre_archivo: str
-    lineas_logicas: int # ELIMINADA
-    lineas_fisicas: int # ELIMINADA
+    lineas_logicas: int # BORRADA
+    lineas_fisicas: int # BORRADA

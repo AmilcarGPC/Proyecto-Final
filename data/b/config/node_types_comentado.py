@@ -21,7 +21,7 @@ Notas:
     Python
 """
 
-from analizador_cambios.models.nodos import TipoNodo # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.83%
+from analizador_cambios.models.nodos import TipoNodo # AÑADIDA EN UN 0.83%
 
 # Tipos de nodos que pueden contener otros nodos
 PARENT_NODE_TYPES = {

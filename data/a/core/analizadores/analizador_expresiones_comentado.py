@@ -28,11 +28,11 @@ Notas:
 
 from contador_lineas.core.analizadores.analizador_comprehension import (
     AnalizadorComprehension
-) # ELIMINADA (las 3 líneas previas cuentan como 1)
+) # BORRADA (las 3 líneas previas cuentan como 1)
 from contador_lineas.core.analizadores.analizador_ternario import (
     AnalizadorTernario
-) # ELIMINADA (las 3 líneas previas cuentan como 1)
-from contador_lineas.models.nodos import InformacionExpresion, TipoNodo # ELIMINADA
+) # BORRADA (las 3 líneas previas cuentan como 1)
+from contador_lineas.models.nodos import InformacionExpresion, TipoNodo # BORRADA
 
 
 class AnalizadorExpresiones:

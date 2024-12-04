@@ -22,7 +22,7 @@ Notas:
     - El árbol debe ser construido usando la clase TreeBuilder
 """
 
-from contador_lineas.core.arbol.nodo import Nodo # ELIMINADA
+from contador_lineas.core.arbol.nodo import Nodo # BORRADA
 
 
 def imprimir_arbol(raiz: Nodo) -> None:

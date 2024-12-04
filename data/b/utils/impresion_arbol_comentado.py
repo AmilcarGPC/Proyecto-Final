@@ -22,7 +22,7 @@ Notas:
     - El árbol debe ser construido usando la clase TreeBuilder
 """
 
-from analizador_cambios.core.arbol.nodo import Nodo # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.83%
+from analizador_cambios.core.arbol.nodo import Nodo # AÑADIDA EN UN 0.83%
 
 
 def imprimir_arbol(raiz: Nodo) -> None:

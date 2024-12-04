@@ -29,7 +29,7 @@ Notas:
     - Retorna -1 si no encuentra el par correspondiente
 """
 
-from contador_lineas.core.constantes import CORCHETES # ELIMINADA
+from contador_lineas.core.constantes import CORCHETES # BORRADA
 
 
 class AnalizadorCorchetes:

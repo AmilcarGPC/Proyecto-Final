@@ -32,16 +32,16 @@ Notas:
 
 from contador_lineas.core.analizadores.analizador_corchetes import (
     AnalizadorCorchetes
-) # ELIMINADA (las 3 líneas previas cuentan como 1)
+) # BORRADA (las 3 líneas previas cuentan como 1)
 from contador_lineas.core.analizadores.buscar_y_extraer_anidados import (
     BuscarYExtraerAnidados
-) # ELIMINADA (las 3 líneas previas cuentan como 1)
+) # BORRADA (las 3 líneas previas cuentan como 1)
 from contador_lineas.core.analizadores.analizador_cadenas import (
     AnalizadorCadenas
-) # ELIMINADA (las 3 líneas previas cuentan como 1)
-from contador_lineas.core.constantes import TIPOS_COMPREHENSION, CORCHETES # ELIMINADA
-from contador_lineas.models.nodos import InformacionExpresion, TipoNodo # ELIMINADA
-from contador_lineas.utils.node_analyzer import TipoNodoAnalyzer # ELIMINADA
+) # BORRADA (las 3 líneas previas cuentan como 1)
+from contador_lineas.core.constantes import TIPOS_COMPREHENSION, CORCHETES # BORRADA
+from contador_lineas.models.nodos import InformacionExpresion, TipoNodo # BORRADA
+from contador_lineas.utils.node_analyzer import TipoNodoAnalyzer # BORRADA
 
 
 class AnalizadorComprehension:
@@ -97,7 +97,7 @@ class AnalizadorComprehension:
 
         Example:
             >>> self.procesar_comprehension("[x for x in range(5)]", 0)
-            InformacionExpresion(tipo=TipoNodo.LIST_COMPREHENSION, ...) # ELIMINADA
+            InformacionExpresion(tipo=TipoNodo.LIST_COMPREHENSION, ...) # BORRADA
         """
         try:
             if not (self.analizador_tipo.check_comprehensions(codigo)):

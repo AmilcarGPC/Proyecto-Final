@@ -22,10 +22,10 @@ Notas:
     - Implementa representación jerárquica del código fuente
 """
 
-from analizador_cambios.utils.tree_builder import TreeBuilder # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.86%
-from analizador_cambios.utils.impresion_arbol import imprimir_arbol # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.87%
-from analizador_cambios.core.arbol.nodo import Nodo # AGREGADA TOTALMENTE NUEVA
-from analizador_cambios.models.nodos import TipoNodo # AGREGADA TOTALMENTE NUEVA
+from analizador_cambios.utils.tree_builder import TreeBuilder # AÑADIDA EN UN 0.86%
+from analizador_cambios.utils.impresion_arbol import imprimir_arbol # AÑADIDA EN UN 0.87%
+from analizador_cambios.core.arbol.nodo import Nodo # AÑADIDA EN UN 100%
+from analizador_cambios.models.nodos import TipoNodo # AÑADIDA EN UN 100%
 
 
 class ArbolArchivoPython:
@@ -49,7 +49,7 @@ class ArbolArchivoPython:
     def __init__(self, file_content: list[str]):
         self.constructor = TreeBuilder()
         self.raiz = self.constructor.build(file_content)
-        self.mapeo_lineas = self.constructor.tree_2_lines # AGREGADA TOTALMENTE NUEVA
+        self.mapeo_lineas = self.constructor.tree_2_lines # AÑADIDA EN UN 100%
 
     def imprimir_arbol(self) -> None:
         """
@@ -57,64 +57,64 @@ class ArbolArchivoPython:
         """
         imprimir_arbol(self.raiz)
 
-    def obtener_nodos_clase(self) -> list[Nodo]: # AGREGADA TOTALMENTE NUEVA
-        """ # AGREGADA TOTALMENTE NUEVA
-        Obtiene los nodos de las clases presentes en el archivo. # AGREGADA TOTALMENTE NUEVA
- # AGREGADA TOTALMENTE NUEVA
-        Returns: # AGREGADA TOTALMENTE NUEVA
-            list[str]: Lista con los nombres de las clases # AGREGADA TOTALMENTE NUEVA
-        """ # AGREGADA TOTALMENTE NUEVA
-        if not self.raiz: # AGREGADA TOTALMENTE NUEVA
-            return [] # AGREGADA TOTALMENTE NUEVA
+    def obtener_nodos_clase(self) -> list[Nodo]: # AÑADIDA EN UN 100%
+        """ # AÑADIDA EN UN 100%
+        Obtiene los nodos de las clases presentes en el archivo. # AÑADIDA EN UN 100%
+ # AÑADIDA EN UN 100%
+        Returns: # AÑADIDA EN UN 100%
+            list[str]: Lista con los nombres de las clases # AÑADIDA EN UN 100%
+        """ # AÑADIDA EN UN 100%
+        if not self.raiz: # AÑADIDA EN UN 100%
+            return [] # AÑADIDA EN UN 100%
         
-        clases = [] # AGREGADA TOTALMENTE NUEVA
-        for nodo in self.raiz.hijos: # AGREGADA TOTALMENTE NUEVA
-            if nodo.tipo == TipoNodo.CLASS: # AGREGADA TOTALMENTE NUEVA
-                clases.append(nodo) # AGREGADA TOTALMENTE NUEVA
-        return clases # AGREGADA TOTALMENTE NUEVA
+        clases = [] # AÑADIDA EN UN 100%
+        for nodo in self.raiz.hijos: # AÑADIDA EN UN 100%
+            if nodo.tipo == TipoNodo.CLASS: # AÑADIDA EN UN 100%
+                clases.append(nodo) # AÑADIDA EN UN 100%
+        return clases # AÑADIDA EN UN 100%
     
-    def obtener_nodos_metodos(self, clase: Nodo) -> list[Nodo]: # AGREGADA TOTALMENTE NUEVA
-        """ # AGREGADA TOTALMENTE NUEVA
-        Obtiene los nodos de los métodos presentes en el archivo. # AGREGADA TOTALMENTE NUEVA
- # AGREGADA TOTALMENTE NUEVA
-        Args: # AGREGADA TOTALMENTE NUEVA
-            clase (Nodo): Nodo de la clase a analizar # AGREGADA TOTALMENTE NUEVA
- # AGREGADA TOTALMENTE NUEVA
-        Returns: # AGREGADA TOTALMENTE NUEVA
-            list[str]: Lista con los nombres de los métodos # AGREGADA TOTALMENTE NUEVA
-        """ # AGREGADA TOTALMENTE NUEVA
-        if not self.raiz and clase.tipo != TipoNodo.CLASS: # AGREGADA TOTALMENTE NUEVA
-            return [] # AGREGADA TOTALMENTE NUEVA
+    def obtener_nodos_metodos(self, clase: Nodo) -> list[Nodo]: # AÑADIDA EN UN 100%
+        """ # AÑADIDA EN UN 100%
+        Obtiene los nodos de los métodos presentes en el archivo. # AÑADIDA EN UN 100%
+ # AÑADIDA EN UN 100%
+        Args: # AÑADIDA EN UN 100%
+            clase (Nodo): Nodo de la clase a analizar # AÑADIDA EN UN 100%
+ # AÑADIDA EN UN 100%
+        Returns: # AÑADIDA EN UN 100%
+            list[str]: Lista con los nombres de los métodos # AÑADIDA EN UN 100%
+        """ # AÑADIDA EN UN 100%
+        if not self.raiz and clase.tipo != TipoNodo.CLASS: # AÑADIDA EN UN 100%
+            return [] # AÑADIDA EN UN 100%
         
-        metodos = [] # AGREGADA TOTALMENTE NUEVA
-        for nodo in clase.hijos: # AGREGADA TOTALMENTE NUEVA
-            if nodo.tipo == TipoNodo.METHOD: # AGREGADA TOTALMENTE NUEVA
-                metodos.append(nodo) # AGREGADA TOTALMENTE NUEVA
-        return metodos # AGREGADA TOTALMENTE NUEVA
+        metodos = [] # AÑADIDA EN UN 100%
+        for nodo in clase.hijos: # AÑADIDA EN UN 100%
+            if nodo.tipo == TipoNodo.METHOD: # AÑADIDA EN UN 100%
+                metodos.append(nodo) # AÑADIDA EN UN 100%
+        return metodos # AÑADIDA EN UN 100%
     
-    def obtener_nodo_otros(self) -> Nodo: # AGREGADA TOTALMENTE NUEVA
-        """ # AGREGADA TOTALMENTE NUEVA
-        Crea un nodo que agrupa todos los elementos que no son clases. # AGREGADA TOTALMENTE NUEVA
- # AGREGADA TOTALMENTE NUEVA
-        Returns: # AGREGADA TOTALMENTE NUEVA
-            Nodo: Nodo tipo clase con nombre "otros" que contiene # AGREGADA TOTALMENTE NUEVA
-                    todos los elementos que no son clases # AGREGADA TOTALMENTE NUEVA
-        """ # AGREGADA TOTALMENTE NUEVA
-        if not self.raiz: # AGREGADA TOTALMENTE NUEVA
-            return Nodo("otros", TipoNodo.CLASS, 0) # AGREGADA TOTALMENTE NUEVA
+    def obtener_nodo_otros(self) -> Nodo: # AÑADIDA EN UN 100%
+        """ # AÑADIDA EN UN 100%
+        Crea un nodo que agrupa todos los elementos que no son clases. # AÑADIDA EN UN 100%
+ # AÑADIDA EN UN 100%
+        Returns: # AÑADIDA EN UN 100%
+            Nodo: Nodo tipo clase con nombre "otros" que contiene # AÑADIDA EN UN 100%
+                    todos los elementos que no son clases # AÑADIDA EN UN 100%
+        """ # AÑADIDA EN UN 100%
+        if not self.raiz: # AÑADIDA EN UN 100%
+            return Nodo("otros", TipoNodo.CLASS, 0) # AÑADIDA EN UN 100%
         
-        # Filtrar nodos que no son clases y ajustar indentación # AGREGADA TOTALMENTE NUEVA
+        # Filtrar nodos que no son clases y ajustar indentación # AÑADIDA EN UN 100%
         nodos_no_clase = [
             nodo for nodo in self.raiz.hijos 
             if nodo.tipo != TipoNodo.CLASS
-        ] # AGREGADA TOTALMENTE NUEVA (las 4 líneas previas cuentan como 1)
+        ] # AÑADIDA EN UN 100% (las 4 líneas previas cuentan como 1)
         
-        # Incrementar indentación de cada nodo en 4 # AGREGADA TOTALMENTE NUEVA
-        for nodo in nodos_no_clase: # AGREGADA TOTALMENTE NUEVA
-            nodo.nivel_indentacion += 4 # AGREGADA TOTALMENTE NUEVA
+        # Incrementar indentación de cada nodo en 4 # AÑADIDA EN UN 100%
+        for nodo in nodos_no_clase: # AÑADIDA EN UN 100%
+            nodo.nivel_indentacion += 4 # AÑADIDA EN UN 100%
         
-        # Crear nodo otros # AGREGADA TOTALMENTE NUEVA
-        nodo_otros = Nodo(TipoNodo.CLASS, "", 0) # AGREGADA TOTALMENTE NUEVA
-        nodo_otros.hijos = nodos_no_clase # AGREGADA TOTALMENTE NUEVA
+        # Crear nodo otros # AÑADIDA EN UN 100%
+        nodo_otros = Nodo(TipoNodo.CLASS, "", 0) # AÑADIDA EN UN 100%
+        nodo_otros.hijos = nodos_no_clase # AÑADIDA EN UN 100%
         
-        return nodo_otros # AGREGADA TOTALMENTE NUEVA
+        return nodo_otros # AÑADIDA EN UN 100%

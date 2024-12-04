@@ -32,17 +32,17 @@ Notas:
 
 from contador_lineas.core.analizadores.analizador_cadenas import (
     AnalizadorCadenas
-) # ELIMINADA (las 3 líneas previas cuentan como 1)
+) # BORRADA (las 3 líneas previas cuentan como 1)
 from contador_lineas.core.analizadores.analizador_expresiones import (
     AnalizadorExpresiones
-) # ELIMINADA (las 3 líneas previas cuentan como 1)
-from contador_lineas.core.arbol.nodo import Nodo # ELIMINADA
+) # BORRADA (las 3 líneas previas cuentan como 1)
+from contador_lineas.core.arbol.nodo import Nodo # BORRADA
 from contador_lineas.config.node_types import (
     PARENT_NODE_TYPES,
     COMMENT_NODE_TYPES,
     NO_NESTED_ALLOWED
-) # ELIMINADA (las 5 líneas previas cuentan como 1)
-from contador_lineas.models.nodos import TipoNodo # ELIMINADA
+) # BORRADA (las 5 líneas previas cuentan como 1)
+from contador_lineas.models.nodos import TipoNodo # BORRADA
 
 
 class VerificadorEstandarCodigo:

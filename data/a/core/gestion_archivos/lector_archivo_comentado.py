@@ -27,8 +27,8 @@ Notas:
 from pathlib import Path
 from typing import Union, Optional
 
-from contador_lineas.utils.validador import validar_archivo_python # ELIMINADA
-from contador_lineas.utils.archivo_utils import leer_archivo_texto # ELIMINADA
+from contador_lineas.utils.validador import validar_archivo_python # BORRADA
+from contador_lineas.utils.archivo_utils import leer_archivo_texto # BORRADA
 
 
 class LectorArchivoPython:

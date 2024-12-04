@@ -237,7 +237,7 @@ class FormateadorLinea:
         return formateado
 
     @staticmethod
-    def _formatear_asignacion(linea: str, indentacion: str) -> List[str]:
+    def _formatear_3asignacion(linea: str, indentacion: str) -> List[str]:
         """
         Formatea asignaciones con múltiples elementos.
 
@@ -253,6 +253,7 @@ class FormateadorLinea:
             ['variable = funcion( \\', '    param1, \\', '    param2)']
         """
         izquierda, derecha = linea.split('=', 1)
+        print(izquierda, derecha)
         if '(' in derecha and ')' in derecha and \
             AnalizadorCadenas.encontrar_sin_comillas(linea, ',', 0, True) != -1:
             nombre_funcion = derecha[:derecha.index('(')].strip()
@@ -268,6 +269,79 @@ class FormateadorLinea:
 
             formateado = [
                 f"{indentacion}{izquierda.strip()} = {nombre_funcion}("
+            ]
+            indentacion_args = indentacion + ' ' * 4
+
+            for i, argumento in enumerate(argumentos):
+                if i < len(argumentos) - 1:
+                    formateado.append(f"{indentacion_args}{argumento},")
+                else:
+                    formateado.append(f"{indentacion_args}{argumento}")
+
+            formateado.append(f"{indentacion}{resto}")
+            return formateado
+
+        print()
+        return FormateadorLinea._formatear_generico(linea, indentacion)
+    
+    @staticmethod
+    def _formatear_asignacion(linea: str, indentacion: str) -> List[str]:
+        """
+        Formatea asignaciones con múltiples elementos.
+
+        Args:
+            linea (str): Línea de código con asignación
+            indentacion (str): Espacios de indentación
+
+        Returns:
+            List[str]: Lista de líneas formateadas
+
+        Example:
+            >>> _formatear_asignacion("variable = funcion(param1, param2)")
+            ['variable = funcion( \\', '    param1, \\', '    param2)']
+        """
+        # Lista de operadores de asignación compuesta y comparación
+        operadores = ['+=', '-=', '*=', '/=', '%=', '**=', '>>=',
+                      '<<=', '&=', '|=', '^=', '==', '=']
+
+        # Encontrar el operador correcto
+        operador_encontrado = None
+        pos_operador = -1
+
+        for op in operadores:
+            pos = AnalizadorCadenas.encontrar_sin_comillas(linea, op, 0, True)
+            if pos != -1:
+                if pos_operador == -1 or pos < pos_operador:
+                    pos_operador = pos
+                    operador_encontrado = op
+ 
+        # Si no encontramos operador de asignación, usar el formato genérico
+        if pos_operador == -1:
+            return FormateadorLinea._formatear_generico(linea, indentacion)
+
+        # Si es un operador de comparación, usar el formato genérico
+        if operador_encontrado == '==':
+            return FormateadorLinea._formatear_generico(linea, indentacion)
+        
+        izquierda = linea[:pos_operador]
+        derecha = linea[pos_operador + len(operador_encontrado):]
+
+        if '(' in derecha and ')' in derecha and \
+            AnalizadorCadenas.encontrar_sin_comillas(linea, ',', 0, True) != -1:
+            nombre_funcion = derecha[:derecha.index('(')].strip()
+            texto_args = derecha[
+                derecha.index('(')+1:derecha.rindex(')')
+            ].strip()
+            resto = (
+                derecha[derecha.rindex(')'):].strip()
+                if derecha.rindex(')') < len(derecha) - 1
+                else ''
+            )
+            argumentos = [arg.strip() for arg in texto_args.split(',')]
+
+            formateado = [
+                f"{indentacion}{izquierda.strip()} {operador_encontrado} " + 
+                f"{nombre_funcion}("
             ]
             indentacion_args = indentacion + ' ' * 4
 

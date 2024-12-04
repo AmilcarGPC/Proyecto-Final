@@ -78,7 +78,7 @@ class TipoNodo(Enum):
     CONTINUE = "continue"
     RAISE = "raise"
     ASSERT = "assert"
-    WHITE_SPACE = "white_space" # AGREGADA TOTALMENTE NUEVA
+    WHITE_SPACE = "white_space" # AÑADIDA EN UN 100%
 
 
 @dataclass

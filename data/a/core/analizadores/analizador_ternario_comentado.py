@@ -31,15 +31,15 @@ from typing import List, Optional
 
 from contador_lineas.core.analizadores.analizador_cadenas import (
     AnalizadorCadenas
-) # ELIMINADA (las 3 líneas previas cuentan como 1)
+) # BORRADA (las 3 líneas previas cuentan como 1)
 from contador_lineas.core.analizadores.analizador_corchetes import (
     AnalizadorCorchetes
-) # ELIMINADA (las 3 líneas previas cuentan como 1)
+) # BORRADA (las 3 líneas previas cuentan como 1)
 from contador_lineas.core.analizadores.buscar_y_extraer_anidados import (
     BuscarYExtraerAnidados
-) # ELIMINADA (las 3 líneas previas cuentan como 1)
-from contador_lineas.models.nodos import InformacionExpresion, TipoNodo # ELIMINADA
-from contador_lineas.utils.node_analyzer import TipoNodoAnalyzer # ELIMINADA
+) # BORRADA (las 3 líneas previas cuentan como 1)
+from contador_lineas.models.nodos import InformacionExpresion, TipoNodo # BORRADA
+from contador_lineas.utils.node_analyzer import TipoNodoAnalyzer # BORRADA
 
 
 class AnalizadorTernario:

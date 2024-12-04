@@ -28,11 +28,11 @@ Notas:
 
 from analizador_cambios.core.analizadores.analizador_comprehension import (
     AnalizadorComprehension
-) # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.91% (las 3 líneas previas cuentan como 1)
+) # AÑADIDA EN UN 0.91% (las 3 líneas previas cuentan como 1)
 from analizador_cambios.core.analizadores.analizador_ternario import (
     AnalizadorTernario
-) # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.91% (las 3 líneas previas cuentan como 1)
-from analizador_cambios.models.nodos import InformacionExpresion, TipoNodo # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.88%
+) # AÑADIDA EN UN 0.91% (las 3 líneas previas cuentan como 1)
+from analizador_cambios.models.nodos import InformacionExpresion, TipoNodo # AÑADIDA EN UN 0.88%
 
 
 class AnalizadorExpresiones:

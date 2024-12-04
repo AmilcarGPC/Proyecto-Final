@@ -24,8 +24,8 @@ Notas:
     - Ignora comentarios y docstrings
 """
 
-from contador_lineas.core.arbol.nodo import Nodo # ELIMINADA
-from contador_lineas.config.node_types import LOGICAL_NODE_TYPES # ELIMINADA
+from contador_lineas.core.arbol.nodo import Nodo # BORRADA
+from contador_lineas.config.node_types import LOGICAL_NODE_TYPES # BORRADA
 
 
 class ContadorLineasLogicas:

@@ -27,8 +27,8 @@ Notas:
 from pathlib import Path
 from typing import Union, Optional
 
-from analizador_cambios.utils.validador import validar_archivo_python # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.87%
-from analizador_cambios.utils.archivo_utils import leer_archivo_texto # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.87%
+from analizador_cambios.utils.validador import validar_archivo_python # AÑADIDA EN UN 0.87%
+from analizador_cambios.utils.archivo_utils import leer_archivo_texto # AÑADIDA EN UN 0.87%
 
 
 class LectorArchivoPython:

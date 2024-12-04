@@ -31,8 +31,8 @@ Notas:
 import os
 from typing import List, Optional
 
-from contador_lineas.models.metricas import MetricasArchivo # ELIMINADA
-from contador_lineas.utils.archivo_utils import leer_json, escribir_json # ELIMINADA
+from contador_lineas.models.metricas import MetricasArchivo # BORRADA
+from contador_lineas.utils.archivo_utils import leer_json, escribir_json # BORRADA
 
 
 class AlmacenamientoMetricas:
@@ -59,7 +59,7 @@ class AlmacenamientoMetricas:
         >>> almacen.guardar_metricas(metricas)
     """
     
-    def __init__(self, ruta_almacenamiento: str = "db/metricas_registro.json"): # ELIMINADA
+    def __init__(self, ruta_almacenamiento: str = "db/metricas_registro.json"): # BORRADA
         self.ruta_almacenamiento = ruta_almacenamiento
         self._asegurar_archivo_almacenamiento()
 
@@ -69,9 +69,9 @@ class AlmacenamientoMetricas:
 
         Args:
             metricas (MetricasArchivo): Métricas a almacenar
- # ELIMINADA
-        Example: # ELIMINADA
-            >>> guardar_metricas(metricas_archivo) # ELIMINADA
+ # BORRADA
+        Example: # BORRADA
+            >>> guardar_metricas(metricas_archivo) # BORRADA
         """
         datos = leer_json(self.ruta_almacenamiento)
         
@@ -79,7 +79,7 @@ class AlmacenamientoMetricas:
             "nombre_archivo": metricas.nombre_archivo,
             "lineas_logicas": metricas.lineas_logicas,
             "lineas_fisicas": metricas.lineas_fisicas
-        } # ELIMINADA (las 5 líneas previas cuentan como 1)
+        } # BORRADA (las 5 líneas previas cuentan como 1)
         
         datos[metricas.nombre_archivo] = diccionario_metricas
         escribir_json(self.ruta_almacenamiento, datos)
@@ -95,29 +95,29 @@ class AlmacenamientoMetricas:
 
         Returns:
             Optional[MetricasArchivo]: Métricas encontradas o None
- # ELIMINADA
-        Example: # ELIMINADA
-            >>> cargar_metricas("script.py") # ELIMINADA
+ # BORRADA
+        Example: # BORRADA
+            >>> cargar_metricas("script.py") # BORRADA
         """
         datos = leer_json(self.ruta_almacenamiento)
         if nombre_archivo in datos:
             diccionario_metricas = datos[nombre_archivo]
-            return MetricasArchivo(**diccionario_metricas) # ELIMINADA
+            return MetricasArchivo(**diccionario_metricas) # BORRADA
         return None
 
     def obtener_todas_las_metricas(self) -> List[MetricasArchivo]:
         """
         Obtiene lista de todas las métricas almacenadas.
- # ELIMINADA
-        Returns: # ELIMINADA
-            List[MetricasArchivo]: Lista de métricas encontradas # ELIMINADA
- # ELIMINADA
-        Example: # ELIMINADA
-            >>> obtener_todas_metricas() # ELIMINADA
+ # BORRADA
+        Returns: # BORRADA
+            List[MetricasArchivo]: Lista de métricas encontradas # BORRADA
+ # BORRADA
+        Example: # BORRADA
+            >>> obtener_todas_metricas() # BORRADA
         """
         datos = leer_json(self.ruta_almacenamiento)
         return [MetricasArchivo(**diccionario_metricas) 
-                for diccionario_metricas in datos.values()] # ELIMINADA (las 2 líneas previas cuentan como 1)
+                for diccionario_metricas in datos.values()] # BORRADA (las 2 líneas previas cuentan como 1)
 
     def _asegurar_archivo_almacenamiento(self) -> None:
         """

@@ -37,12 +37,12 @@ from typing import List
 
 from analizador_cambios.core.analizadores.analizador_cadenas import (
     AnalizadorCadenas
-) # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.9% (las 3 líneas previas cuentan como 1)
+) # AÑADIDA EN UN 0.9% (las 3 líneas previas cuentan como 1)
 from analizador_cambios.core.analizadores.analizador_corchetes import (
     AnalizadorCorchetes
-) # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.91% (las 3 líneas previas cuentan como 1)
-from analizador_cambios.core.constantes import CORCHETES # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.84%
-from analizador_cambios.models.nodos import InformacionExpresion # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.86%
+) # AÑADIDA EN UN 0.91% (las 3 líneas previas cuentan como 1)
+from analizador_cambios.core.constantes import CORCHETES # AÑADIDA EN UN 0.84%
+from analizador_cambios.models.nodos import InformacionExpresion # AÑADIDA EN UN 0.86%
 
 
 class BuscarYExtraerAnidados:
@@ -205,7 +205,7 @@ class BuscarYExtraerAnidados:
         """
         from analizador_cambios.core.analizadores.analizador_ternario import (
             AnalizadorTernario
-        ) # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.91% (las 3 líneas previas cuentan como 1)
+        ) # AÑADIDA EN UN 0.91% (las 3 líneas previas cuentan como 1)
         
         expresion_ternaria = AnalizadorTernario().analizar_ternario(codigo)
         if not expresion_ternaria:

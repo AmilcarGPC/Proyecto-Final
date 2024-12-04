@@ -22,29 +22,29 @@ Notas:
 """
 
 from dataclasses import dataclass
-from typing import Optional # AGREGADA TOTALMENTE NUEVA
+from typing import Optional # AÑADIDA EN UN 100%
 
 
 @dataclass
-class MetricasClase: # AGREGADA TOTALMENTE NUEVA
-    """ # AGREGADA TOTALMENTE NUEVA
-    Almacena las métricas de análisis de una clase Python. # AGREGADA TOTALMENTE NUEVA
- # AGREGADA TOTALMENTE NUEVA
-    Attributes: # AGREGADA TOTALMENTE NUEVA
-        nombre_clase (str): Nombre de la clase analizada # AGREGADA TOTALMENTE NUEVA
-        cantidad_metodos (int): Número de métodos en la clase # AGREGADA TOTALMENTE NUEVA
-        lineas_fisicas (int): Número de líneas físicas en la clase # AGREGADA TOTALMENTE NUEVA
- # AGREGADA TOTALMENTE NUEVA
-    Example: # AGREGADA TOTALMENTE NUEVA
-        >>> metricas = MetricasClase("Clase", 10, 20) # AGREGADA TOTALMENTE NUEVA
-    """ # AGREGADA TOTALMENTE NUEVA
+class MetricasClase: # AÑADIDA EN UN 100%
+    """ # AÑADIDA EN UN 100%
+    Almacena las métricas de análisis de una clase Python. # AÑADIDA EN UN 100%
+ # AÑADIDA EN UN 100%
+    Attributes: # AÑADIDA EN UN 100%
+        nombre_clase (str): Nombre de la clase analizada # AÑADIDA EN UN 100%
+        cantidad_metodos (int): Número de métodos en la clase # AÑADIDA EN UN 100%
+        lineas_fisicas (int): Número de líneas físicas en la clase # AÑADIDA EN UN 100%
+ # AÑADIDA EN UN 100%
+    Example: # AÑADIDA EN UN 100%
+        >>> metricas = MetricasClase("Clase", 10, 20) # AÑADIDA EN UN 100%
+    """ # AÑADIDA EN UN 100%
 
-    nombre_clase: str # AGREGADA TOTALMENTE NUEVA
-    cantidad_metodos: int # AGREGADA TOTALMENTE NUEVA
-    lineas_fisicas: int # AGREGADA TOTALMENTE NUEVA
+    nombre_clase: str # AÑADIDA EN UN 100%
+    cantidad_metodos: int # AÑADIDA EN UN 100%
+    lineas_fisicas: int # AÑADIDA EN UN 100%
 
 
-@dataclass # AGREGADA TOTALMENTE NUEVA
+@dataclass # AÑADIDA EN UN 100%
 class MetricasArchivo:
     """
     Almacena las métricas de análisis de un archivo Python.
@@ -59,9 +59,9 @@ class MetricasArchivo:
     """
     
     nombre_archivo: str
-    clases: list[MetricasClase] # AGREGADA TOTALMENTE NUEVA
-    total_lineas_fisicas: Optional[int] = None # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.62%
+    clases: list[MetricasClase] # AÑADIDA EN UN 100%
+    total_lineas_fisicas: Optional[int] = None # AÑADIDA EN UN 0.62%
 
-    def __post_init__(self): # AGREGADA TOTALMENTE NUEVA
+    def __post_init__(self): # AÑADIDA EN UN 100%
         self.total_lineas_fisicas = sum([clase.lineas_fisicas for clase in \
-        self.clases]) # AGREGADA TOTALMENTE NUEVA (las 2 líneas previas cuentan como 1)
+        self.clases]) # AÑADIDA EN UN 100% (las 2 líneas previas cuentan como 1)

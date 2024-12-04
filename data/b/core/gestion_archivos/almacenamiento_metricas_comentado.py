@@ -31,8 +31,8 @@ Notas:
 import os
 from typing import List, Optional
 
-from analizador_cambios.models.metricas import MetricasArchivo, MetricasClase # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.76%
-from analizador_cambios.utils.archivo_utils import leer_json, escribir_json # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.88%
+from analizador_cambios.models.metricas import MetricasArchivo, MetricasClase # AÑADIDA EN UN 0.76%
+from analizador_cambios.utils.archivo_utils import leer_json, escribir_json # AÑADIDA EN UN 0.88%
 
 
 class AlmacenamientoMetricas:
@@ -61,7 +61,7 @@ class AlmacenamientoMetricas:
     
     def __init__(
             self,
-            ruta_almacenamiento: str = "db/lineas_por_clase_registro.json"): # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.88% (las 3 líneas previas cuentan como 1)
+            ruta_almacenamiento: str = "db/lineas_por_clase_registro.json"): # AÑADIDA EN UN 0.88% (las 3 líneas previas cuentan como 1)
         self.ruta_almacenamiento = ruta_almacenamiento
         self._asegurar_archivo_almacenamiento()
 
@@ -74,7 +74,7 @@ class AlmacenamientoMetricas:
         """
         datos = leer_json(self.ruta_almacenamiento)
         
-        # Convertir cada MetricasClase a diccionario # AGREGADA TOTALMENTE NUEVA
+        # Convertir cada MetricasClase a diccionario # AÑADIDA EN UN 100%
         clases_dict = [
             {
                 "nombre_clase": clase.nombre_clase,
@@ -82,13 +82,13 @@ class AlmacenamientoMetricas:
                 "lineas_fisicas": clase.lineas_fisicas
             } 
             for clase in metricas.clases
-        ] # AGREGADA TOTALMENTE NUEVA (las 8 líneas previas cuentan como 1)
+        ] # AÑADIDA EN UN 100% (las 8 líneas previas cuentan como 1)
         
         diccionario_metricas = {
             "nombre_archivo": metricas.nombre_archivo,
             "clases": clases_dict,
             "total_lineas_fisicas": metricas.total_lineas_fisicas
-        } # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.83% (las 5 líneas previas cuentan como 1)
+        } # AÑADIDA EN UN 0.83% (las 5 líneas previas cuentan como 1)
         
         datos[metricas.nombre_archivo] = diccionario_metricas
         escribir_json(self.ruta_almacenamiento, datos)
@@ -109,17 +109,17 @@ class AlmacenamientoMetricas:
         if nombre_archivo in datos:
             diccionario_metricas = datos[nombre_archivo]
             
-            # Reconstruir objetos MetricasClase # AGREGADA TOTALMENTE NUEVA
+            # Reconstruir objetos MetricasClase # AÑADIDA EN UN 100%
             clases = [
                 MetricasClase(**clase_dict)
                 for clase_dict in diccionario_metricas["clases"]
-            ] # AGREGADA TOTALMENTE NUEVA (las 4 líneas previas cuentan como 1)
+            ] # AÑADIDA EN UN 100% (las 4 líneas previas cuentan como 1)
             
-            # Crear MetricasArchivo con la lista de clases # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.61%
+            # Crear MetricasArchivo con la lista de clases # AÑADIDA EN UN 0.61%
             return MetricasArchivo(
                 nombre_archivo=diccionario_metricas["nombre_archivo"],
                 clases=clases
-            ) # AGREGADA TOTALMENTE NUEVA (las 4 líneas previas cuentan como 1)
+            ) # AÑADIDA EN UN 100% (las 4 líneas previas cuentan como 1)
         return None
 
     def obtener_todas_las_metricas(self) -> List[MetricasArchivo]:
@@ -127,19 +127,19 @@ class AlmacenamientoMetricas:
         Obtiene lista de todas las métricas almacenadas.
         """
         datos = leer_json(self.ruta_almacenamiento)
-        metricas = [] # AGREGADA TOTALMENTE NUEVA
+        metricas = [] # AÑADIDA EN UN 100%
         
-        for diccionario_metricas in datos.values(): # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.63%
+        for diccionario_metricas in datos.values(): # AÑADIDA EN UN 0.63%
             clases = [
                 MetricasClase(**clase_dict)
                 for clase_dict in diccionario_metricas["clases"]
-            ] # AGREGADA TOTALMENTE NUEVA (las 4 líneas previas cuentan como 1)
+            ] # AÑADIDA EN UN 100% (las 4 líneas previas cuentan como 1)
             metricas.append(MetricasArchivo(
                 nombre_archivo=diccionario_metricas["nombre_archivo"],
                 clases=clases
-            )) # AGREGADA TOTALMENTE NUEVA (las 4 líneas previas cuentan como 1)
+            )) # AÑADIDA EN UN 100% (las 4 líneas previas cuentan como 1)
         
-        return metricas # AGREGADA TOTALMENTE NUEVA
+        return metricas # AÑADIDA EN UN 100%
 
     def _asegurar_archivo_almacenamiento(self) -> None:
         """

@@ -34,21 +34,21 @@ from typing import Optional, Tuple
 
 from contador_lineas.core.contadores.contador_fisico import (
     ContadorLineasFisicas
-) # ELIMINADA (las 3 líneas previas cuentan como 1)
+) # BORRADA (las 3 líneas previas cuentan como 1)
 from contador_lineas.core.contadores.contador_logico import (
     ContadorLineasLogicas
-) # ELIMINADA (las 3 líneas previas cuentan como 1)
+) # BORRADA (las 3 líneas previas cuentan como 1)
 from contador_lineas.core.gestion_archivos.lector_archivo import (
     LectorArchivoPython
-) # ELIMINADA (las 3 líneas previas cuentan como 1)
+) # BORRADA (las 3 líneas previas cuentan como 1)
 from contador_lineas.core.gestion_archivos.almacenamiento_metricas import (
     AlmacenamientoMetricas
-) # ELIMINADA (las 3 líneas previas cuentan como 1)
-from contador_lineas.core.arbol.arbol_sintactico import ArbolArchivoPython # ELIMINADA
+) # BORRADA (las 3 líneas previas cuentan como 1)
+from contador_lineas.core.arbol.arbol_sintactico import ArbolArchivoPython # BORRADA
 from contador_lineas.core.arbol.verificador_estandar_codigo import (
     VerificadorEstandarCodigo
-) # ELIMINADA (las 3 líneas previas cuentan como 1)
-from contador_lineas.models.metricas import MetricasArchivo # ELIMINADA
+) # BORRADA (las 3 líneas previas cuentan como 1)
+from contador_lineas.models.metricas import MetricasArchivo # BORRADA
 
 
 class ExcepcionAnalizador(Exception):
@@ -191,7 +191,7 @@ class AnalizadorCodigo:
         codigo, error = lector.leer_lineas()
         if error:
             raise ExcepcionAnalizador(f"Error al leer archivo: {error}")
-        return codigo # ELIMINADA
+        return codigo # BORRADA
 
     def _procesar_codigo(
             self, codigo: list[str], nombre_archivo: str
@@ -221,7 +221,7 @@ class AnalizadorCodigo:
             ),
             lineas_logicas = self.contador_logico.contar_lineas_logicas( \
             arbol.raiz )
-        ) # ELIMINADA (las 8 líneas previas cuentan como 1)
+        ) # BORRADA (las 8 líneas previas cuentan como 1)
 
     def _validar_arbol_sintaxis(self, arbol: ArbolArchivoPython) -> None:
         """
@@ -260,4 +260,4 @@ class AnalizadorCodigo:
             lineas_fisicas=metricas.lineas_fisicas,
             lineas_logicas=metricas.lineas_logicas,
             nombre_archivo=metricas.nombre_archivo
-        ) # ELIMINADA (las 5 líneas previas cuentan como 1)
+        ) # BORRADA (las 5 líneas previas cuentan como 1)

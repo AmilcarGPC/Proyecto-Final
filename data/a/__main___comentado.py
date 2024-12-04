@@ -35,17 +35,17 @@ from pathlib import Path
 from contador_lineas.core.contadores.analizador import (
     AnalizadorCodigo,
     ExcepcionAnalizador
-) # ELIMINADA (las 4 líneas previas cuentan como 1)
+) # BORRADA (las 4 líneas previas cuentan como 1)
 from contador_lineas.core.gestion_archivos.almacenamiento_metricas import (
     AlmacenamientoMetricas
-) # ELIMINADA (las 3 líneas previas cuentan como 1)
-from contador_lineas.utils.archivo_utils import escribir_python # ELIMINADA
-from contador_lineas.utils.formatters import display_metrics_table # ELIMINADA
+) # BORRADA (las 3 líneas previas cuentan como 1)
+from contador_lineas.utils.archivo_utils import escribir_python # BORRADA
+from contador_lineas.utils.formatters import display_metrics_table # BORRADA
 
 
 def obtener_nombre_archivo(ruta_archivo: str) -> str:
-    '''Obtiene el nombre base de un archivo desde su ruta''' # ELIMINADA
-    return Path(ruta_archivo).name # ELIMINADA
+    '''Obtiene el nombre base de un archivo desde su ruta''' # BORRADA
+    return Path(ruta_archivo).name # BORRADA
 
 
 def procesar_argumentos() -> argparse.Namespace:
@@ -68,12 +68,12 @@ def procesar_argumentos() -> argparse.Namespace:
         type=str,
         nargs='?',
         help="Ruta del archivo Python a analizar"
-    ) # ELIMINADA (las 6 líneas previas cuentan como 1)
+    ) # BORRADA (las 6 líneas previas cuentan como 1)
     analizador.add_argument(
         "-t",
         action="store_true",
         help="Mostrar tabla de métricas del archivo procesado"
-    ) # ELIMINADA (las 5 líneas previas cuentan como 1)
+    ) # BORRADA (las 5 líneas previas cuentan como 1)
     analizador.add_argument(
         "-tc",
         action="store_true",
@@ -113,8 +113,8 @@ def validar_argumentos(args: argparse.Namespace) -> tuple[bool, str]:
         >>> print(es_valido, error)
         True, ""
     """
-    if not args.tc and not args.ruta_archivo: # ELIMINADA
-        return False, "Error: Se requiere el archivo cuando no se usa -tc" # ELIMINADA
+    if not args.tc and not args.ruta_archivo: # BORRADA
+        return False, "Error: Se requiere el archivo cuando no se usa -tc" # BORRADA
     return True, ""
 
 
@@ -122,38 +122,38 @@ def procesar_archivo(
         ruta_archivo: str,
         almacen: AlmacenamientoMetricas,
         mostrar_tabla: bool,
-        formatear: bool = False) -> None: # ELIMINADA (las 5 líneas previas cuentan como 1)
+        formatear: bool = False) -> None: # BORRADA (las 5 líneas previas cuentan como 1)
     """
-    Procesa un archivo individual y muestra resultados. # ELIMINADA
- # ELIMINADA
-    Args: # ELIMINADA
-        ruta_archivo (str): Ruta del archivo a procesar # ELIMINADA
-        almacen (AlmacenamientoMetricas): Almacenamiento de métricas # ELIMINADA
-        mostrar_tabla (bool): Mostrar tabla de métricas # ELIMINADA
-        formatear (bool): Guardar archivo formateado # ELIMINADA
- # ELIMINADA
-    Example: # ELIMINADA
-        >>> procesar_archivo("archivo.py", AlmacenamientoMetricas(), True) # ELIMINADA
+    Procesa un archivo individual y muestra resultados. # BORRADA
+ # BORRADA
+    Args: # BORRADA
+        ruta_archivo (str): Ruta del archivo a procesar # BORRADA
+        almacen (AlmacenamientoMetricas): Almacenamiento de métricas # BORRADA
+        mostrar_tabla (bool): Mostrar tabla de métricas # BORRADA
+        formatear (bool): Guardar archivo formateado # BORRADA
+ # BORRADA
+    Example: # BORRADA
+        >>> procesar_archivo("archivo.py", AlmacenamientoMetricas(), True) # BORRADA
     """
-    nombre_archivo = obtener_nombre_archivo(ruta_archivo) # ELIMINADA
-    analizador = AnalizadorCodigo() # ELIMINADA
-    resultado = analizador.analizar_archivo(ruta_archivo, nombre_archivo) # ELIMINADA
+    nombre_archivo = obtener_nombre_archivo(ruta_archivo) # BORRADA
+    analizador = AnalizadorCodigo() # BORRADA
+    resultado = analizador.analizar_archivo(ruta_archivo, nombre_archivo) # BORRADA
 
-    if formatear: # ELIMINADA
-        ruta_base = Path(ruta_archivo) # ELIMINADA
+    if formatear: # BORRADA
+        ruta_base = Path(ruta_archivo) # BORRADA
         ruta_formateada = ruta_base.parent / \
-        f"{ruta_base.stem}_formateado{ruta_base.suffix}" # ELIMINADA (las 2 líneas previas cuentan como 1)
-        error = escribir_python(ruta_formateada, analizador.codigo) # ELIMINADA
-        if error: # ELIMINADA
-            print(f"{Fore.RED}{error}{Style.RESET_ALL}") # ELIMINADA
-        else: # ELIMINADA
+        f"{ruta_base.stem}_formateado{ruta_base.suffix}" # BORRADA (las 2 líneas previas cuentan como 1)
+        error = escribir_python(ruta_formateada, analizador.codigo) # BORRADA
+        if error: # BORRADA
+            print(f"{Fore.RED}{error}{Style.RESET_ALL}") # BORRADA
+        else: # BORRADA
             print(f"{Fore.GREEN}Archivo formateado guardado en: \
-            {ruta_formateada}{Style.RESET_ALL}") # ELIMINADA (las 2 líneas previas cuentan como 1)
+            {ruta_formateada}{Style.RESET_ALL}") # BORRADA (las 2 líneas previas cuentan como 1)
 
     if mostrar_tabla:
         display_metrics_table([
             almacen.cargar_metricas(nombre_archivo)
-        ]) # ELIMINADA (las 3 líneas previas cuentan como 1)
+        ]) # BORRADA (las 3 líneas previas cuentan como 1)
 
 
 def main() -> None:
@@ -167,17 +167,17 @@ def main() -> None:
     args = procesar_argumentos()
     almacen = AlmacenamientoMetricas()
 
-    if args.tc and not args.ruta_archivo: # ELIMINADA
+    if args.tc and not args.ruta_archivo: # BORRADA
         display_metrics_table(almacen.obtener_todas_las_metricas())
         return
 
-    es_valido, mensaje_error = validar_argumentos(args) # ELIMINADA
+    es_valido, mensaje_error = validar_argumentos(args) # BORRADA
     if not es_valido:
         print(f"{Fore.RED}{mensaje_error}{Style.RESET_ALL}")
         return
 
     try:
-        procesar_archivo(args.ruta_archivo, almacen, args.t) # ELIMINADA
+        procesar_archivo(args.ruta_archivo, almacen, args.t) # BORRADA
         if args.tc:
             display_metrics_table(almacen.obtener_todas_las_metricas())
     except ExcepcionAnalizador as e:

@@ -32,25 +32,25 @@ Notas:
 from dataclasses import dataclass
 from typing import Optional, Tuple
 
-from analizador_cambios.core.arbol.nodo import Nodo # AGREGADA TOTALMENTE NUEVA
+from analizador_cambios.core.arbol.nodo import Nodo # AÑADIDA EN UN 100%
 from analizador_cambios.core.contadores.contador_fisico import (
     ContadorLineasFisicas
-) # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.9% (las 3 líneas previas cuentan como 1)
+) # AÑADIDA EN UN 0.9% (las 3 líneas previas cuentan como 1)
 from analizador_cambios.core.contadores.contador_logico import (
     ContadorLineasLogicas
-) # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.9% (las 3 líneas previas cuentan como 1)
+) # AÑADIDA EN UN 0.9% (las 3 líneas previas cuentan como 1)
 from analizador_cambios.core.gestion_archivos.lector_archivo import (
     LectorArchivoPython
-) # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.91% (las 3 líneas previas cuentan como 1)
+) # AÑADIDA EN UN 0.91% (las 3 líneas previas cuentan como 1)
 from analizador_cambios.core.gestion_archivos.almacenamiento_metricas import (
     AlmacenamientoMetricas
-) # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.92% (las 3 líneas previas cuentan como 1)
-from analizador_cambios.core.arbol.arbol_sintactico import ArbolArchivoPython # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.89%
+) # AÑADIDA EN UN 0.92% (las 3 líneas previas cuentan como 1)
+from analizador_cambios.core.arbol.arbol_sintactico import ArbolArchivoPython # AÑADIDA EN UN 0.89%
 from analizador_cambios.core.arbol.verificador_estandar_codigo import (
     VerificadorEstandarCodigo
-) # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.91% (las 3 líneas previas cuentan como 1)
-from analizador_cambios.models.metricas import MetricasClase, MetricasArchivo # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.76%
-from analizador_cambios.utils.formateador_linea import FormateadorLinea # AGREGADA TOTALMENTE NUEVA
+) # AÑADIDA EN UN 0.91% (las 3 líneas previas cuentan como 1)
+from analizador_cambios.models.metricas import MetricasClase, MetricasArchivo # AÑADIDA EN UN 0.76%
+from analizador_cambios.utils.formateador_linea import FormateadorLinea # AÑADIDA EN UN 100%
 
 
 class ExcepcionAnalizador(Exception):
@@ -116,32 +116,32 @@ class AnalizadorCodigo:
         self.arbol = None
         self.codigo = None
         self.almacenamiento = AlmacenamientoMetricas()
-        self.formateador = FormateadorLinea() # AGREGADA TOTALMENTE NUEVA
+        self.formateador = FormateadorLinea() # AÑADIDA EN UN 100%
         self.contador_fisico = ContadorLineasFisicas()
         self.contador_logico = ContadorLineasLogicas()
         self.verificador_estandar = VerificadorEstandarCodigo()
 
-    def formatear_codigo(self, codigo: list[str]) -> list[str]: # AGREGADA TOTALMENTE NUEVA
-        """ # AGREGADA TOTALMENTE NUEVA
-        Formatea el código fuente para su análisis. # AGREGADA TOTALMENTE NUEVA
- # AGREGADA TOTALMENTE NUEVA
-        Args: # AGREGADA TOTALMENTE NUEVA
-            codigo (list[str]): Líneas de código a formatear # AGREGADA TOTALMENTE NUEVA
- # AGREGADA TOTALMENTE NUEVA
-        Returns: # AGREGADA TOTALMENTE NUEVA
-            list[str]: Líneas formateadas # AGREGADA TOTALMENTE NUEVA
- # AGREGADA TOTALMENTE NUEVA
-        Example: # AGREGADA TOTALMENTE NUEVA
-            >>> formatear_codigo(["def f():", "    pass"]) # AGREGADA TOTALMENTE NUEVA
-        """ # AGREGADA TOTALMENTE NUEVA
-        codigo_nuevo = [] # AGREGADA TOTALMENTE NUEVA
-        for linea in codigo: # AGREGADA TOTALMENTE NUEVA
-            formateada = self.formateador.formatear_linea(linea) # AGREGADA TOTALMENTE NUEVA
-            if len(formateada) > 1: # AGREGADA TOTALMENTE NUEVA
-                codigo_nuevo.extend(formateada) # AGREGADA TOTALMENTE NUEVA
-            else: # AGREGADA TOTALMENTE NUEVA
-                codigo_nuevo.extend(formateada) # AGREGADA TOTALMENTE NUEVA
-        return codigo_nuevo # AGREGADA TOTALMENTE NUEVA
+    def formatear_codigo(self, codigo: list[str]) -> list[str]: # AÑADIDA EN UN 100%
+        """ # AÑADIDA EN UN 100%
+        Formatea el código fuente para su análisis. # AÑADIDA EN UN 100%
+ # AÑADIDA EN UN 100%
+        Args: # AÑADIDA EN UN 100%
+            codigo (list[str]): Líneas de código a formatear # AÑADIDA EN UN 100%
+ # AÑADIDA EN UN 100%
+        Returns: # AÑADIDA EN UN 100%
+            list[str]: Líneas formateadas # AÑADIDA EN UN 100%
+ # AÑADIDA EN UN 100%
+        Example: # AÑADIDA EN UN 100%
+            >>> formatear_codigo(["def f():", "    pass"]) # AÑADIDA EN UN 100%
+        """ # AÑADIDA EN UN 100%
+        codigo_nuevo = [] # AÑADIDA EN UN 100%
+        for linea in codigo: # AÑADIDA EN UN 100%
+            formateada = self.formateador.formatear_linea(linea) # AÑADIDA EN UN 100%
+            if len(formateada) > 1: # AÑADIDA EN UN 100%
+                codigo_nuevo.extend(formateada) # AÑADIDA EN UN 100%
+            else: # AÑADIDA EN UN 100%
+                codigo_nuevo.extend(formateada) # AÑADIDA EN UN 100%
+        return codigo_nuevo # AÑADIDA EN UN 100%
 
     def validate_syntax_tree(
             self, tree: ArbolArchivoPython) -> Tuple[bool, Optional[str]]:
@@ -216,7 +216,7 @@ class AnalizadorCodigo:
         codigo, error = lector.leer_lineas()
         if error:
             raise ExcepcionAnalizador(f"Error al leer archivo: {error}")
-        return self.formatear_codigo(codigo) # AGREGADA TOTALMENTE NUEVA
+        return self.formatear_codigo(codigo) # AÑADIDA EN UN 100%
 
     def _procesar_codigo(
             self, codigo: list[str], nombre_archivo: str
@@ -238,56 +238,56 @@ class AnalizadorCodigo:
         self._validar_arbol_sintaxis(arbol)
         self.arbol = arbol
 
-        clases = self._analizar_clases(arbol) # AGREGADA TOTALMENTE NUEVA
+        clases = self._analizar_clases(arbol) # AÑADIDA EN UN 100%
         
         return MetricasArchivo(
             nombre_archivo=nombre_archivo,
             clases=clases
-        ) # AGREGADA TOTALMENTE NUEVA (las 4 líneas previas cuentan como 1)
+        ) # AÑADIDA EN UN 100% (las 4 líneas previas cuentan como 1)
     
     def _analizar_clases(
             self,
-            arbol: ArbolArchivoPython) -> list[MetricasClase]: # AGREGADA TOTALMENTE NUEVA (las 3 líneas previas cuentan como 1)
-        """ # AGREGADA TOTALMENTE NUEVA
-        Analiza las clases de un archivo Python y obtiene métricas. # AGREGADA TOTALMENTE NUEVA
- # AGREGADA TOTALMENTE NUEVA
-        Args: # AGREGADA TOTALMENTE NUEVA
-            arbol (ArbolArchivoPython): Árbol sintáctico del archivo # AGREGADA TOTALMENTE NUEVA
- # AGREGADA TOTALMENTE NUEVA
-        Returns: # AGREGADA TOTALMENTE NUEVA
-            list[MetricasClase]: Métricas de las clases del archivo # AGREGADA TOTALMENTE NUEVA
- # AGREGADA TOTALMENTE NUEVA
-        Example: # AGREGADA TOTALMENTE NUEVA
-            >>> clases = self._analizar_clases(arbol) # AGREGADA TOTALMENTE NUEVA
-        """ # AGREGADA TOTALMENTE NUEVA
-        clases = [] # AGREGADA TOTALMENTE NUEVA
-        for nodo in arbol.obtener_nodos_clase(): # AGREGADA TOTALMENTE NUEVA
-            metricas_clase = self._analizar_clase(nodo) # AGREGADA TOTALMENTE NUEVA
-            clases.append(metricas_clase) # AGREGADA TOTALMENTE NUEVA
-        nodo_otros = arbol.obtener_nodo_otros() # AGREGADA TOTALMENTE NUEVA
-        otros = self._analizar_clase(nodo_otros) # AGREGADA TOTALMENTE NUEVA
-        otros.cantidad_metodos = 0 # AGREGADA TOTALMENTE NUEVA
-        otros.lineas_fisicas -= 1 # Restar la línea de la clase # AGREGADA TOTALMENTE NUEVA
-        clases.append(otros) # AGREGADA TOTALMENTE NUEVA
-        return clases # AGREGADA TOTALMENTE NUEVA
+            arbol: ArbolArchivoPython) -> list[MetricasClase]: # AÑADIDA EN UN 100% (las 3 líneas previas cuentan como 1)
+        """ # AÑADIDA EN UN 100%
+        Analiza las clases de un archivo Python y obtiene métricas. # AÑADIDA EN UN 100%
+ # AÑADIDA EN UN 100%
+        Args: # AÑADIDA EN UN 100%
+            arbol (ArbolArchivoPython): Árbol sintáctico del archivo # AÑADIDA EN UN 100%
+ # AÑADIDA EN UN 100%
+        Returns: # AÑADIDA EN UN 100%
+            list[MetricasClase]: Métricas de las clases del archivo # AÑADIDA EN UN 100%
+ # AÑADIDA EN UN 100%
+        Example: # AÑADIDA EN UN 100%
+            >>> clases = self._analizar_clases(arbol) # AÑADIDA EN UN 100%
+        """ # AÑADIDA EN UN 100%
+        clases = [] # AÑADIDA EN UN 100%
+        for nodo in arbol.obtener_nodos_clase(): # AÑADIDA EN UN 100%
+            metricas_clase = self._analizar_clase(nodo) # AÑADIDA EN UN 100%
+            clases.append(metricas_clase) # AÑADIDA EN UN 100%
+        nodo_otros = arbol.obtener_nodo_otros() # AÑADIDA EN UN 100%
+        otros = self._analizar_clase(nodo_otros) # AÑADIDA EN UN 100%
+        otros.cantidad_metodos = 0 # AÑADIDA EN UN 100%
+        otros.lineas_fisicas -= 1 # Restar la línea de la clase # AÑADIDA EN UN 100%
+        clases.append(otros) # AÑADIDA EN UN 100%
+        return clases # AÑADIDA EN UN 100%
     
-    def _analizar_clase(self, clase: Nodo) -> MetricasClase: # AGREGADA TOTALMENTE NUEVA
-        """ # AGREGADA TOTALMENTE NUEVA
-        Analiza una clase Python y obtiene métricas. # AGREGADA TOTALMENTE NUEVA
- # AGREGADA TOTALMENTE NUEVA
-        Args: # AGREGADA TOTALMENTE NUEVA
-            clase (Nodo): Nodo de la clase a analizar # AGREGADA TOTALMENTE NUEVA
- # AGREGADA TOTALMENTE NUEVA
-        Returns: # AGREGADA TOTALMENTE NUEVA
-            MetricasClase: Métricas de la clase # AGREGADA TOTALMENTE NUEVA
- # AGREGADA TOTALMENTE NUEVA
-        Example: # AGREGADA TOTALMENTE NUEVA
-            >>> metricas_clase = self._analizar_clase(clase) # AGREGADA TOTALMENTE NUEVA
-        """ # AGREGADA TOTALMENTE NUEVA
+    def _analizar_clase(self, clase: Nodo) -> MetricasClase: # AÑADIDA EN UN 100%
+        """ # AÑADIDA EN UN 100%
+        Analiza una clase Python y obtiene métricas. # AÑADIDA EN UN 100%
+ # AÑADIDA EN UN 100%
+        Args: # AÑADIDA EN UN 100%
+            clase (Nodo): Nodo de la clase a analizar # AÑADIDA EN UN 100%
+ # AÑADIDA EN UN 100%
+        Returns: # AÑADIDA EN UN 100%
+            MetricasClase: Métricas de la clase # AÑADIDA EN UN 100%
+ # AÑADIDA EN UN 100%
+        Example: # AÑADIDA EN UN 100%
+            >>> metricas_clase = self._analizar_clase(clase) # AÑADIDA EN UN 100%
+        """ # AÑADIDA EN UN 100%
         return MetricasClase(
             nombre_clase=clase.obtener_nombre_clase(),
             cantidad_metodos=len(self.arbol.obtener_nodos_metodos(clase)),
-            lineas_fisicas=self.contador_fisico.contar_lineas_fisicas(clase)) # AGREGADA TOTALMENTE NUEVA (las 4 líneas previas cuentan como 1)
+            lineas_fisicas=self.contador_fisico.contar_lineas_fisicas(clase)) # AÑADIDA EN UN 100% (las 4 líneas previas cuentan como 1)
 
     def _validar_arbol_sintaxis(self, arbol: ArbolArchivoPython) -> None:
         """
@@ -322,4 +322,4 @@ class AnalizadorCodigo:
         Example:
             >>> resultado = self._crear_resultado(metricas)
         """
-        return None # AGREGADA TOTALMENTE NUEVA
+        return None # AÑADIDA EN UN 100%

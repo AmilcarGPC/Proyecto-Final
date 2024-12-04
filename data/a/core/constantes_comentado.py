@@ -23,7 +23,7 @@ Notas:
     - Define tipos de expresiones de comprensión según su símbolo
 """
 
-from contador_lineas.models.nodos import TipoNodo # ELIMINADA
+from contador_lineas.models.nodos import TipoNodo # BORRADA
 
 # Mapeo de símbolos de apertura con sus correspondientes cierres
 CORCHETES = {

@@ -32,41 +32,41 @@ import argparse
 from colorama import init, Fore, Style
 from pathlib import Path
 
-# mientras # AGREGADA TOTALMENTE NUEVA
-from analizador_cambios.utils.impresion_arbol import imprimir_arbol # AGREGADA TOTALMENTE NUEVA
+# mientras # AÑADIDA EN UN 100%
+from analizador_cambios.utils.impresion_arbol import imprimir_arbol # AÑADIDA EN UN 100%
 
 from analizador_cambios.core.contadores.analizador import (
     AnalizadorCodigo,
     ExcepcionAnalizador
-) # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.91% (las 4 líneas previas cuentan como 1)
+) # AÑADIDA EN UN 0.91% (las 4 líneas previas cuentan como 1)
 from analizador_cambios.core.gestion_archivos.almacenamiento_metricas import (
     AlmacenamientoMetricas
-) # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.92% (las 3 líneas previas cuentan como 1)
-from analizador_cambios.utils.archivo_utils import escribir_python # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.87%
-from analizador_cambios.utils.formatters import display_metrics_table # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.87%
+) # AÑADIDA EN UN 0.92% (las 3 líneas previas cuentan como 1)
+from analizador_cambios.utils.archivo_utils import escribir_python # AÑADIDA EN UN 0.87%
+from analizador_cambios.utils.formatters import display_metrics_table # AÑADIDA EN UN 0.87%
 
 from analizador_cambios.core.arbol.comparador_principal import (
     ComparadorVersiones
-) # AGREGADA TOTALMENTE NUEVA (las 3 líneas previas cuentan como 1)
+) # AÑADIDA EN UN 100% (las 3 líneas previas cuentan como 1)
 from analizador_cambios.core.gestion_archivos.escribir_cambios import (
     EscribirCambios
-) # AGREGADA TOTALMENTE NUEVA (las 3 líneas previas cuentan como 1)
+) # AÑADIDA EN UN 100% (las 3 líneas previas cuentan como 1)
 
 def obtener_nombre_archivo(ruta_archivo: str) -> str:
-    """ # AGREGADA TOTALMENTE NUEVA
-    Obtiene el nombre base de un archivo desde su ruta. # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.93%
- # AGREGADA TOTALMENTE NUEVA
-    Args: # AGREGADA TOTALMENTE NUEVA
-        ruta_archivo (str): Ruta completa del archivo # AGREGADA TOTALMENTE NUEVA
- # AGREGADA TOTALMENTE NUEVA
-    Returns: # AGREGADA TOTALMENTE NUEVA
-        str: Nombre del archivo sin ruta # AGREGADA TOTALMENTE NUEVA
- # AGREGADA TOTALMENTE NUEVA
-    Example: # AGREGADA TOTALMENTE NUEVA
-        >>> obtener_nombre_archivo("c:/temp/archivo.py") # AGREGADA TOTALMENTE NUEVA
-        'archivo.py' # AGREGADA TOTALMENTE NUEVA
-    """ # AGREGADA TOTALMENTE NUEVA
-    return Path(ruta_archivo).name # AGREGADA TOTALMENTE NUEVA
+    """ # AÑADIDA EN UN 100%
+    Obtiene el nombre base de un archivo desde su ruta. # AÑADIDA EN UN 0.93%
+ # AÑADIDA EN UN 100%
+    Args: # AÑADIDA EN UN 100%
+        ruta_archivo (str): Ruta completa del archivo # AÑADIDA EN UN 100%
+ # AÑADIDA EN UN 100%
+    Returns: # AÑADIDA EN UN 100%
+        str: Nombre del archivo sin ruta # AÑADIDA EN UN 100%
+ # AÑADIDA EN UN 100%
+    Example: # AÑADIDA EN UN 100%
+        >>> obtener_nombre_archivo("c:/temp/archivo.py") # AÑADIDA EN UN 100%
+        'archivo.py' # AÑADIDA EN UN 100%
+    """ # AÑADIDA EN UN 100%
+    return Path(ruta_archivo).name # AÑADIDA EN UN 100%
 
 
 def procesar_argumentos() -> argparse.Namespace:
@@ -89,18 +89,18 @@ def procesar_argumentos() -> argparse.Namespace:
         type=str,
         nargs='?',
         help="Ruta del primer archivo Python a analizar"
-    ) # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.96% (las 6 líneas previas cuentan como 1)
+    ) # AÑADIDA EN UN 0.96% (las 6 líneas previas cuentan como 1)
     analizador.add_argument(
         "ruta_archivo_2",
         type=str,
         nargs='?',
         help="Ruta del segundo archivo Python a analizar"
-    ) # AGREGADA TOTALMENTE NUEVA (las 6 líneas previas cuentan como 1)
+    ) # AÑADIDA EN UN 100% (las 6 líneas previas cuentan como 1)
     analizador.add_argument(
         "-t",
         action="store_true",
         help="Mostrar tabla de métricas de los archivos procesados"
-    ) # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.98% (las 5 líneas previas cuentan como 1)
+    ) # AÑADIDA EN UN 0.98% (las 5 líneas previas cuentan como 1)
     analizador.add_argument(
         "-tc",
         action="store_true",
@@ -110,7 +110,7 @@ def procesar_argumentos() -> argparse.Namespace:
         "-cc",
         action="store_true", 
         help="Mostrar conteo de cambios entre archivos"
-    ) # AGREGADA TOTALMENTE NUEVA (las 5 líneas previas cuentan como 1)
+    ) # AÑADIDA EN UN 100% (las 5 líneas previas cuentan como 1)
     return analizador.parse_args()
 
 
@@ -145,10 +145,10 @@ def validar_argumentos(args: argparse.Namespace) -> tuple[bool, str]:
         >>> print(es_valido, error)
         True, ""
     """
-    if not args.tc: # AGREGADA TOTALMENTE NUEVA
-        if not (args.ruta_archivo_1 and args.ruta_archivo_2): # AGREGADA TOTALMENTE NUEVA
+    if not args.tc: # AÑADIDA EN UN 100%
+        if not (args.ruta_archivo_1 and args.ruta_archivo_2): # AÑADIDA EN UN 100%
             return False, "Error: Se requieren dos archivos cuando no se usa \
-            -tc" # AGREGADA TOTALMENTE NUEVA (las 2 líneas previas cuentan como 1)
+            -tc" # AÑADIDA EN UN 100% (las 2 líneas previas cuentan como 1)
     return True, ""
 
 
@@ -157,53 +157,53 @@ def procesar_archivos(
         ruta_archivo_2: str,
         almacen: AlmacenamientoMetricas,
         mostrar_tabla: bool,
-        mostrar_cambios: bool) -> None: # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.83% (las 6 líneas previas cuentan como 1)
+        mostrar_cambios: bool) -> None: # AÑADIDA EN UN 0.83% (las 6 líneas previas cuentan como 1)
     """
-    Procesa dos archivos, los compara y guarda resultados # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.67%
+    Procesa dos archivos, los compara y guarda resultados # AÑADIDA EN UN 0.67%
     """
-    nombre_archivo_1 = obtener_nombre_archivo(ruta_archivo_1) # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.96%
-    nombre_archivo_2 = obtener_nombre_archivo(ruta_archivo_2) # 30 # AGREGADA TOTALMENTE NUEVA
+    nombre_archivo_1 = obtener_nombre_archivo(ruta_archivo_1) # AÑADIDA EN UN 0.96%
+    nombre_archivo_2 = obtener_nombre_archivo(ruta_archivo_2) # 30 # AÑADIDA EN UN 100%
     
-    analizador1 = AnalizadorCodigo() # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.98%
-    analizador2 = AnalizadorCodigo() # AGREGADA TOTALMENTE NUEVA
+    analizador1 = AnalizadorCodigo() # AÑADIDA EN UN 0.98%
+    analizador2 = AnalizadorCodigo() # AÑADIDA EN UN 100%
     
-    resultado1 = analizador1.analizar_archivo(ruta_archivo_1, nombre_archivo_1) # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.96%
-    resultado2 = analizador2.analizar_archivo(ruta_archivo_2, nombre_archivo_2) # AGREGADA TOTALMENTE NUEVA
+    resultado1 = analizador1.analizar_archivo(ruta_archivo_1, nombre_archivo_1) # AÑADIDA EN UN 0.96%
+    resultado2 = analizador2.analizar_archivo(ruta_archivo_2, nombre_archivo_2) # AÑADIDA EN UN 100%
 
-    # Realizar comparación # AGREGADA TOTALMENTE NUEVA
-    comparador = ComparadorVersiones() # AGREGADA TOTALMENTE NUEVA
+    # Realizar comparación # AÑADIDA EN UN 100%
+    comparador = ComparadorVersiones() # AÑADIDA EN UN 100%
     cambios = comparador.comparar_archivos(
         analizador1.arbol,
         analizador2.arbol
-    ) # AGREGADA TOTALMENTE NUEVA (las 4 líneas previas cuentan como 1)
+    ) # AÑADIDA EN UN 100% (las 4 líneas previas cuentan como 1)
     
-    # Escribir archivos comentados # AGREGADA TOTALMENTE NUEVA
-    escritor = EscribirCambios() # AGREGADA TOTALMENTE NUEVA
-    codigo_1, codigo_2 = escritor.escribir(analizador1, analizador2, cambios) # AGREGADA TOTALMENTE NUEVA
+    # Escribir archivos comentados # AÑADIDA EN UN 100%
+    escritor = EscribirCambios() # AÑADIDA EN UN 100%
+    codigo_1, codigo_2 = escritor.escribir(analizador1, analizador2, cambios) # AÑADIDA EN UN 100%
     
-    ruta_1 = Path(ruta_archivo_1) # AGREGADA TOTALMENTE NUEVA
-    ruta_2 = Path(ruta_archivo_2) # AGREGADA TOTALMENTE NUEVA
+    ruta_1 = Path(ruta_archivo_1) # AÑADIDA EN UN 100%
+    ruta_2 = Path(ruta_archivo_2) # AÑADIDA EN UN 100%
     
     ruta_comentada_1 = ruta_1.parent / \
-    f"{ruta_1.stem}_comentado{ruta_1.suffix}" # AGREGADA TOTALMENTE NUEVA (las 2 líneas previas cuentan como 1)
+    f"{ruta_1.stem}_comentado{ruta_1.suffix}" # AÑADIDA EN UN 100% (las 2 líneas previas cuentan como 1)
     ruta_comentada_2 = ruta_2.parent / \
-    f"{ruta_2.stem}_comentado{ruta_2.suffix}" # AGREGADA TOTALMENTE NUEVA (las 2 líneas previas cuentan como 1)
+    f"{ruta_2.stem}_comentado{ruta_2.suffix}" # AÑADIDA EN UN 100% (las 2 líneas previas cuentan como 1)
     
-    escribir_python(ruta_comentada_1, codigo_1) # AGREGADA TOTALMENTE NUEVA
-    escribir_python(ruta_comentada_2, codigo_2) # AGREGADA TOTALMENTE NUEVA
+    escribir_python(ruta_comentada_1, codigo_1) # AÑADIDA EN UN 100%
+    escribir_python(ruta_comentada_2, codigo_2) # AÑADIDA EN UN 100%
 
     if mostrar_tabla:
         display_metrics_table([
             almacen.cargar_metricas(nombre_archivo_1),
             almacen.cargar_metricas(nombre_archivo_2)
-        ]) # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.75% (las 4 líneas previas cuentan como 1)
+        ]) # AÑADIDA EN UN 0.75% (las 4 líneas previas cuentan como 1)
 
-    if mostrar_cambios: # AGREGADA TOTALMENTE NUEVA
-        agregados, modificados, eliminados = comparador.contar_cambios(cambios) # AGREGADA TOTALMENTE NUEVA
-        print(f"\nConteo de cambios:") # AGREGADA TOTALMENTE NUEVA
-        print(f"{Fore.GREEN}Líneas añadidas nuevas: {agregados}") # AGREGADA TOTALMENTE NUEVA
-        print(f"{Fore.YELLOW}Líneas añadidas modificadas: {modificados}") # AGREGADA TOTALMENTE NUEVA
-        print(f"{Fore.RED}Líneas eliminadas: {eliminados}{Style.RESET_ALL}\n") # AGREGADA TOTALMENTE NUEVA
+    if mostrar_cambios: # AÑADIDA EN UN 100%
+        agregados, modificados, eliminados = comparador.contar_cambios(cambios) # AÑADIDA EN UN 100%
+        print(f"\nConteo de cambios:") # AÑADIDA EN UN 100%
+        print(f"{Fore.GREEN}Líneas añadidas nuevas: {agregados}") # AÑADIDA EN UN 100%
+        print(f"{Fore.YELLOW}Líneas añadidas modificadas: {modificados}") # AÑADIDA EN UN 100%
+        print(f"{Fore.RED}Líneas eliminadas: {eliminados}{Style.RESET_ALL}\n") # AÑADIDA EN UN 100%
 
 def main() -> None:
     """
@@ -216,11 +216,11 @@ def main() -> None:
     args = procesar_argumentos()
     almacen = AlmacenamientoMetricas()
 
-    if args.tc and not (args.ruta_archivo_1 or args.ruta_archivo_2): # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.73%
+    if args.tc and not (args.ruta_archivo_1 or args.ruta_archivo_2): # AÑADIDA EN UN 0.73%
         display_metrics_table(almacen.obtener_todas_las_metricas())
         return
 
-    es_valido, mensaje_error = validar_argumentos(args) #60 # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.96%
+    es_valido, mensaje_error = validar_argumentos(args) #60 # AÑADIDA EN UN 0.96%
     if not es_valido:
         print(f"{Fore.RED}{mensaje_error}{Style.RESET_ALL}")
         return
@@ -232,7 +232,7 @@ def main() -> None:
             almacen, 
             args.t,
             args.cc
-        ) # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.75% (las 7 líneas previas cuentan como 1)
+        ) # AÑADIDA EN UN 0.75% (las 7 líneas previas cuentan como 1)
         if args.tc:
             display_metrics_table(almacen.obtener_todas_las_metricas())
     except ExcepcionAnalizador as e:

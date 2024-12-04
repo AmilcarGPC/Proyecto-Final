@@ -22,8 +22,8 @@ Notas:
     - Implementa representación jerárquica del código fuente
 """
 
-from contador_lineas.utils.tree_builder import TreeBuilder # ELIMINADA
-from contador_lineas.utils.impresion_arbol import imprimir_arbol # ELIMINADA
+from contador_lineas.utils.tree_builder import TreeBuilder # BORRADA
+from contador_lineas.utils.impresion_arbol import imprimir_arbol # BORRADA
 
 
 class ArbolArchivoPython:

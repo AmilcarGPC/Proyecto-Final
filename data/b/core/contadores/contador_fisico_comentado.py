@@ -28,12 +28,12 @@ Notas:
 
 from typing import List
 
-from analizador_cambios.core.arbol.nodo import Nodo # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.83%
+from analizador_cambios.core.arbol.nodo import Nodo # AÑADIDA EN UN 0.83%
 from analizador_cambios.config.node_types import (
     COMMENT_NODE_TYPES,
     VALID_CODE_NODE_TYPES
-) # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.91% (las 4 líneas previas cuentan como 1)
-from analizador_cambios.models.nodos import TipoNodo # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.83%
+) # AÑADIDA EN UN 0.91% (las 4 líneas previas cuentan como 1)
+from analizador_cambios.models.nodos import TipoNodo # AÑADIDA EN UN 0.83%
 
 
 class ContadorLineasFisicas:

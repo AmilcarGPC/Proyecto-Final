@@ -32,16 +32,16 @@ Notas:
 
 from analizador_cambios.core.analizadores.analizador_corchetes import (
     AnalizadorCorchetes
-) # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.91% (las 3 líneas previas cuentan como 1)
+) # AÑADIDA EN UN 0.91% (las 3 líneas previas cuentan como 1)
 from analizador_cambios.core.analizadores.buscar_y_extraer_anidados import (
     BuscarYExtraerAnidados
-) # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.91% (las 3 líneas previas cuentan como 1)
+) # AÑADIDA EN UN 0.91% (las 3 líneas previas cuentan como 1)
 from analizador_cambios.core.analizadores.analizador_cadenas import (
     AnalizadorCadenas
-) # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.9% (las 3 líneas previas cuentan como 1)
-from analizador_cambios.core.constantes import TIPOS_COMPREHENSION, CORCHETES # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.89%
-from analizador_cambios.models.nodos import InformacionExpresion, TipoNodo # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.88%
-from analizador_cambios.utils.node_analyzer import TipoNodoAnalyzer # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.87%
+) # AÑADIDA EN UN 0.9% (las 3 líneas previas cuentan como 1)
+from analizador_cambios.core.constantes import TIPOS_COMPREHENSION, CORCHETES # AÑADIDA EN UN 0.89%
+from analizador_cambios.models.nodos import InformacionExpresion, TipoNodo # AÑADIDA EN UN 0.88%
+from analizador_cambios.utils.node_analyzer import TipoNodoAnalyzer # AÑADIDA EN UN 0.87%
 
 
 class AnalizadorComprehension:
@@ -97,7 +97,7 @@ class AnalizadorComprehension:
 
         Example:
             >>> self.procesar_comprehension("[x for x in range(5)]", 0)
-            InformacionExpresion(tipo=TipoNodo.LIST_COMPREHENSION, .) # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.98%
+            InformacionExpresion(tipo=TipoNodo.LIST_COMPREHENSION, .) # AÑADIDA EN UN 0.98%
         """
         try:
             if not (self.analizador_tipo.check_comprehensions(codigo)):

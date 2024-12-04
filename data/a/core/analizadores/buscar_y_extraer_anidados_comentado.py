@@ -37,12 +37,12 @@ from typing import List
 
 from contador_lineas.core.analizadores.analizador_cadenas import (
     AnalizadorCadenas
-) # ELIMINADA (las 3 líneas previas cuentan como 1)
+) # BORRADA (las 3 líneas previas cuentan como 1)
 from contador_lineas.core.analizadores.analizador_corchetes import (
     AnalizadorCorchetes
-) # ELIMINADA (las 3 líneas previas cuentan como 1)
-from contador_lineas.core.constantes import CORCHETES # ELIMINADA
-from contador_lineas.models.nodos import InformacionExpresion # ELIMINADA
+) # BORRADA (las 3 líneas previas cuentan como 1)
+from contador_lineas.core.constantes import CORCHETES # BORRADA
+from contador_lineas.models.nodos import InformacionExpresion # BORRADA
 
 
 class BuscarYExtraerAnidados:
@@ -205,7 +205,7 @@ class BuscarYExtraerAnidados:
         """
         from contador_lineas.core.analizadores.analizador_ternario import (
             AnalizadorTernario
-        ) # ELIMINADA (las 3 líneas previas cuentan como 1)
+        ) # BORRADA (las 3 líneas previas cuentan como 1)
         
         expresion_ternaria = AnalizadorTernario().analizar_ternario(codigo)
         if not expresion_ternaria:
