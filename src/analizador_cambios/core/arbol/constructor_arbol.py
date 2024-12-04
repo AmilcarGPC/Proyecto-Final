@@ -1,13 +1,13 @@
 """
 Nombre del módulo: constructor_arbol.py
-Ruta: contador_lineas/core/arbol/constructor_arbol.py
+Ruta: analizador_cambios/core/arbol/constructor_arbol.py
 Descripción: Construye un árbol sintáctico a partir de código Python
 Proyecto: Sistema de Conteo de Líneas Físicas y Lógicas en Python
 Autor: Amílcar Pérez
 Organización: Equipo 3
 Licencia: MIT
-Fecha de Creación: 19-11-2024
-Última Actualización: 19-11-2024
+Fecha de Creación: 28-11-2024
+Última Actualización: 02-12-2024
 
 Dependencias:
     - typing.List
@@ -16,21 +16,22 @@ Dependencias:
     - contador_lineas.models.nodos
 
 Uso:
-    from contador_lineas.core.arbol.constructor_arbol import ConstructorArbol
+    from analizador_cambios.core.arbol.constructor_arbol import ConstructorArbol
     constructor = ConstructorArbol()
     arbol = constructor.construir(lineas_codigo)
 """
 
 from typing import List
 
+from analizador_cambios.core.arbol.nodo import Nodo
+
 from contador_lineas.core.analizadores.analizador_cadenas import (
     AnalizadorCadenas
 )
 from contador_lineas.core.arbol.analizador_nodos import AnalizadorTipoNodo
-from analizador_cambios.core.arbol.nodo import Nodo
 from contador_lineas.config.node_types import PARENT_NODE_TYPES
 from contador_lineas.models.nodos import TipoNodo
-from contador_lineas.utils.impresion_arbol import imprimir_arbol
+
 
 class ConstructorArbol:
     """
@@ -41,6 +42,7 @@ class ConstructorArbol:
 
     Attributes:
         multilinea_vale_1 (bool): Indica si las líneas múltiples cuentan como 1
+        arbol_a_lineas (Dict[int, List[int]]): Mapeo de nodos a líneas de código
         analizador_tipo (AnalizadorTipoNodo): Analizador de tipos de nodos
         buffer_multilinea (List[str]): Buffer temporal para líneas múltiples
         delimitadores_abiertos (int): Contador de delimitadores sin cerrar
@@ -78,7 +80,7 @@ class ConstructorArbol:
         Example:
             >>> construir(["def suma(a, b):", "    return a + b"])
         """
-        raiz = Nodo(TipoNodo.ROOT, "raiz", -1, -1) 
+        raiz = Nodo(TipoNodo.ROOT, "raiz", -1, -1)
         padre_actual = raiz
         # Usamos una pila para rastrear la indentación y los padres cada
         # elemento es una tupla (nodo_padre, nivel_indentacion)
@@ -210,7 +212,6 @@ class ConstructorArbol:
 
             i += 1
 
-        imprimir_arbol(raiz)
         return raiz
 
     def _es_asignacion_cadena(self, linea: str) -> bool:

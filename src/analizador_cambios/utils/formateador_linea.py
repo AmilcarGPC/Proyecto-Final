@@ -1,19 +1,20 @@
 """
 Nombre del módulo: formateador_linea.py
-Ruta: src/utils/formateador_linea.py
+Ruta: analizador_cambios/utils/formateador_linea.py
 Descripción: Formatea líneas de código Python para cumplir con límites de longitud
 Proyecto: Sistema de Conteo de Líneas Físicas y Lógicas en Python
 Autor: Amílcar Pérez
 Organización: Equipo 3
 Licencia: MIT
-Fecha de Creación: 19-11-2024
-Última Actualización: 19-11-2024
+Fecha de Creación: 29-11-2024
+Última Actualización: 01-12-2024
 
 Dependencias:
     - config.longitud_lineas.LONGITUD_MAXIMA_LINEA
+    - core.analizadores.analizador_cadenas.AnalizadorCadenas
 
 Uso:
-    from utils.formateador_linea import FormateadorLinea
+    from analizador_cambios.utils.formateador_linea import FormateadorLinea
     formateador = FormateadorLinea()
     lineas = formateador.formatear_linea("linea_muy_larga..")
 
@@ -22,8 +23,11 @@ Notas:
     - Soporta imports, definiciones de funciones y asignaciones
 """
 
+from typing import List, Tuple
+
 from analizador_cambios.config.longitud_lineas import LONGITUD_MAXIMA_LINEA
 from contador_lineas.core.analizadores.analizador_cadenas import AnalizadorCadenas
+
 
 class ExcepcionFormateo(Exception):
     """
@@ -36,6 +40,7 @@ class ExcepcionFormateo(Exception):
     """
 
     pass
+
 
 class FormateadorLinea:
     """
@@ -54,7 +59,7 @@ class FormateadorLinea:
         ['def funcion( \\', '    param2, \\', '    param3):']
     """
     @staticmethod
-    def formatear_linea(linea: str) -> list[str]:
+    def formatear_linea(linea: str) -> List[str]:
         """
         Formatea una línea considerando comentarios.
         """
@@ -62,31 +67,37 @@ class FormateadorLinea:
 
         if len(linea) <= LONGITUD_MAXIMA_LINEA:
             return [linea]
-            
+
         indentacion = len(codigo) - len(codigo.lstrip())
         indentacion_str = ' ' * indentacion
 
         if comentario and len(codigo) <= LONGITUD_MAXIMA_LINEA:
             formateado = [codigo]
-            formateado.extend(FormateadorLinea._formatear_comentario(comentario, indentacion_str))
+            formateado.extend(FormateadorLinea._formatear_comentario(comentario,
+            indentacion_str))
             return formateado
-        
+
         if codigo.strip().startswith(('from ', 'import ')):
-            formateado = FormateadorLinea._formatear_importacion(codigo, indentacion_str)
+            formateado = FormateadorLinea._formatear_importacion(codigo,
+                         indentacion_str)
         elif codigo.strip().startswith('def ') and '(' in codigo:
-            formateado = FormateadorLinea._formatear_definicion_funcion(codigo, indentacion_str)
+            formateado = FormateadorLinea._formatear_definicion_funcion(codigo,
+                         indentacion_str)
         elif '=' in codigo:
-            formateado = FormateadorLinea._formatear_asignacion(codigo, indentacion_str)
+            formateado = FormateadorLinea._formatear_asignacion(codigo,
+                         indentacion_str)
         else:
-            formateado = FormateadorLinea._formatear_generico(codigo, indentacion_str)
-        
+            formateado = FormateadorLinea._formatear_generico(codigo,
+                         indentacion_str)
+
         if comentario:
-            formateado.extend(FormateadorLinea._formatear_comentario(comentario, indentacion_str))
-        
+            formateado.extend(FormateadorLinea._formatear_comentario(comentario,
+            indentacion_str))
+
         return formateado
-    
+
     @staticmethod
-    def _extraer_codigo_y_comentario(linea: str) -> tuple[str, str]:
+    def _extraer_codigo_y_comentario(linea: str) -> Tuple[str, str]:
         """
         Separa código, comentario y posición del comentario.
         """
@@ -94,9 +105,9 @@ class FormateadorLinea:
         if pos_hash == -1:
             return linea, ''
         return linea[:pos_hash].rstrip(), linea[pos_hash:]
-    
+
     @staticmethod
-    def _formatear_comentario(comentario: str, indentacion: str) -> list[str]:
+    def _formatear_comentario(comentario: str, indentacion: str) -> List[str]:
         """
         Formatea comentarios que exceden la longitud máxima.
         
@@ -105,30 +116,30 @@ class FormateadorLinea:
             indentacion: Espacios de indentación
         
         Returns:
-            list[str]: Lista de líneas formateadas
+            List[str]: Lista de líneas formateadas
         """
         comentario = comentario[1:].strip()
-        
+
         linea_completa = indentacion + '# ' + comentario
         if len(linea_completa) <= LONGITUD_MAXIMA_LINEA:
             return [linea_completa]
-        
+
         palabras = comentario.split()
         linea_actual = indentacion + '# ' + palabras[0]
         formateado = []
-        
+
         for palabra in palabras[1:]:
             if len(linea_actual + ' ' + palabra) <= LONGITUD_MAXIMA_LINEA:
                 linea_actual += ' ' + palabra
             else:
                 formateado.append(linea_actual)
                 linea_actual = indentacion + '# ' + palabra
-                
+
         formateado.append(linea_actual)
         return formateado
-    
+
     @staticmethod
-    def _formatear_importacion(linea: str, indentacion: str) -> list[str]:
+    def _formatear_importacion(linea: str, indentacion: str) -> List[str]:
         """
         Formatea declaración de importación con múltiples elementos.
 
@@ -137,34 +148,37 @@ class FormateadorLinea:
             indentacion (str): Espacios de indentación
 
         Returns:
-            list[str]: Lista de líneas formateadas
+            List[str]: Lista de líneas formateadas
 
         Example:
-            >>> _formatear_importacion("from app import (module1, module2, module3)")
-            ['from app import (, \\', '    module1, \\', '    module2, \\', '    module3)']
+            >>> _formatear_importacion("from app import (module1, module2, 
+                                                                    module3)")
+            ['from app import (, \\', '    module1, \\', '    module2, \\', 
+            '    module3)']
         """
         if linea.strip().startswith('import '):
             elementos = [elem.strip() for elem in linea[6:].strip().split(',')]
             formateado = []
             linea_actual = 'import '
-            
+
             for i, elemento in enumerate(elementos):
                 if not elemento:
                     continue
 
-                if len(linea_actual + ', ' + elemento) + 3 <= LONGITUD_MAXIMA_LINEA:
-                    linea_actual += ((', ' if linea_actual != 'import ' 
+                if len(linea_actual + ', ' + elemento) + 3 <= \
+                    LONGITUD_MAXIMA_LINEA:
+                    linea_actual += ((', ' if linea_actual != 'import '
                                       else '')
                                      + elemento)
                 else:
                     formateado.append(linea_actual + ', \\')
                     linea_actual = indentacion + elemento
-            
+
             if linea_actual:
                 formateado.append(linea_actual)
 
             return formateado
-        
+
         if '(' in linea and ')' in linea:
             parte_importacion = linea[:linea.index('(')]
             parte_elementos = linea[linea.index('(')+1:linea.rindex(')')
@@ -172,7 +186,7 @@ class FormateadorLinea:
         else:
             parte_importacion = linea[:linea.index('import') + 6]
             parte_elementos = linea[linea.index('import') + 6:].strip()
-        
+
         elementos = [elem.strip() for elem in parte_elementos.split(',')]
         formateado = [f"{indentacion}{parte_importacion.strip()} ("]
         indentacion_elem = indentacion + ' ' * 4
@@ -184,13 +198,13 @@ class FormateadorLinea:
                 formateado.append(f"{indentacion_elem}{elemento},")
             else:
                 formateado.append(f"{indentacion_elem}{elemento}")
-        
+
         formateado.append(f"{indentacion})")
         return formateado
 
     @staticmethod
-    def _formatear_definicion_funcion(linea: str, 
-                                      indentacion: str) -> list[str]:
+    def _formatear_definicion_funcion(linea: str,
+                                      indentacion: str) -> List[str]:
         """
         Formatea definición de función con parámetros.
 
@@ -199,7 +213,7 @@ class FormateadorLinea:
             indentacion (str): Espacios de indentación
 
         Returns:
-            list[str]: Lista de líneas formateadas
+            List[str]: Lista de líneas formateadas
 
         Example:
             >>> _formatear_definicion_funcion("def funcion(param1, param2):")
@@ -210,7 +224,7 @@ class FormateadorLinea:
         params = [p.strip() for p in parte_parametros.split(',')]
 
         formateado = [f"{parte_funcion}("]
-        indentacion_params = indentacion + ' ' * 8 
+        indentacion_params = indentacion + ' ' * 8
 
         for i, parametro in enumerate(params):
             if i < len(params) - 1:
@@ -223,7 +237,7 @@ class FormateadorLinea:
         return formateado
 
     @staticmethod
-    def _formatear_asignacion(linea: str, indentacion: str) -> list[str]:
+    def _formatear_asignacion(linea: str, indentacion: str) -> List[str]:
         """
         Formatea asignaciones con múltiples elementos.
 
@@ -232,21 +246,22 @@ class FormateadorLinea:
             indentacion (str): Espacios de indentación
 
         Returns:
-            list[str]: Lista de líneas formateadas
+            List[str]: Lista de líneas formateadas
 
         Example:
             >>> _formatear_asignacion("variable = funcion(param1, param2)")
             ['variable = funcion( \\', '    param1, \\', '    param2)']
         """
         izquierda, derecha = linea.split('=', 1)
-        if '(' in derecha and ')' in derecha and AnalizadorCadenas.encontrar_sin_comillas(linea, ',', 0, True) != -1:
+        if '(' in derecha and ')' in derecha and \
+            AnalizadorCadenas.encontrar_sin_comillas(linea, ',', 0, True) != -1:
             nombre_funcion = derecha[:derecha.index('(')].strip()
             texto_args = derecha[
                 derecha.index('(')+1:derecha.rindex(')')
             ].strip()
             resto = (
-                derecha[derecha.rindex(')'):].strip() 
-                if derecha.rindex(')') < len(derecha) - 1 
+                derecha[derecha.rindex(')'):].strip()
+                if derecha.rindex(')') < len(derecha) - 1
                 else ''
             )
             argumentos = [arg.strip() for arg in texto_args.split(',')]
@@ -266,9 +281,9 @@ class FormateadorLinea:
             return formateado
 
         return FormateadorLinea._formatear_generico(linea, indentacion)
-    
+
     @staticmethod
-    def _formatear_generico(linea: str, indentacion: str) -> list[str]:
+    def _formatear_generico(linea: str, indentacion: str) -> List[str]:
         """
         Formateo genérico para líneas largas.
 
@@ -277,7 +292,7 @@ class FormateadorLinea:
             indentacion (str): Espacios de indentación
 
         Returns:
-            list[str]: Lista de líneas formateadas
+            List[str]: Lista de líneas formateadas
 
         Example:    
             >>> _formatear_generico("json.loads('{"key": "value"}')")
@@ -288,11 +303,12 @@ class FormateadorLinea:
         formateado = []
 
         for i, palabra in enumerate(palabras):
-            if i == 0 and len(palabra) + len(indentacion) + 2 > LONGITUD_MAXIMA_LINEA:
-                raise ExcepcionFormateo(f"La línea '{linea.strip()}' es muy " + 
+            if i == 0 and len(palabra) + len(indentacion) + 2 > \
+                LONGITUD_MAXIMA_LINEA:
+                raise ExcepcionFormateo(f"La línea '{linea.strip()}' es muy " +
                 "larga para ser formateada.")
             if len(linea_actual) + len(palabra) + 2 <= LONGITUD_MAXIMA_LINEA:
-                linea_actual += ((' ' if linea_actual != indentacion else '') 
+                linea_actual += ((' ' if linea_actual != indentacion else '')
                                  + palabra)
             else:
                 formateado.append(linea_actual + ' \\')

@@ -224,7 +224,7 @@ class AnalizadorCodigo:
         )
 
     def _analizar_clases(
-            self, 
+            self,
             arbol: ArbolArchivoPython) -> List[MetricasClase]:
         """
         Analiza las clases de un archivo Python y obtiene métricas.

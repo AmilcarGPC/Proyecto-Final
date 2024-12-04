@@ -1,13 +1,13 @@
 """
-Nombre del módulo: main.py
-Ruta: src/main.py
+Nombre del módulo: __main__.py
+Ruta: analizador_cambios/__main__.py
 Descripción: Punto de entrada principal para el analizador de código Python
 Proyecto: Sistema de Conteo de Líneas Físicas y Lógicas en Python
 Autor: Amílcar Pérez
 Organización: Equipo 3
 Licencia: MIT
-Fecha de Creación: 20-11-2024
-Última Actualización: 20-11-2024
+Fecha de Creación: 28-11-2024
+Última Actualización: 02-12-2024
 
 Dependencias:
     - argparse
@@ -15,10 +15,10 @@ Dependencias:
     - pathlib.Path
     - core.contadores.analizador.AnalizadorCodigo, ExcepcionAnalizador
     - core.gestion_archivos.almacenamiento_metricas.AlmacenamientoMetricas
-    - utils.formatters.display_metrics_table
+    - utils.formatters.mostrar_tabla_metricas
 
 Uso:
-    >>> python main.py archivo.py [-t] [-tc]
+    >>> analizador_cambios archivo1.py archivo2.py [-t] [-tc] [-cc]
     
     Opciones:
         archivo.py: Ruta del archivo a analizar
@@ -28,22 +28,28 @@ Uso:
 Notas:
     - Requiere permisos de lectura en archivos a analizar
 """
+
 import argparse
-from colorama import init, Fore, Style
 from pathlib import Path
+from typing import Tuple
 
-# mientras
-from contador_lineas.utils.impresion_arbol import imprimir_arbol
+from colorama import init, Fore, Style
 
-from analizador_cambios.core.contadores.analizador import AnalizadorCodigo, ExcepcionAnalizador
-from analizador_cambios.core.gestion_archivos.almacenamiento_metricas import (
-    AlmacenamientoMetricas
+from analizador_cambios.core.arbol.comparador_principal import (
+    ComparadorVersiones
+)
+from analizador_cambios.core.contadores.analizador import (
+    AnalizadorCodigo, ExcepcionAnalizador
+)
+from analizador_cambios.core.gestion_archivos.escribir_cambios import (
+    EscribirCambios
 )
 from contador_lineas.utils.archivo_utils import escribir_python
-from analizador_cambios.utils.formatters import display_metrics_table
+from lineas_por_clase.core.gestion_archivos.almacenamiento_metricas import (
+    AlmacenamientoMetricas
+)
+from lineas_por_clase.utils.formateador_metricas import mostrar_tabla_metricas
 
-from analizador_cambios.core.arbol.comparador_principal import ComparadorVersiones
-from analizador_cambios.core.gestion_archivos.escribir_cambios import EscribirCambios
 
 def obtener_nombre_archivo(ruta_archivo: str) -> str:
     """
@@ -101,7 +107,7 @@ def procesar_argumentos() -> argparse.Namespace:
     )
     analizador.add_argument(
         "-cc",
-        action="store_true", 
+        action="store_true",
         help="Mostrar conteo de cambios entre archivos"
     )
     return analizador.parse_args()
@@ -118,7 +124,7 @@ def imprimir_resultados() -> None:
     print(f"{Fore.GREEN}{mensaje_exito}{Style.RESET_ALL}")
 
 
-def validar_argumentos(args: argparse.Namespace) -> tuple[bool, str]:
+def validar_argumentos(args: argparse.Namespace) -> Tuple[bool, str]:
     """
     Valida los argumentos de línea de comandos
 
@@ -126,10 +132,11 @@ def validar_argumentos(args: argparse.Namespace) -> tuple[bool, str]:
         args (argparse.Namespace): Argumentos procesados
 
     Returns:
-        tuple[bool, str]: (es_valido, mensaje_error)
+        Tuple[bool, str]: (es_valido, mensaje_error)
 
     Example:
-        >>> args = argparse.Namespace(ruta_archivo="archivo.py", t=True, tc=False)
+        >>> args = argparse.Namespace(ruta_archivo="archivo.py", t=True,
+                                                                    tc=False)
         >>> es_valido, error = validar_argumentos(args)
         >>> print(es_valido, error)
         True, ""
@@ -150,43 +157,42 @@ def procesar_archivos(
     Procesa dos archivos, los compara y guarda resultados
     """
     nombre_archivo_1 = obtener_nombre_archivo(ruta_archivo_1)
-    nombre_archivo_2 = obtener_nombre_archivo(ruta_archivo_2) # 30
-    
+    nombre_archivo_2 = obtener_nombre_archivo(ruta_archivo_2)
+
     analizador1 = AnalizadorCodigo()
     analizador2 = AnalizadorCodigo()
-    
+
     resultado1 = analizador1.analizar_archivo(ruta_archivo_1, nombre_archivo_1)
     resultado2 = analizador2.analizar_archivo(ruta_archivo_2, nombre_archivo_2)
 
-    # Realizar comparación
     comparador = ComparadorVersiones()
     cambios = comparador.comparar_archivos(analizador1.arbol, analizador2.arbol)
-    
-    # Escribir archivos comentados
+
     escritor = EscribirCambios()
     codigo_1, codigo_2 = escritor.escribir(analizador1, analizador2, cambios)
-    
+
     ruta_1 = Path(ruta_archivo_1)
     ruta_2 = Path(ruta_archivo_2)
-    
+
     ruta_comentada_1 = ruta_1.parent / f"{ruta_1.stem}_comentado{ruta_1.suffix}"
     ruta_comentada_2 = ruta_2.parent / f"{ruta_2.stem}_comentado{ruta_2.suffix}"
-    
+
     escribir_python(ruta_comentada_1, codigo_1)
     escribir_python(ruta_comentada_2, codigo_2)
 
     if mostrar_tabla:
-        display_metrics_table([
+        mostrar_tabla_metricas([
             almacen.cargar_metricas(nombre_archivo_1),
             almacen.cargar_metricas(nombre_archivo_2)
         ])
 
     if mostrar_cambios:
         agregados, modificados, eliminados = comparador.contar_cambios(cambios)
-        print(f"\nConteo de cambios:")
+        print("\nConteo de cambios:")
         print(f"{Fore.GREEN}Líneas añadidas nuevas: {agregados}")
         print(f"{Fore.YELLOW}Líneas añadidas modificadas: {modificados}")
         print(f"{Fore.RED}Líneas eliminadas: {eliminados}{Style.RESET_ALL}\n")
+
 
 def main() -> None:
     """
@@ -199,25 +205,31 @@ def main() -> None:
     args = procesar_argumentos()
     almacen = AlmacenamientoMetricas()
 
+    # Caso especial: si solo se pide tabla completa (-tc), mostramos todas las
+    # métricas y terminamos
     if args.tc and not (args.ruta_archivo_1 or args.ruta_archivo_2):
-        display_metrics_table(almacen.obtener_todas_las_metricas())
+        mostrar_tabla_metricas(almacen.obtener_todas_las_metricas())
         return
 
-    es_valido, mensaje_error = validar_argumentos(args) #60
+    # Validamos argumentos antes de cualquier procesamiento para fallar rápido
+    # si hay errores
+    es_valido, mensaje_error = validar_argumentos(args)
     if not es_valido:
         print(f"{Fore.RED}{mensaje_error}{Style.RESET_ALL}")
         return
 
     try:
+        # Procesamos el archivo actual y opcionalmente mostramos la tabla
+        # histórica si se solicitó
         procesar_archivos(
-            args.ruta_archivo_1, 
-            args.ruta_archivo_2, 
-            almacen, 
+            args.ruta_archivo_1,
+            args.ruta_archivo_2,
+            almacen,
             args.t,
             args.cc
         )
         if args.tc:
-            display_metrics_table(almacen.obtener_todas_las_metricas())
+            mostrar_tabla_metricas(almacen.obtener_todas_las_metricas())
     except ExcepcionAnalizador as e:
         print(f"{Fore.RED}{str(e)}{Style.RESET_ALL}")
     except Exception as e:
