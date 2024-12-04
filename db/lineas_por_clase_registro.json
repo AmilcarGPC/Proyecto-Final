@@ -1,0 +1,77 @@
+{
+    "test_2.py": {
+        "nombre_archivo": "test_2.py",
+        "clases": [
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 19
+            }
+        ],
+        "total_lineas_fisicas": 19
+    },
+    "test_1.py": {
+        "nombre_archivo": "test_1.py",
+        "clases": [
+            {
+                "nombre_clase": "Token",
+                "cantidad_metodos": 2,
+                "lineas_fisicas": 6
+            },
+            {
+                "nombre_clase": "Lexer",
+                "cantidad_metodos": 5,
+                "lineas_fisicas": 30
+            },
+            {
+                "nombre_clase": "Parser",
+                "cantidad_metodos": 5,
+                "lineas_fisicas": 42
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 14
+            }
+        ],
+        "total_lineas_fisicas": 92
+    },
+    "test_6.py": {
+        "nombre_archivo": "test_6.py",
+        "clases": [
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 23
+            }
+        ],
+        "total_lineas_fisicas": 23
+    },
+    "test_12.py": {
+        "nombre_archivo": "test_12.py",
+        "clases": [
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 10
+            }
+        ],
+        "total_lineas_fisicas": 10
+    },
+    "test_8.py": {
+        "nombre_archivo": "test_8.py",
+        "clases": [
+            {
+                "nombre_clase": "ArbolArchivoPython",
+                "cantidad_metodos": 2,
+                "lineas_fisicas": 6
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 2
+            }
+        ],
+        "total_lineas_fisicas": 8
+    }
+}

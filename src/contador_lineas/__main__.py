@@ -1,6 +1,6 @@
 """
-Nombre del módulo: main.py
-Ruta: contador_lineas/main.py
+Nombre del módulo: __main__.py
+Ruta: contador_lineas/__main__.py
 Descripción: Punto de entrada principal para el analizador de código Python
 Proyecto: Sistema de Conteo de Líneas Físicas y Lógicas en Python
 Autor: Amílcar Pérez

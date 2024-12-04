@@ -1,20 +1,20 @@
 """
 Nombre del módulo: nodo.py
-Ruta: src/core/arbol/nodo.py
+Ruta: lineas_por_clase/core/arbol/nodo.py
 Descripción: Define la estructura base de nodos para el árbol sintáctico
 Proyecto: Sistema de Conteo de Líneas Físicas y Lógicas en Python
 Autor: Amílcar Pérez
 Organización: Equipo 3
 Licencia: MIT
-Fecha de Creación: 18-11-2024
-Última Actualización: 18-11-2024
+Fecha de Creación: 27-11-2024
+Última Actualización: 28-11-2024
 
 Dependencias:
     - typing
     - models.nodos.TipoNodo
 
 Uso:
-    from core.arbol.nodo import Nodo
+    from lineas_por_clase.core.arbol.nodo import Nodo
     nodo = Nodo(tipo, contenido, nivel_indentacion)
 
 Notas:
@@ -23,7 +23,7 @@ Notas:
 
 from typing import List, Optional
 
-from lineas_por_clase.models.nodos import TipoNodo
+from contador_lineas.models.nodos import TipoNodo
 
 
 class Nodo:
@@ -46,7 +46,7 @@ class Nodo:
         >>> nodo_hijo = Nodo(TipoNodo.CODIGO, "    return None", 1)
         >>> nodo.agregar_hijo(nodo_hijo)
     """
-    
+
     def __init__(
             self,
             tipo: TipoNodo,
@@ -83,7 +83,7 @@ class Nodo:
         """
         if self.tipo != TipoNodo.CLASS:
             return None
-            
+
         try:
             if len(self.contenido) == 0:
                 return ""

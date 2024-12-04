@@ -1,13 +1,13 @@
 """
-Nombre del módulo: main.py
-Ruta: src/main.py
+Nombre del módulo: __main__.py
+Ruta: lineas_por_clase/__main__.py
 Descripción: Punto de entrada principal para el analizador de código Python
 Proyecto: Sistema de Conteo de Líneas Físicas y Lógicas en Python
 Autor: Amílcar Pérez
 Organización: Equipo 3
 Licencia: MIT
-Fecha de Creación: 20-11-2024
-Última Actualización: 20-11-2024
+Fecha de Creación: 27-11-2024
+Última Actualización: 28-11-2024
 
 Dependencias:
     - argparse
@@ -15,10 +15,10 @@ Dependencias:
     - pathlib.Path
     - core.contadores.analizador.AnalizadorCodigo, ExcepcionAnalizador
     - core.gestion_archivos.almacenamiento_metricas.AlmacenamientoMetricas
-    - utils.formatters.display_metrics_table
+    - utils.formateador_metricas.mostrar_tabla_metricas
 
 Uso:
-    >>> python main.py archivo.py [-t] [-tc]
+    >>> lineas_por_clase archivo.py [-t] [-tc]
     
     Opciones:
         archivo.py: Ruta del archivo a analizar
@@ -28,16 +28,19 @@ Uso:
 Notas:
     - Requiere permisos de lectura en archivos a analizar
 """
+
 import argparse
-from colorama import init, Fore, Style
 from pathlib import Path
 
-from lineas_por_clase.core.contadores.analizador import AnalizadorCodigo, ExcepcionAnalizador
+from colorama import init, Fore, Style
+
+from lineas_por_clase.core.contadores.analizador import (
+    AnalizadorCodigo, ExcepcionAnalizador
+)
+from lineas_por_clase.utils.formateador_metricas import mostrar_tabla_metricas
 from lineas_por_clase.core.gestion_archivos.almacenamiento_metricas import (
     AlmacenamientoMetricas
 )
-from lineas_por_clase.utils.archivo_utils import escribir_python
-from lineas_por_clase.utils.formatters import display_metrics_table
 
 
 def obtener_nombre_archivo(ruta_archivo: str) -> str:
@@ -88,11 +91,6 @@ def procesar_argumentos() -> argparse.Namespace:
         action="store_true",
         help="Mostrar tabla de métricas de todos los archivos procesados"
     )
-    analizador.add_argument(
-        "--formato",
-        action="store_true",
-        help="Guardar versión formateada del archivo"
-    )
     return analizador.parse_args()
 
 
@@ -118,7 +116,8 @@ def validar_argumentos(args: argparse.Namespace) -> tuple[bool, str]:
         tuple[bool, str]: (es_valido, mensaje_error)
 
     Example:
-        >>> args = argparse.Namespace(ruta_archivo="archivo.py", t=True, tc=False)
+        >>> args = argparse.Namespace(ruta_archivo="archivo.py", t=True, 
+                                                                    tc=False)
         >>> es_valido, error = validar_argumentos(args)
         >>> print(es_valido, error)
         True, ""
@@ -131,8 +130,7 @@ def validar_argumentos(args: argparse.Namespace) -> tuple[bool, str]:
 def procesar_archivo(
         ruta_archivo: str,
         almacen: AlmacenamientoMetricas,
-        mostrar_tabla: bool,
-        formatear: bool = False) -> None:
+        mostrar_tabla: bool) -> None:
     """
     Procesa un archivo individual y muestra resultados.
 
@@ -149,17 +147,8 @@ def procesar_archivo(
     analizador = AnalizadorCodigo()
     resultado = analizador.analizar_archivo(ruta_archivo, nombre_archivo)
 
-    if formatear:
-        ruta_base = Path(ruta_archivo)
-        ruta_formateada = ruta_base.parent / f"{ruta_base.stem}_formateado{ruta_base.suffix}"
-        error = escribir_python(ruta_formateada, analizador.codigo)
-        if error:
-            print(f"{Fore.RED}{error}{Style.RESET_ALL}")
-        else:
-            print(f"{Fore.GREEN}Archivo formateado guardado en: {ruta_formateada}{Style.RESET_ALL}")
-
     if mostrar_tabla:
-        display_metrics_table([
+        mostrar_tabla_metricas([
             almacen.cargar_metricas(nombre_archivo)
         ])
 
@@ -175,19 +164,25 @@ def main() -> None:
     args = procesar_argumentos()
     almacen = AlmacenamientoMetricas()
 
+    # Caso especial: si solo se pide tabla completa (-tc), mostramos todas las
+    # métricas y terminamos
     if args.tc and not args.ruta_archivo:
-        display_metrics_table(almacen.obtener_todas_las_metricas())
+        mostrar_tabla_metricas(almacen.obtener_todas_las_metricas())
         return
 
+    # Validamos argumentos antes de cualquier procesamiento para fallar rápido
+    # si hay errores
     es_valido, mensaje_error = validar_argumentos(args)
     if not es_valido:
         print(f"{Fore.RED}{mensaje_error}{Style.RESET_ALL}")
         return
 
     try:
-        procesar_archivo(args.ruta_archivo, almacen, args.t, args.formato)
+        # Procesamos el archivo actual y opcionalmente mostramos la tabla
+        # histórica si se solicitó
+        procesar_archivo(args.ruta_archivo, almacen, args.t)
         if args.tc:
-            display_metrics_table(almacen.obtener_todas_las_metricas())
+            mostrar_tabla_metricas(almacen.obtener_todas_las_metricas())
     except ExcepcionAnalizador as e:
         print(f"{Fore.RED}{str(e)}{Style.RESET_ALL}")
     except Exception as e:
