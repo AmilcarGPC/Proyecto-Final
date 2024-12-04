@@ -143,7 +143,7 @@ def validar_argumentos(args: argparse.Namespace) -> Tuple[bool, str]:
     """
     if not args.tc:
         if not (args.ruta_archivo_1 and args.ruta_archivo_2):
-            return False, "Error: Se requieren dos archivos cuando no se usa -tc"
+            return False, "Error: Se requieren 2 archivos cuando no se usa -tc"
     return True, ""
 
 
