@@ -1,6 +1,6 @@
 """
 Nombre del módulo: lector_archivo.py
-Ruta: src/core/gestion_archivos/lector_archivo.py
+Ruta: contador_lineas/core/gestion_archivos/lector_archivo.py
 Descripción: Maneja la lectura y validación de archivos Python
 Proyecto: Sistema de Conteo de Líneas Físicas y Lógicas en Python
 Autor: Amílcar Pérez
@@ -15,7 +15,9 @@ Dependencias:
     - utils.validador.validar_archivo_python
 
 Uso:
-    from core.gestion_archivos.lector_archivo import LectorArchivoPython
+    from contador_lineas.core.gestion_archivos.lector_archivo import (
+        LectorArchivoPython
+    )
     lector = LectorArchivoPython("script.py")
     lineas, error = lector.leer_lineas()
 
@@ -53,11 +55,11 @@ class LectorArchivoPython:
         >>> print(len(lineas))
         42
     """
-    
+
     def __init__(self, ruta_archivo: Union[str, Path]):
         self.ruta_archivo = Path(ruta_archivo)
         self._contenido: Optional[list[str]] = None
-        
+
     def validar(self) -> tuple[bool, str]:
         """
         Valida si el archivo es un archivo Python válido.
@@ -68,8 +70,10 @@ class LectorArchivoPython:
         Example:
             >>> es_valido, error = lector.validar()
         """
+        # Delegamos la validación a una función especializada para mantener la
+        # separación de responsabilidades
         return validar_archivo_python(self.ruta_archivo)
-    
+
     def leer_lineas(self) -> tuple[list[str], Optional[str]]:
         """
         Lee todas las líneas del archivo Python.
@@ -81,9 +85,13 @@ class LectorArchivoPython:
             >>> lineas, error = lector.leer_lineas()
             def main(), ""
         """
+        # Validamos primero para fallar rápido y evitar lecturas innecesarias de
+        # archivos inválidos
         es_valido, error = self.validar()
         if not es_valido:
             return [], error
-        
+
+        # Guardamos el contenido en el objeto para permitir múltiples lecturas
+        # sin acceder al almacenamiento cada vez
         self._contenido, error = leer_archivo_texto(self.ruta_archivo)
         return self._contenido, error

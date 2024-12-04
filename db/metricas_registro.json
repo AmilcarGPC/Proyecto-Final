@@ -21,8 +21,8 @@
     },
     "test_12.py": {
         "nombre_archivo": "test_12.py",
-        "lineas_logicas": 3,
-        "lineas_fisicas": 12
+        "lineas_logicas": 2,
+        "lineas_fisicas": 10
     },
     "longitud_lineas.py": {
         "nombre_archivo": "longitud_lineas.py",

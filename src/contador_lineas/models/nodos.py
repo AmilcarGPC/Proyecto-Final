@@ -1,6 +1,6 @@
 """
 Nombre del módulo: nodos.py
-Ruta: src/models/nodos.py
+Ruta: contador_lineas/models/nodos.py
 Descripción: Define los tipos de nodos y su estructura para el análisis sintáctico
 Proyecto: Sistema de Conteo de Líneas Físicas y Lógicas en Python
 Autor: Amílcar Pérez
@@ -15,7 +15,7 @@ Dependencias:
     - typing
 
 Uso:
-    from models.nodos import TipoNodo, InformacionExpresion
+    from contador_lineas.models.nodos import TipoNodo, InformacionExpresion
 
     nodo = InformacionExpresion(TipoNodo.ROOT, [], 0, 10, "código")
 
@@ -77,6 +77,7 @@ class TipoNodo(Enum):
     CONTINUE = "continue"
     RAISE = "raise"
     ASSERT = "assert"
+    WHITE_SPACE = "white_space"
 
 
 @dataclass
@@ -86,7 +87,8 @@ class InformacionExpresion:
 
     Attributes:
         tipo (TipoNodo): Tipo de nodo que representa
-        expresiones_anidadas (List[InformacionExpresion]): Lista de expresiones contenidas
+        expresiones_anidadas (List[InformacionExpresion]): Lista de expresiones
+                                                           contenidas
         posicion_inicial (int): Posición de inicio en el código
         posicion_final (int): Posición final en el código
         expresion (str): Contenido textual de la expresión
@@ -94,11 +96,13 @@ class InformacionExpresion:
     Example:
         >>> nodo = InformacionExpresion(TipoNodo.ROOT, [], 0, 10, "def main():")
     """
-    
+
     tipo: TipoNodo
+    # Lista de expresiones anidadas que contiene esta expresión (por ejemplo,
+    # ternarios dentro de comprehensions)
     expresiones_anidadas: List['InformacionExpresion']
     posicion_inicial: int
-    posicion_final: int  
+    posicion_final: int
     expresion: str
 
     def __post_init__(self) -> None:
@@ -108,5 +112,8 @@ class InformacionExpresion:
         Raises:
             ValueError: Si la posición inicial es mayor que la final.
         """
+        # Validamos que las posiciones sean lógicas para evitar problemas al
+        # procesar el código. Esta validación es necesaria ya que las posiciones
+        # se usan para extraer subexpresiones
         if self.posicion_inicial > self.posicion_final:
             raise ValueError("La posición inicial debe ser menor que la final")

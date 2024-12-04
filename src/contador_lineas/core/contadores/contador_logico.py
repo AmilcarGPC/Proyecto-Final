@@ -1,20 +1,22 @@
 """
 Nombre del módulo: contador_logico.py
-Ruta: src/core/contadores/contador_logico.py
+Ruta: contador_lineas/core/contadores/contador_logico.py
 Descripción: Cuenta líneas lógicas de código Python
 Proyecto: Sistema de Conteo de Líneas Físicas y Lógicas en Python
 Autor: Amílcar Pérez
 Organización: Equipo 3
 Licencia: MIT
 Fecha de Creación: 18-11-2024
-Última Actualización: 18-11-2024
+Última Actualización: 19-11-2024
 
 Dependencias:
     - core.arbol.nodo.Nodo
     - config.node_types.LOGICAL_NODE_TYPES
 
 Uso:
-    from core.contadores.contador_logico import ContadorLineasLogicas
+    from contador_lineas.core.contadores.contador_logico import (
+        ContadorLineasLogicas
+    )
     
     contador = ContadorLineasLogicas()
     total = contador.contar_lineas_logicas(nodo_raiz)
@@ -33,7 +35,7 @@ class ContadorLineasLogicas:
     Cuenta líneas lógicas de código Python.
 
     Procesa un árbol sintáctico para contar declaraciones ejecutables,
-    excluyendo comentarios y docstrings.
+    excluyendo cualquier línea que no sea una estructura lógica.
 
     Methods:
         contar_lineas_logicas(raiz: Nodo) -> int:
@@ -43,7 +45,7 @@ class ContadorLineasLogicas:
         >>> contador = ContadorLineasLogicas()
         >>> total = contador.contar_lineas_logicas(nodo_raiz)
     """
-    
+
     @staticmethod
     def contar_lineas_logicas(raiz: Nodo) -> int:
         """
@@ -60,7 +62,7 @@ class ContadorLineasLogicas:
             7
         """
         return ContadorLineasLogicas._contar_lineas_nodo(raiz)
-    
+
     @staticmethod
     def _contar_lineas_nodo(nodo: Nodo) -> int:
         """
@@ -77,11 +79,16 @@ class ContadorLineasLogicas:
             1
         """
         contador = 0
-            
+
+        # Solo contamos nodos que representan declaraciones ejecutables
+        # (definidos en LOGICAL_NODE_TYPES) ignorando cualquier otro tipo de
+        # elemento
         if nodo.tipo in LOGICAL_NODE_TYPES:
             contador += 1
-            
+
+        # El recorrido recursivo es necesario ya que las declaraciones lógicas
+        # pueden estar anidadas (por ejemplo, dentro de funciones o clases)
         for hijo in nodo.hijos:
             contador += ContadorLineasLogicas._contar_lineas_nodo(hijo)
-                
+
         return contador

@@ -1,6 +1,6 @@
 """
 Nombre del módulo: analizador_ternario.py
-Ruta: src/core/analyzers/analizador_ternario.py
+Ruta: contador_lineas/core/analizadores/analizador_ternario.py
 Descripción: Analiza y procesa expresiones ternarias en código Python
 Proyecto: Sistema de Conteo de Líneas Físicas y Lógicas en Python
 Autor: Amílcar Pérez
@@ -14,10 +14,12 @@ Dependencias:
     - core.analizadores.analizador_corchetes.AnalizadorCorchetes
     - core.analizadores.buscar_y_extraer_anidados.BuscarYExtraerAnidados
     - models.nodos.InformacionExpresion
-    - utils.node_analyzer.TipoNodoAnalyzer
+    - utils.analizador_nodos.AnalizadorTipoNodo
 
 Uso:
-    from core.analizadores.analizador_ternario import AnalizadorTernario
+    from contador_lineas.core.analizadores.analizador_ternario import (
+        AnalizadorTernario
+    )
     
     analizador = AnalizadorTernario()
     info = analizador.analizar_ternario("x if y else z")
@@ -29,11 +31,17 @@ Notas:
 
 from typing import List, Optional
 
-from contador_lineas.core.analizadores.analizador_cadenas import AnalizadorCadenas
-from contador_lineas.core.analizadores.analizador_corchetes import AnalizadorCorchetes
-from contador_lineas.core.analizadores.buscar_y_extraer_anidados import BuscarYExtraerAnidados
+from contador_lineas.core.analizadores.analizador_cadenas import (
+    AnalizadorCadenas
+)
+from contador_lineas.core.analizadores.analizador_corchetes import (
+    AnalizadorCorchetes
+)
+from contador_lineas.core.analizadores.buscar_y_extraer_anidados import (
+    BuscarYExtraerAnidados
+)
 from contador_lineas.models.nodos import InformacionExpresion, TipoNodo
-from contador_lineas.utils.node_analyzer import TipoNodoAnalyzer
+from contador_lineas.core.arbol.analizador_nodos import AnalizadorTipoNodo
 
 
 class AnalizadorTernario:
@@ -46,11 +54,13 @@ class AnalizadorTernario:
     Attributes:
         analizador_cadenas (AnalizadorCadenas): Analiza cadenas de texto
         analizador_corchetes (AnalizadorCorchetes): Procesa pares de corchetes
-        analizador_tipo (TipoNodoAnalyzer): Analiza tipos de nodos
+        analizador_tipo (AnalizadorTipoNodo): Analiza tipos de nodos
         buscar_y_extraer_anidados (BuscarYExtraerAnidados): Extrae expresiones
 
     Methods:
-        analizar_ternario(codigo: str, posicion_inicial: int) -> Optional[InformacionExpresion]:
+        analizar_ternario(
+                codigo: str, 
+                posicion_inicial: int) -> Optional[InformacionExpresion]:
             Determina si una expresión ternaria contiene anidaciones
 
     Example:
@@ -59,11 +69,11 @@ class AnalizadorTernario:
         >>> info.tipo
         TipoNodo.TERNARY
     """
-    
+
     def __init__(self):
         self.analizador_cadenas = AnalizadorCadenas()
         self.analizador_corchetes = AnalizadorCorchetes()
-        self.analizador_tipo = TipoNodoAnalyzer()
+        self.analizador_tipo = AnalizadorTipoNodo()
         self.buscar_y_extraer_anidados = BuscarYExtraerAnidados()
 
     def analizar_ternario(
@@ -72,7 +82,8 @@ class AnalizadorTernario:
             posicion_inicial: int = 0
         ) -> Optional[InformacionExpresion]:
         """
-        Analiza una expresión ternaria y extrae su información, así como sus anidados.
+        Analiza una expresión ternaria y extrae su información, así como sus 
+        anidados.
 
         Args:
             codigo (str): Código fuente a analizar
@@ -87,7 +98,8 @@ class AnalizadorTernario:
         if not self._es_operacion_valida(codigo):
             return None
 
-        posiciones = self._encontrar_posiciones_operadores(codigo, posicion_inicial)
+        posiciones = self._encontrar_posiciones_operadores(codigo,
+                                                           posicion_inicial)
         if not posiciones:
             return None
 
@@ -99,7 +111,7 @@ class AnalizadorTernario:
         return self._crear_expression_info(
             codigo, posicion_inicial, posicion_final, expresiones_anidadas
         )
-    
+
     def _es_operacion_valida(self, codigo: str) -> bool:
         """
         Verifica si el código contiene una expresión ternaria válida.
@@ -111,13 +123,14 @@ class AnalizadorTernario:
             bool: True si es una operación ternaria válida
         """
         try:
-            return self.analizador_tipo.check_special_operations(codigo)
+            return self.analizador_tipo.ver_operaciones_especiales(codigo)
         except Exception:
             return False
-        
+
     def _encontrar_posiciones_operadores(
-            self, codigo: str, posicion_inicial: int
-        ) -> Optional[dict]:
+            self,
+            codigo: str,
+            posicion_inicial: int) -> Optional[dict]:
         """
         Obtiene las posiciones de los operadores if/else en el código.
 
@@ -128,18 +141,23 @@ class AnalizadorTernario:
         Returns:
             Optional[dict]: Diccionario con posiciones o None si no encuentra
         """
+        # Buscamos 'if' con espacios alrededor para evitar falsos positivos como
+        # 'elif' o identificadores que contengan 'if'
         posicion_if = self.analizador_cadenas.encontrar_sin_comillas(
             codigo, ' if ', posicion_inicial
         )
         if posicion_if == -1:
             return None
 
+        # El else debe aparecer después del if para ser válido
         posicion_else = self.analizador_cadenas.encontrar_sin_comillas(
             codigo, ' else ', posicion_if
         )
         if posicion_else == -1:
             return None
 
+        # Guardamos posiciones de potenciales operadores anidados para optimizar
+        # el análisis posterior
         return {
             'if': posicion_if,
             'else': posicion_else,
@@ -148,8 +166,9 @@ class AnalizadorTernario:
         }
 
     def _calcular_posicion_final(
-            self, codigo: str, posiciones: dict
-        ) -> int:
+            self,
+            codigo: str,
+            posiciones: dict) -> int:
         """
         Calcula la posición donde termina la expresión ternaria.
 
@@ -176,11 +195,13 @@ class AnalizadorTernario:
         Returns:
             bool: True si existe ternario anidado
         """
-        return (posiciones['siguiente_if'] != -1 and 
+        return (posiciones['siguiente_if'] != -1 and
                 posiciones['siguiente_else'] != -1)
 
     def _procesar_ternario_anidado(
-            self, codigo: str, posiciones: dict
+            self,
+            codigo: str,
+            posiciones: dict
         ) -> int:
         """
         Procesa un ternario anidado y calcula su posición final.
@@ -200,8 +221,10 @@ class AnalizadorTernario:
         )
 
     def _procesar_expresiones_anidadas(
-            self, codigo: str, posiciones: dict, posicion_final: int
-        ) -> List[InformacionExpresion]:
+            self,
+            codigo: str,
+            posiciones: dict,
+            posicion_final: int) -> List[InformacionExpresion]:
         """
         Extrae todas las expresiones anidadas del ternario.
 
@@ -211,9 +234,13 @@ class AnalizadorTernario:
             posicion_final (int): Posición final de la expresión
 
         Returns:
-            List[InformacionExpresion]: Lista de expresiones anidadas encontradas
+            List[InformacionExpresion]: Lista de expresiones anidadas 
+                                        encontradas
         """
         expresiones = []
+        # Procesamos en orden: condición, valor y else
+        # Este orden es importante para mantener la precedencia correcta de las
+        # expresiones anidadas
         self._agregar_expresiones_condicion(
             codigo, posiciones, expresiones
         )
@@ -226,9 +253,12 @@ class AnalizadorTernario:
         return expresiones
 
     def _crear_expression_info(
-            self, codigo: str, inicio: int, fin: int, 
+            self,
+            codigo: str,
+            inicio: int,
+            fin: int,
             expresiones_anidadas: List[InformacionExpresion]
-        ) -> InformacionExpresion:
+            ) -> InformacionExpresion:
         """
         Crea un objeto InformacionExpresion con la información del ternario.
 
@@ -236,7 +266,8 @@ class AnalizadorTernario:
             codigo (str): Código fuente analizado
             inicio (int): Posición inicial
             fin (int): Posición final
-            expresiones_anidadas (List[InformacionExpresion]): Expresiones encontradas
+            expresiones_anidadas (List[InformacionExpresion]): Expresiones 
+                                                               encontradas
 
         Returns:
             InformacionExpresion: Objeto con información del ternario
@@ -248,20 +279,20 @@ class AnalizadorTernario:
             posicion_final=fin,
             expresion=codigo[inicio:fin]
         )
-    
+
     def _agregar_expresiones_condicion(
             self,
             codigo: str,
             posiciones: dict,
-            expresiones: List[InformacionExpresion]
-        ) -> None:
+            expresiones: List[InformacionExpresion]) -> None:
         """
         Agrega expresiones anidadas encontradas en la condición del ternario.
 
         Args:
             codigo (str): Código fuente a analizar
             posiciones (dict): Diccionario con posiciones de operadores
-            expresiones (List[InformacionExpresion]): Lista donde agregar expresiones
+            expresiones (List[InformacionExpresion]): Lista donde agregar 
+                                                      expresiones
         """
         try:
             segmento = codigo[posiciones['if'] + 4:posiciones['else']]
@@ -273,15 +304,15 @@ class AnalizadorTernario:
             self,
             codigo: str,
             posiciones: dict,
-            expresiones: List[InformacionExpresion]
-        ) -> None:
+            expresiones: List[InformacionExpresion]) -> None:
         """
         Agrega expresiones anidadas encontradas en el valor antes del if.
 
         Args:
             codigo (str): Código fuente a analizar
             posiciones (dict): Diccionario con posiciones de operadores
-            expresiones (List[InformacionExpresion]): Lista donde agregar expresiones
+            expresiones (List[InformacionExpresion]): Lista donde agregar 
+                                                      expresiones
         """
         try:
             segmento = codigo[:posiciones['if']]
@@ -294,8 +325,7 @@ class AnalizadorTernario:
             codigo: str,
             posiciones: dict,
             posicion_final: int,
-            expresiones: List[InformacionExpresion]
-        ) -> None:
+            expresiones: List[InformacionExpresion]) -> None:
         """
         Agrega expresiones anidadas encontradas en la parte else del ternario.
 
@@ -303,10 +333,14 @@ class AnalizadorTernario:
             codigo (str): Código fuente a analizar
             posiciones (dict): Diccionario con posiciones de operadores
             posicion_final (int): Posición final de la expresión
-            expresiones (List[InformacionExpresion]): Lista donde agregar expresiones
+            expresiones (List[InformacionExpresion]): Lista donde agregar 
+                                                      expresiones
         """
         try:
             expresion_else = codigo[posiciones['else'] + 6:posicion_final]
+            # La parte else requiere un tratamiento especial:
+            # Si contiene otro 'if', es un ternario anidado completo
+            # En caso contrario, buscamos otras expresiones anidadas
             if ' if ' in expresion_else:
                 if ternario := self.analizar_ternario(expresion_else):
                     expresiones.append(ternario)
@@ -314,7 +348,7 @@ class AnalizadorTernario:
                 expresiones.extend(self._encontrar_expresiones(expresion_else))
         except Exception:
             return
-        
+
     def _encontrar_expresiones(self, codigo: str) -> List[InformacionExpresion]:
         """
         Busca expresiones anidadas en el código.
@@ -332,6 +366,7 @@ class AnalizadorTernario:
         if ternario := self.analizar_ternario(codigo):
             expresiones.append(ternario)
         expresiones.extend(
-            self.buscar_y_extraer_anidados.buscar_comprehensions_anidadas(codigo)
+            self.buscar_y_extraer_anidados.buscar_comprehensions_anidadas(
+                                                                        codigo)
         )
         return expresiones

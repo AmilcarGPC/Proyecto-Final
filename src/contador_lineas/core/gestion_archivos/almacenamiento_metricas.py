@@ -1,13 +1,13 @@
 """
 Nombre del módulo: almacenamiento_metricas.py
-Ruta: src/core/gestion_archivos/almacenamiento_metricas.py
+Ruta: contador_lineas/core/gestion_archivos/almacenamiento_metricas.py
 Descripción: Gestiona el almacenamiento de métricas de archivos Python en JSON
 Proyecto: Sistema de Conteo de Líneas Físicas y Lógicas en Python
 Autor: Amílcar Pérez
 Organización: Equipo 3
 Licencia: MIT
 Fecha de Creación: 18-11-2024
-Última Actualización: 18-11-2024
+Última Actualización: 19-11-2024
 
 Dependencias:
     - os
@@ -16,7 +16,9 @@ Dependencias:
     - utils.utilidades_archivo.leer_json, escribir_json
 
 Uso:
-    from core.gestion_archivos.almacenamiento_metricas import AlmacenamientoMetricas
+    from contador_lineas.core.gestion_archivos.almacenamiento_metricas import (
+        AlmacenamientoMetricas
+    )
     
     almacen = AlmacenamientoMetricas()
     almacen.guardar_metricas(metricas)
@@ -35,7 +37,8 @@ from contador_lineas.utils.archivo_utils import leer_json, escribir_json
 
 class AlmacenamientoMetricas:
     """
-    Gestiona el almacenamiento persistente de métricas (Lineas Físicas y Lógicas) en JSON.
+    Gestiona el almacenamiento persistente de métricas (Lineas Físicas y 
+    Lógicas) en JSON.
 
     Permite guardar y recuperar métricas de archivos Python,
     manteniendo un registro histórico en formato JSON.
@@ -55,8 +58,10 @@ class AlmacenamientoMetricas:
         >>> almacen = AlmacenamientoMetricas("metricas.json")
         >>> almacen.guardar_metricas(metricas)
     """
-    
-    def __init__(self, ruta_almacenamiento: str = "db/contador_lineas_registro.json"):
+
+    def __init__(self, ruta_almacenamiento: str = "db/metricas_registro.json"):
+        # Usamos un archivo JSON por defecto en la carpeta db/ para mantener
+        # persistencia entre ejecuciones
         self.ruta_almacenamiento = ruta_almacenamiento
         self._asegurar_archivo_almacenamiento()
 
@@ -71,13 +76,16 @@ class AlmacenamientoMetricas:
             >>> guardar_metricas(metricas_archivo)
         """
         datos = leer_json(self.ruta_almacenamiento)
-        
+
+        # Convertimos el objeto MetricasArchivo a diccionario para facilitar la
+        # serialización JSON y mantener la estructura de datos consistente
         diccionario_metricas = {
             "nombre_archivo": metricas.nombre_archivo,
             "lineas_logicas": metricas.lineas_logicas,
             "lineas_fisicas": metricas.lineas_fisicas
         }
-        
+
+        # Usamos el nombre del archivo como clave para permitir actualizaciones
         datos[metricas.nombre_archivo] = diccionario_metricas
         escribir_json(self.ruta_almacenamiento, datos)
 
@@ -111,7 +119,7 @@ class AlmacenamientoMetricas:
             >>> obtener_todas_metricas()
         """
         datos = leer_json(self.ruta_almacenamiento)
-        return [MetricasArchivo(**diccionario_metricas) 
+        return [MetricasArchivo(**diccionario_metricas)
                 for diccionario_metricas in datos.values()]
 
     def _asegurar_archivo_almacenamiento(self) -> None:
@@ -121,5 +129,7 @@ class AlmacenamientoMetricas:
         Example:
             >>> _asegurar_archivo_almacenamiento()
         """
+        # Inicializamos con un diccionario vacío para mantener una estructura
+        # consistente desde el inicio
         if not os.path.exists(self.ruta_almacenamiento):
             escribir_json(self.ruta_almacenamiento, {})
