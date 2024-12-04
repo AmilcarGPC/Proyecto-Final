@@ -1,54 +1,6 @@
 {
-    "ejemplo_v1.py": {
-        "nombre_archivo": "ejemplo_v1.py",
-        "clases": [
-            {
-                "nombre_clase": "",
-                "cantidad_metodos": 0,
-                "lineas_fisicas": 1
-            }
-        ],
-        "total_lineas_fisicas": 1
-    },
-    "ejemplo_v2.py": {
-        "nombre_archivo": "ejemplo_v2.py",
-        "clases": [
-            {
-                "nombre_clase": "",
-                "cantidad_metodos": 0,
-                "lineas_fisicas": 2
-            }
-        ],
-        "total_lineas_fisicas": 2
-    },
     "test_1.py": {
         "nombre_archivo": "test_1.py",
-        "clases": [
-            {
-                "nombre_clase": "Token",
-                "cantidad_metodos": 2,
-                "lineas_fisicas": 6
-            },
-            {
-                "nombre_clase": "Lexer",
-                "cantidad_metodos": 5,
-                "lineas_fisicas": 30
-            },
-            {
-                "nombre_clase": "Parser",
-                "cantidad_metodos": 2,
-                "lineas_fisicas": 9
-            },
-            {
-                "nombre_clase": "",
-                "cantidad_metodos": 0,
-                "lineas_fisicas": 0
-            }
-        ],
-        "total_lineas_fisicas": 45
-    },
-    "test_1_v2.py": {
-        "nombre_archivo": "test_1_v2.py",
         "clases": [
             {
                 "nombre_clase": "Token",
@@ -68,9 +20,68 @@
             {
                 "nombre_clase": "",
                 "cantidad_metodos": 0,
-                "lineas_fisicas": 0
+                "lineas_fisicas": 14
             }
         ],
-        "total_lineas_fisicas": 78
+        "total_lineas_fisicas": 92
+    },
+    "test_v2.py": {
+        "nombre_archivo": "test_v2.py",
+        "clases": [
+            {
+                "nombre_clase": "Token",
+                "cantidad_metodos": 2,
+                "lineas_fisicas": 6
+            },
+            {
+                "nombre_clase": "Lexer",
+                "cantidad_metodos": 5,
+                "lineas_fisicas": 30
+            },
+            {
+                "nombre_clase": "Parser",
+                "cantidad_metodos": 5,
+                "lineas_fisicas": 42
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 14
+            }
+        ],
+        "total_lineas_fisicas": 92
+    },
+    "ejemplo_v1.py": {
+        "nombre_archivo": "ejemplo_v1.py",
+        "clases": [
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 2
+            }
+        ],
+        "total_lineas_fisicas": 2
+    },
+    "ejemplo_v2.py": {
+        "nombre_archivo": "ejemplo_v2.py",
+        "clases": [
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 2
+            }
+        ],
+        "total_lineas_fisicas": 2
+    },
+    "test_2.py": {
+        "nombre_archivo": "test_2.py",
+        "clases": [
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 19
+            }
+        ],
+        "total_lineas_fisicas": 19
     }
 }

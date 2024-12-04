@@ -22,7 +22,7 @@ Uso:
     tipo = analizador.obtener_tipo_nodo(linea)
 """
 
-from typing import Optional
+from typing import Optional, List
 
 from contador_lineas.core.analizadores.analizador_cadenas import (
     AnalizadorCadenas
@@ -155,7 +155,7 @@ class AnalizadorTipoNodo:
         def tiene_contenido_valido(
                 inicio: int,
                 fin: int,
-                palabras_clave: list[str]) -> bool:
+                palabras_clave: List[str]) -> bool:
             if inicio >= fin:
                 return False
             contenido = linea[inicio + 1:fin]

@@ -1,29 +1,68 @@
 {
     "test_1.py": {
         "nombre_archivo": "test_1.py",
-        "clases": [
-            {
-                "nombre_clase": "class Token:",
-                "cantidad_metodos": 2,
-                "lineas_fisicas": 6
-            },
-            {
-                "nombre_clase": "class Lexer:",
-                "cantidad_metodos": 5,
-                "lineas_fisicas": 30
-            },
-            {
-                "nombre_clase": "class Parser:",
-                "cantidad_metodos": 5,
-                "lineas_fisicas": 42
-            },
-            {
-                "nombre_clase": "",
-                "cantidad_metodos": 0,
-                "lineas_fisicas": 15
-            }
-        ],
-        "total_lineas_fisicas": 93
+        "lineas_logicas": 35,
+        "lineas_fisicas": 92
+    },
+    "test_2.py": {
+        "nombre_archivo": "test_2.py",
+        "lineas_logicas": 8,
+        "lineas_fisicas": 19
+    },
+    "test_6.py": {
+        "nombre_archivo": "test_6.py",
+        "lineas_logicas": 8,
+        "lineas_fisicas": 23
+    },
+    "test_8.py": {
+        "nombre_archivo": "test_8.py",
+        "lineas_logicas": 3,
+        "lineas_fisicas": 8
+    },
+    "test_12.py": {
+        "nombre_archivo": "test_12.py",
+        "lineas_logicas": 2,
+        "lineas_fisicas": 10
+    },
+    "longitud_lineas.py": {
+        "nombre_archivo": "longitud_lineas.py",
+        "lineas_logicas": 0,
+        "lineas_fisicas": 1
+    },
+    "node_types.py": {
+        "nombre_archivo": "node_types.py",
+        "lineas_logicas": 0,
+        "lineas_fisicas": 6
+    },
+    "analizador_cadenas.py": {
+        "nombre_archivo": "analizador_cadenas.py",
+        "lineas_logicas": 43,
+        "lineas_fisicas": 115
+    },
+    "analizador_comprehension.py": {
+        "nombre_archivo": "analizador_comprehension.py",
+        "lineas_logicas": 25,
+        "lineas_fisicas": 56
+    },
+    "analizador_corchetes.py": {
+        "nombre_archivo": "analizador_corchetes.py",
+        "lineas_logicas": 13,
+        "lineas_fisicas": 35
+    },
+    "analizador_expresiones.py": {
+        "nombre_archivo": "analizador_expresiones.py",
+        "lineas_logicas": 5,
+        "lineas_fisicas": 15
+    },
+    "analizador_ternario.py": {
+        "nombre_archivo": "analizador_ternario.py",
+        "lineas_logicas": 29,
+        "lineas_fisicas": 79
+    },
+    "buscar_y_extraer_anidados.py": {
+        "nombre_archivo": "buscar_y_extraer_anidados.py",
+        "lineas_logicas": 20,
+        "lineas_fisicas": 50
     },
     "ejemplo_v1.py": {
         "nombre_archivo": "ejemplo_v1.py",

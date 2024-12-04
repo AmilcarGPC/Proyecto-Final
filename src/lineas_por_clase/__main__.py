@@ -1,13 +1,13 @@
 """
 Nombre del módulo: __main__.py
-Ruta: contador_lineas/__main__.py
+Ruta: lineas_por_clase/__main__.py
 Descripción: Punto de entrada principal para el analizador de código Python
 Proyecto: Sistema de Conteo de Líneas Físicas y Lógicas en Python
 Autor: Amílcar Pérez
 Organización: Equipo 3
 Licencia: MIT
-Fecha de Creación: 20-11-2024
-Última Actualización: 20-11-2024
+Fecha de Creación: 27-11-2024
+Última Actualización: 28-11-2024
 
 Dependencias:
     - argparse
@@ -18,7 +18,7 @@ Dependencias:
     - utils.formateador_metricas.mostrar_tabla_metricas
 
 Uso:
-    >>> contador_lineas archivo.py [-t] [-tc]
+    >>> lineas_por_clase archivo.py [-t] [-tc]
     
     Opciones:
         archivo.py: Ruta del archivo a analizar
@@ -35,13 +35,13 @@ from typing import Tuple
 
 from colorama import init, Fore, Style
 
-from contador_lineas.core.contadores.analizador import (
+from lineas_por_clase.core.contadores.analizador import (
     AnalizadorCodigo, ExcepcionAnalizador
 )
-from contador_lineas.core.gestion_archivos.almacenamiento_metricas import (
+from lineas_por_clase.utils.formateador_metricas import mostrar_tabla_metricas
+from lineas_por_clase.core.gestion_archivos.almacenamiento_metricas import (
     AlmacenamientoMetricas
 )
-from contador_lineas.utils.formateador_metricas import mostrar_tabla_metricas
 
 
 def obtener_nombre_archivo(ruta_archivo: str) -> str:
