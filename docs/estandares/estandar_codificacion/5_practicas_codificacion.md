@@ -1,5 +1,5 @@
 ---
-# docs/standards/coding_standard/coding_practices.md
+# docs/estandares/estandar_codificacion/5_practicas_codificacion.md
 title: Prácticas de Codificación
 description: Esta sección define las prácticas de codificación permitidas, limitadas y prohibidas en Python.
 ---

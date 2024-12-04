@@ -1,5 +1,5 @@
 ---
-# docs/standards/coding_standard/imports.md
+# docs/estandares/estandar_codificacion/4_importaciones.md
 title: Importaciones
 description: Esta sección describe las reglas y mejores prácticas para importar módulos y librerías en Python. Incluye ejemplos y recomendaciones.
 ---

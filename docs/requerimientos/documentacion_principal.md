@@ -1,5 +1,5 @@
 ---
-# src/proyecto_1/docs/requirements/system_core_documentation.md
+# docs/requerimientos/documentacion_principal.md
 title: Documentación Principal del Sistema
 description: Documentación principal del sistema de conteo de líneas de código incluyendo requerimientos, estándares y exclusiones
 ---

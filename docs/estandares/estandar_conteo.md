@@ -1,6 +1,6 @@
 ---
-# docs/standards/counting_standard.md
-title: Estándar de Conteo de LOC para Python
+# docs/estandares/estandar_conteo.md
+title: Estándar de Conteo
 description: Este documento describe las reglas y guías para contar líneas de código en Python.
 ---
 

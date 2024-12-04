@@ -1,5 +1,5 @@
 ---
-# docs/standards/coding_standard/naming_conventions.md
+# docs/estandares/estandar_codificacion/1_convenciones_nombrado.md
 title: Convenciones de Nombrado
 description: Esta sección describe las convenciones de nombrado para variables, funciones, clases y constantes en Python. Incluye ejemplos y mejores prácticas.
 ---

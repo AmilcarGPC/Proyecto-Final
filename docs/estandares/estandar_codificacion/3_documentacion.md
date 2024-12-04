@@ -1,5 +1,5 @@
 ---
-# docs/standards/coding_standard/documentation.md
+# docs/estandares/estandar_codificacion/3_documentacion.md
 title: Documentación
 description: Esta sección describe las reglas y mejores prácticas para documentar módulos, funciones y clases en Python. Incluye ejemplos y recomendaciones.
 ---

@@ -1,5 +1,5 @@
 ---
-# docs/standards/coding_standard/code_format.md
+# docs/estandares/estandar_codificacion/2_formato_codigo.md
 title: Formato del Código
 description: Esta sección describe las reglas de formato para el código Python. Incluye guías rápidas y ejemplos.
 ---

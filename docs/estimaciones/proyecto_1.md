@@ -1,5 +1,5 @@
 ---
-# src/proyecto_1/docs/estimations/macro_estimation.md
+# docs/estimaciones/proyecto_1.md
 title: Estimación del Sistema de Conteo de LOC
 description: Estimación en Puntos de Función para el sistema de conteo de líneas de código
 ---

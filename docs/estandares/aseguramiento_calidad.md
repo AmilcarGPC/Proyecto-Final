@@ -1,4 +1,8 @@
-# Documento de Estándares de Calidad - Equipo de 5 personas
+---
+# docs/estandares/aseguramiento_calidad.md
+title: Aseguramiento de la Calidad
+description: Este documento incluye las prácticas y procesos para asegurar la calidad del software. Se describen las fases de desarrollo, procesos de control de calidad, roles y responsabilidades, herramientas y recursos, y métricas de calidad.
+---
 
 ## 1. Fases de Desarrollo
 
