@@ -1,6 +1,6 @@
 """
 Nombre del módulo: validador.py
-Ruta: src/utils/validador.py
+Ruta: contador_lineas/utils/validador.py
 Descripción: Valida archivos Python y verifica su accesibilidad
 Proyecto: Sistema de Conteo de Líneas Físicas y Lógicas en Python
 Autor: Amílcar Pérez
@@ -14,7 +14,7 @@ Dependencias:
     - typing.Union
 
 Uso:
-    from utils.validador import validar_archivo_python
+    from contador_lineas.utils.validador import validar_archivo_python
     es_valido, error = validar_archivo_python("script.py")
 """
 
@@ -42,6 +42,8 @@ def validar_archivo_python(ruta_archivo: Union[str, Path]) -> tuple[bool, str]:
         True, ""
     """
     try:
+        # Separamos la conversión y validación para mantener responsabilidades
+        # únicas en cada función
         ruta = _convertir_a_ruta(ruta_archivo)
         return _validar_ruta(ruta)
 
@@ -84,5 +86,7 @@ def _validar_ruta(ruta: Path) -> tuple[bool, str]:
     if ruta.suffix.lower() != '.py':
         return False, f"El archivo '{ruta}' debe tener extensión .py"
 
+    # Intentamos abrir y cerrar el archivo para verificar permisos de lectura
+    # sin mantener el archivo abierto innecesariamente
     ruta.open('r').close()
     return True, ""
