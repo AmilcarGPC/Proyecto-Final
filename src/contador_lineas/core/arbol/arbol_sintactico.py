@@ -22,6 +22,8 @@ Notas:
     - Implementa representación jerárquica del código fuente
 """
 
+from typing import List
+
 from contador_lineas.core.arbol.constructor_arbol import ConstructorArbol
 from contador_lineas.utils.impresion_arbol import imprimir_arbol
 
@@ -44,7 +46,7 @@ class ArbolArchivoPython:
         >>> arbol.imprimir_arbol()
     """
 
-    def __init__(self, file_content: list[str]):
+    def __init__(self, file_content: List[str]):
         # Usamos ConstructorArbol para construir el árbol sintáctico ya que la
         # construcción requiere un análisis complejo del código que se mantiene
         # separado de la representación del árbol

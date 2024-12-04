@@ -22,6 +22,8 @@ Notas:
     - Implementa representación jerárquica del código fuente
 """
 
+from typing import List
+
 from contador_lineas.utils.impresion_arbol import imprimir_arbol
 from contador_lineas.models.nodos import TipoNodo
 from lineas_por_clase.core.arbol.constructor_arbol import ConstructorArbol
@@ -46,7 +48,7 @@ class ArbolArchivoPython:
         >>> arbol.imprimir_arbol()
     """
 
-    def __init__(self, file_content: list[str]):
+    def __init__(self, file_content: List[str]):
         self.constructor = ConstructorArbol()
         self.raiz = self.constructor.construir(file_content)
 
@@ -56,12 +58,12 @@ class ArbolArchivoPython:
         """
         imprimir_arbol(self.raiz)
 
-    def obtener_nodos_clase(self) -> list[Nodo]:
+    def obtener_nodos_clase(self) -> List[Nodo]:
         """
         Obtiene los nodos de las clases presentes en el archivo.
 
         Returns:
-            list[str]: Lista con los nombres de las clases
+            List[str]: Lista con los nombres de las clases
         """
         if not self.raiz:
             return []
@@ -72,7 +74,7 @@ class ArbolArchivoPython:
                 clases.append(nodo)
         return clases
 
-    def obtener_nodos_metodos(self, clase: Nodo) -> list[Nodo]:
+    def obtener_nodos_metodos(self, clase: Nodo) -> List[Nodo]:
         """
         Obtiene los nodos de los métodos presentes en el archivo.
 
@@ -80,7 +82,7 @@ class ArbolArchivoPython:
             clase (Nodo): Nodo de la clase a analizar
 
         Returns:
-            list[str]: Lista con los nombres de los métodos
+            List[str]: Lista con los nombres de los métodos
         """
         if not self.raiz and clase.tipo != TipoNodo.CLASS:
             return []

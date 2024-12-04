@@ -30,7 +30,7 @@ Notas:
 """
 
 from dataclasses import dataclass
-from typing import Optional, Tuple
+from typing import Optional, Tuple, List
 
 from contador_lineas.core.contadores.contador_fisico import (
     ContadorLineasFisicas
@@ -178,7 +178,7 @@ class AnalizadorCodigo:
         if not es_valido:
             raise ExcepcionAnalizador(f"Archivo inválido: {error}")
 
-    def _obtener_codigo(self, ruta_archivo: str) -> list[str]:
+    def _obtener_codigo(self, ruta_archivo: str) -> List[str]:
         """
         Lee y formatea el código fuente del archivo.
 
@@ -186,7 +186,7 @@ class AnalizadorCodigo:
             ruta_archivo (str): Ruta al archivo a leer
 
         Returns:
-            list[str]: Lista de líneas de código formateadas
+            List[str]: Lista de líneas de código formateadas
 
         Example:
             >>> codigo = self._obtener_codigo("script.py")
@@ -198,13 +198,13 @@ class AnalizadorCodigo:
         return codigo
 
     def _procesar_codigo(
-            self, codigo: list[str], nombre_archivo: str
+            self, codigo: List[str], nombre_archivo: str
         ) -> MetricasArchivo:
         """
         Procesa el código y calcula sus métricas.
 
         Args:
-            codigo (list[str]): Líneas de código a procesar
+            codigo (List[str]): Líneas de código a procesar
             nombre_archivo (str): Nombre del archivo procesado
 
         Returns:

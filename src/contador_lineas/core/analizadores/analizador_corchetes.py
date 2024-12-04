@@ -27,6 +27,8 @@ Notas:
     - Retorna -1 si no encuentra el par correspondiente
 """
 
+from typing import Tuple
+
 from contador_lineas.core.constantes import CORCHETES
 
 
@@ -41,7 +43,7 @@ class AnalizadorCorchetes:
         encontrar_par_corchetes(
                 codigo: str, 
                 posicion_inicial: int, 
-                corchetes: tuple[str, str]) -> int:
+                corchetes: Tuple[str, str]) -> int:
             Encuentra la posición del corchete de cierre correspondiente.
         encontrar_limite_expresion(codigo: str, posicion_inicial: int) -> int:
             Encuentra el límite de una expresión en el código.
@@ -56,14 +58,14 @@ class AnalizadorCorchetes:
     def encontrar_par_corchetes(
             codigo: str,
             posicion_inicial: int,
-            corchetes: tuple[str, str]) -> int:
+            corchetes: Tuple[str, str]) -> int:
         """
         Encuentra la posición del corchete de cierre correspondiente.
 
         Args:
             codigo (str): Código fuente a analizar
             posicion_inicial (int): Posición del corchete de apertura
-            corchetes (tuple[str, str]): Par de caracteres de apertura y cierre
+            corchetes (Tuple[str, str]): Par de caracteres de apertura y cierre
 
         Returns:
             int: Posición del corchete de cierre o -1 si no se encuentra

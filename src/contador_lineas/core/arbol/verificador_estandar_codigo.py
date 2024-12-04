@@ -29,6 +29,8 @@ Notas:
     - Se basa en el estándar de código definido en el proyecto
 """
 
+from typing import Tuple
+
 from contador_lineas.core.analizadores.analizador_cadenas import (
     AnalizadorCadenas
 )
@@ -47,7 +49,7 @@ class VerificadorEstandarCodigo:
     Verifica el cumplimiento de estándares de código en el árbol sintáctico.
 
     Methods:
-        es_arbol_sintactico_valido(self, raiz: Nodo) -> tuple[bool, str]: 
+        es_arbol_sintactico_valido(self, raiz: Nodo) -> Tuple[bool, str]: 
             Valida si el árbol cumple los estándares
 
     Example:
@@ -58,7 +60,7 @@ class VerificadorEstandarCodigo:
     def __init__(self):
         pass
 
-    def es_arbol_sintactico_valido(self, raiz: Nodo) -> tuple[bool, str]:
+    def es_arbol_sintactico_valido(self, raiz: Nodo) -> Tuple[bool, str]:
         """
         Verifica si el árbol sintáctico cumple con los estándares de código.
 
@@ -66,7 +68,7 @@ class VerificadorEstandarCodigo:
             raiz (Nodo): Nodo raíz del árbol a validar
 
         Returns:
-            tuple[bool, str]: (es_valido, mensaje_error)
+            Tuple[bool, str]: (es_valido, mensaje_error)
 
         Example:
             >>> es_valido, mensaje = \
@@ -74,7 +76,7 @@ class VerificadorEstandarCodigo:
         """
         return self._validar_nodo(raiz)
 
-    def _validar_nodo(self, nodo: Nodo) -> tuple[bool, str]:
+    def _validar_nodo(self, nodo: Nodo) -> Tuple[bool, str]:
         """
         Valida recursivamente un nodo y sus hijos con los estándares de código.
 
@@ -82,7 +84,7 @@ class VerificadorEstandarCodigo:
             nodo (Nodo): Nodo a validar con sus hijos
 
         Returns:
-            tuple[bool, str]: (es_valido, mensaje_error)
+            Tuple[bool, str]: (es_valido, mensaje_error)
 
         Example:
             >>> es_valido, mensaje = verificador._validar_nodo(nodo_raiz)

@@ -31,6 +31,7 @@ Notas:
 
 import argparse
 from pathlib import Path
+from typing import Tuple
 
 from colorama import init, Fore, Style
 
@@ -105,7 +106,7 @@ def imprimir_resultados() -> None:
     print(f"{Fore.GREEN}{mensaje_exito}{Style.RESET_ALL}")
 
 
-def validar_argumentos(args: argparse.Namespace) -> tuple[bool, str]:
+def validar_argumentos(args: argparse.Namespace) -> Tuple[bool, str]:
     """
     Valida los argumentos de línea de comandos
 
@@ -113,7 +114,7 @@ def validar_argumentos(args: argparse.Namespace) -> tuple[bool, str]:
         args (argparse.Namespace): Argumentos procesados
 
     Returns:
-        tuple[bool, str]: (es_valido, mensaje_error)
+        Tuple[bool, str]: (es_valido, mensaje_error)
 
     Example:
         >>> args = argparse.Namespace(ruta_archivo="archivo.py", t=True, 

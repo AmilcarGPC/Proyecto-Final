@@ -19,10 +19,10 @@ Uso:
 """
 
 from pathlib import Path
-from typing import Union
+from typing import Union, Tuple
 
 
-def validar_archivo_python(ruta_archivo: Union[str, Path]) -> tuple[bool, str]:
+def validar_archivo_python(ruta_archivo: Union[str, Path]) -> Tuple[bool, str]:
     """
     Valida si una ruta corresponde a un archivo Python válido.
 
@@ -30,7 +30,7 @@ def validar_archivo_python(ruta_archivo: Union[str, Path]) -> tuple[bool, str]:
         ruta_archivo (Union[str, Path]): Ruta del archivo a validar
 
     Returns:
-        tuple[bool, str]: (es_valido, mensaje_error)
+        Tuple[bool, str]: (es_valido, mensaje_error)
 
     Raises:
         PermissionError: Si no hay permisos para leer el archivo
@@ -67,7 +67,7 @@ def _convertir_a_ruta(ruta_archivo: Union[str, Path]) -> Path:
     return Path(ruta_archivo)
 
 
-def _validar_ruta(ruta: Path) -> tuple[bool, str]:
+def _validar_ruta(ruta: Path) -> Tuple[bool, str]:
     """
     Valida que la ruta exista y sea un archivo Python.
 
@@ -75,7 +75,7 @@ def _validar_ruta(ruta: Path) -> tuple[bool, str]:
         ruta (Path): Ruta a validar
 
     Returns:
-        tuple[bool, str]: (es_valido, mensaje_error)
+        Tuple[bool, str]: (es_valido, mensaje_error)
     """
     if not ruta.exists():
         return False, f"El archivo '{ruta}' no fue encontrado"

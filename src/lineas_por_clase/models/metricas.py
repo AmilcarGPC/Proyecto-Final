@@ -22,7 +22,7 @@ Notas:
 """
 
 from dataclasses import dataclass
-from typing import Optional
+from typing import Optional, List
 
 
 @dataclass
@@ -59,7 +59,7 @@ class MetricasArchivo:
     """
 
     nombre_archivo: str
-    clases: list[MetricasClase]
+    clases: List[MetricasClase]
     total_lineas_fisicas: Optional[int] = None
 
     def __post_init__(self):
