@@ -1,13 +1,13 @@
 """
 Nombre del módulo: analizador.py
-Ruta: contador_lineas/core/contadores/analizador.py
+Ruta: lineas_por_clase/core/contadores/analizador.py
 Descripción: Analiza archivos Python para obtener métricas de líneas de código
 Proyecto: Sistema de Conteo de Líneas Físicas y Lógicas en Python
 Autor: Amílcar Pérez
 Organización: Equipo 3
 Licencia: MIT
-Fecha de Creación: 18-11-2024
-Última Actualización: 19-11-2024
+Fecha de Creación: 27-11-2024
+Última Actualización: 28-11-2024
 
 Dependencias:
     - core.contadores.contador_fisico.ContadorLineasFisicas
@@ -19,7 +19,7 @@ Dependencias:
     - utils.formateador_linea.FormateadorLinea
 
 Uso:
-    from contador_lineas.core.contadores.analizador import Analizador
+    from lineas_por_clase.core.contadores.analizador import Analizador
     
     analizador = Analizador()
     resultado = analizador.analizar_archivo("script.py", "script.py")
@@ -35,20 +35,18 @@ from typing import Optional, Tuple, List
 from contador_lineas.core.contadores.contador_fisico import (
     ContadorLineasFisicas
 )
-from contador_lineas.core.contadores.contador_logico import (
-    ContadorLineasLogicas
-)
 from contador_lineas.core.gestion_archivos.lector_archivo import (
     LectorArchivoPython
 )
-from contador_lineas.core.gestion_archivos.almacenamiento_metricas import (
-    AlmacenamientoMetricas
-)
-from contador_lineas.core.arbol.arbol_sintactico import ArbolArchivoPython
 from contador_lineas.core.arbol.verificador_estandar_codigo import (
     VerificadorEstandarCodigo
 )
-from contador_lineas.models.metricas import MetricasArchivo
+from lineas_por_clase.core.arbol.arbol_sintactico import ArbolArchivoPython
+from lineas_por_clase.core.arbol.nodo import Nodo
+from lineas_por_clase.core.gestion_archivos.almacenamiento_metricas import (
+    AlmacenamientoMetricas
+)
+from lineas_por_clase.models.metricas import MetricasClase, MetricasArchivo
 
 
 class ExcepcionAnalizador(Exception):
@@ -98,7 +96,6 @@ class AnalizadorCodigo:
         almacenamiento (AlmacenamientoMetricas): Gestor de almacenamiento
         formateador (FormateadorLinea): Formateador de líneas
         contador_fisico (ContadorLineasFisicas): Contador de líneas físicas
-        contador_logico (ContadorLineasLogicas): Contador de líneas lógicas
 
     Methods:
         analizar_archivo(ruta_archivo: str, 
@@ -115,7 +112,6 @@ class AnalizadorCodigo:
         self.codigo = None
         self.almacenamiento = AlmacenamientoMetricas()
         self.contador_fisico = ContadorLineasFisicas()
-        self.contador_logico = ContadorLineasLogicas()
         self.verificador_estandar = VerificadorEstandarCodigo()
 
     def validate_syntax_tree(
@@ -219,13 +215,57 @@ class AnalizadorCodigo:
         self._validar_arbol_sintaxis(arbol)
         self.arbol = arbol
 
+        # Obtenemos las métricas de las clases y otros nodos del archivo
+        clases = self._analizar_clases(arbol)
+
         return MetricasArchivo(
             nombre_archivo=nombre_archivo,
-            lineas_fisicas = \
-            self.contador_fisico.contar_lineas_fisicas( arbol.raiz ),
-            lineas_logicas = \
-            self.contador_logico.contar_lineas_logicas( arbol.raiz )
+            clases=clases
         )
+
+    def _analizar_clases(
+            self, 
+            arbol: ArbolArchivoPython) -> List[MetricasClase]:
+        """
+        Analiza las clases de un archivo Python y obtiene métricas.
+
+        Args:
+            arbol (ArbolArchivoPython): Árbol sintáctico del archivo
+
+        Returns:
+            List[MetricasClase]: Métricas de las clases del archivo
+
+        Example:
+            >>> clases = self._analizar_clases(arbol)
+        """
+        clases = []
+        for nodo in arbol.obtener_nodos_clase():
+            metricas_clase = self._analizar_clase(nodo)
+            clases.append(metricas_clase)
+        nodo_otros = arbol.obtener_nodo_otros()
+        otros = self._analizar_clase(nodo_otros)
+        otros.cantidad_metodos = 0
+        otros.lineas_fisicas -= 1 # Restar la línea de la clase
+        clases.append(otros)
+        return clases
+
+    def _analizar_clase(self, clase: Nodo) -> MetricasClase:
+        """
+        Analiza una clase Python y obtiene métricas.
+
+        Args:
+            clase (Nodo): Nodo de la clase a analizar
+
+        Returns:
+            MetricasClase: Métricas de la clase
+
+        Example:
+            >>> metricas_clase = self._analizar_clase(clase)
+        """
+        return MetricasClase(
+            nombre_clase=clase.obtener_nombre_clase(),
+            cantidad_metodos=len(self.arbol.obtener_nodos_metodos(clase)),
+            lineas_fisicas=self.contador_fisico.contar_lineas_fisicas(clase))
 
     def _validar_arbol_sintaxis(self, arbol: ArbolArchivoPython) -> None:
         """
@@ -241,8 +281,6 @@ class AnalizadorCodigo:
         Example:
             >>> self._validar_arbol_sintaxis(arbol)
         """
-        # La validación del árbol es necesaria para asegurar que el código
-        # cumple con los estándares de codificación antes de calcular métricas
         es_valido, error = \
         self.verificador_estandar.es_arbol_sintactico_valido(arbol.raiz)
         if not es_valido:
@@ -261,8 +299,4 @@ class AnalizadorCodigo:
         Example:
             >>> resultado = self._crear_resultado(metricas)
         """
-        return ResultadoAnalisis(
-            lineas_fisicas=metricas.lineas_fisicas,
-            lineas_logicas=metricas.lineas_logicas,
-            nombre_archivo=metricas.nombre_archivo
-        )
+        return None

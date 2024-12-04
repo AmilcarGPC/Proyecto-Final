@@ -27,7 +27,7 @@ Notas:
 """
 
 from pathlib import Path
-from typing import Union, Optional
+from typing import Union, Optional, List, Tuple
 
 from contador_lineas.utils.validador import validar_archivo_python
 from contador_lineas.utils.archivo_utils import leer_archivo_texto
@@ -42,12 +42,12 @@ class LectorArchivoPython:
 
     Attributes:
         ruta_archivo (Path): Ruta al archivo Python a leer
-        _contenido (Optional[list[str]]): Contenido en caché del archivo
+        _contenido (Optional[List[str]]): Contenido en caché del archivo
 
     Methods:
-        validar() -> tuple[bool, str]: Valida si es un archivo Python válido
-        leer_lineas() -> tuple[list[str], Optional[str]]: Lee todas las líneas
-        contenido() -> list[str]: Retorna contenido en caché o lo lee
+        validar() -> Tuple[bool, str]: Valida si es un archivo Python válido
+        leer_lineas() -> Tuple[List[str], Optional[str]]: Lee todas las líneas
+        contenido() -> List[str]: Retorna contenido en caché o lo lee
 
     Example:
         >>> lector = LectorArchivoPython("ejemplo.py")
@@ -58,14 +58,14 @@ class LectorArchivoPython:
 
     def __init__(self, ruta_archivo: Union[str, Path]):
         self.ruta_archivo = Path(ruta_archivo)
-        self._contenido: Optional[list[str]] = None
+        self._contenido: Optional[List[str]] = None
 
-    def validar(self) -> tuple[bool, str]:
+    def validar(self) -> Tuple[bool, str]:
         """
         Valida si el archivo es un archivo Python válido.
 
         Returns:
-            tuple[bool, str]: (es_valido, mensaje_error)
+            Tuple[bool, str]: (es_valido, mensaje_error)
 
         Example:
             >>> es_valido, error = lector.validar()
@@ -74,12 +74,12 @@ class LectorArchivoPython:
         # separación de responsabilidades
         return validar_archivo_python(self.ruta_archivo)
 
-    def leer_lineas(self) -> tuple[list[str], Optional[str]]:
+    def leer_lineas(self) -> Tuple[List[str], Optional[str]]:
         """
         Lee todas las líneas del archivo Python.
 
         Returns:
-            tuple[list[str], Optional[str]]: (lineas, mensaje_error)
+            Tuple[List[str], Optional[str]]: (lineas, mensaje_error)
 
         Example:
             >>> lineas, error = lector.leer_lineas()
