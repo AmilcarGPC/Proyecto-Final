@@ -1,22 +1,24 @@
 """
 Nombre del módulo: analizador_expresiones.py
-Ruta: src/core/analyzers/analizador_expresiones.py
+Ruta: contador_lineas/core/analizadores/analizador_expresiones.py
 Descripción: Analiza expresiones ternarias y comprehensions en código Python
 Proyecto: Sistema de Conteo de Líneas Físicas y Lógicas en Python
 Autor: Amílcar Pérez
 Organización: Equipo 3
 Licencia: MIT
 Fecha de Creación: 18-11-2024
-Última Actualización: 18-11-2024
+Última Actualización: 19-11-2024
 
 Dependencias:
-    - models.nodos.InformacionExpresion
-    - models.nodos.TipoNodo
-    - core.analizadores.analizador_comprehension.AnalizadorComprehension
-    - core.analizadores.analizador_ternario.AnalizadorTernario
+    - contador_lineas.models.nodos.InformacionExpresion
+    - contador_lineas.models.nodos.TipoNodo
+    - contador_lineas.core.analizadores.analizador_comprehension.AnalizadorComprehension
+    - contador_lineas.core.analizadores.analizador_ternario.AnalizadorTernario
 
 Uso:
-    from core.analizadores.analizador_expresiones import AnalizadorExpresiones
+    from contador_lineas.core.analizadores.analizador_expresiones import (
+        AnalizadorExpresiones
+    )
     
     analizador = AnalizadorExpresiones()
     info = analizador.analizar(codigo, TipoNodo.TERNARY)
@@ -26,8 +28,12 @@ Notas:
     - Retorna None si la expresión no es válida
 """
 
-from contador_lineas.core.analizadores.analizador_comprehension import AnalizadorComprehension
-from contador_lineas.core.analizadores.analizador_ternario import AnalizadorTernario
+from contador_lineas.core.analizadores.analizador_comprehension import (
+    AnalizadorComprehension
+)
+from contador_lineas.core.analizadores.analizador_ternario import (
+    AnalizadorTernario
+)
 from contador_lineas.models.nodos import InformacionExpresion, TipoNodo
 
 
@@ -40,7 +46,8 @@ class AnalizadorExpresiones:
 
     Attributes:
         analizador_ternario (AnalizadorTernario): Analiza expresiones ternarias
-        analizador_comprehension (AnalizadorComprehension): Analiza comprehensions
+        analizador_comprehension (AnalizadorComprehension): Analiza 
+                                                            comprehensions
 
     Methods:
         analizar(codigo: str, tipo_nodo: TipoNodo) -> InformacionExpresion:
@@ -52,30 +59,43 @@ class AnalizadorExpresiones:
         >>> info
         TipoNodo.TERNARY
     """
+
     def __init__(self) -> None:
         self.analizador_ternario = AnalizadorTernario()
         self.analizador_comprehension = AnalizadorComprehension()
 
-    def analizar(self, codigo: str, tipo_nodo: TipoNodo) -> InformacionExpresion:
+    def analizar(
+            self, codigo:
+            str,
+            tipo_nodo: TipoNodo) -> InformacionExpresion:
         """
-        Analiza un ternario, comprehension o generator y determina si existe anidamiento
+        Analiza un ternario, comprehension o generator y determina si existe 
+        anidamiento
 
         Args:
             codigo (str): Código fuente a analizar
             tipo_nodo (TipoNodo): Tipo de expresión a buscar
 
         Returns:
-            InformacionExpresion: Información de la expresión analizada y sus anidados
+            InformacionExpresion: Información de la expresión analizada y sus 
+            anidados
 
         Example:
             >>> analizar("[x for x in range(5)]", TipoNodo.LIST_COMPREHENSION)
             InformacionExpresion(tipo=TipoNodo.LIST_COMPREHENSION, ...)
         """
+        # Se decidió dividir el análisis en dos métodos para simplificar el
+        # código ya que ambos tienen un grado de complejidad no apto para un
+        # solo módulo
         if tipo_nodo == TipoNodo.TERNARY:
             resultado = self.analizador_ternario.analizar_ternario(codigo)
         else:
-            resultado = self.analizador_comprehension.procesar_comprehension(codigo)
-        
+            resultado = \
+            self.analizador_comprehension.procesar_comprehension(codigo)
+
+        # Si el análisis falla, retornamos un objeto InformacionExpresion
+        # "vacío" en lugar de None. Esto simplifica el manejo de errores en la
+        # el módulo main
         if not resultado:
             return InformacionExpresion(
                 tipo=tipo_nodo,

@@ -31,6 +31,744 @@
             {
                 "nombre_clase": "TipoNodo(Enum)",
                 "cantidad_metodos": 0,
+                "lineas_fisicas": 38
+            },
+            {
+                "nombre_clase": "InformacionExpresion",
+                "cantidad_metodos": 1,
+                "lineas_fisicas": 9
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 4
+            }
+        ],
+        "total_lineas_fisicas": 51
+    },
+    "ejemplo_v1.py": {
+        "nombre_archivo": "ejemplo_v1.py",
+        "clases": [
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 11
+            }
+        ],
+        "total_lineas_fisicas": 11
+    },
+    "ejemplo_v2.py": {
+        "nombre_archivo": "ejemplo_v2.py",
+        "clases": [
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 6
+            }
+        ],
+        "total_lineas_fisicas": 6
+    },
+    "__main__.py": {
+        "nombre_archivo": "__main__.py",
+        "clases": [
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 78
+            }
+        ],
+        "total_lineas_fisicas": 78
+    },
+    "longitud_lineas.py": {
+        "nombre_archivo": "longitud_lineas.py",
+        "clases": [
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 1
+            }
+        ],
+        "total_lineas_fisicas": 1
+    },
+    "node_types.py": {
+        "nombre_archivo": "node_types.py",
+        "clases": [
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 6
+            }
+        ],
+        "total_lineas_fisicas": 6
+    },
+    "constantes.py": {
+        "nombre_archivo": "constantes.py",
+        "clases": [
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 3
+            }
+        ],
+        "total_lineas_fisicas": 3
+    },
+    "analizador_cadenas.py": {
+        "nombre_archivo": "analizador_cadenas.py",
+        "clases": [
+            {
+                "nombre_clase": "AnalizadorCadenas",
+                "cantidad_metodos": 5,
+                "lineas_fisicas": 115
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 0
+            }
+        ],
+        "total_lineas_fisicas": 115
+    },
+    "analizador_comprehension.py": {
+        "nombre_archivo": "analizador_comprehension.py",
+        "clases": [
+            {
+                "nombre_clase": "AnalizadorComprehension",
+                "cantidad_metodos": 4,
+                "lineas_fisicas": 50
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 6
+            }
+        ],
+        "total_lineas_fisicas": 56
+    },
+    "analizador_corchetes.py": {
+        "nombre_archivo": "analizador_corchetes.py",
+        "clases": [
+            {
+                "nombre_clase": "AnalizadorCorchetes",
+                "cantidad_metodos": 2,
+                "lineas_fisicas": 34
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 1
+            }
+        ],
+        "total_lineas_fisicas": 35
+    },
+    "analizador_expresiones.py": {
+        "nombre_archivo": "analizador_expresiones.py",
+        "clases": [
+            {
+                "nombre_clase": "AnalizadorExpresiones",
+                "cantidad_metodos": 2,
+                "lineas_fisicas": 12
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 3
+            }
+        ],
+        "total_lineas_fisicas": 15
+    },
+    "analizador_ternario.py": {
+        "nombre_archivo": "analizador_ternario.py",
+        "clases": [
+            {
+                "nombre_clase": "AnalizadorTernario",
+                "cantidad_metodos": 13,
+                "lineas_fisicas": 73
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 6
+            }
+        ],
+        "total_lineas_fisicas": 79
+    },
+    "buscar_y_extraer_anidados.py": {
+        "nombre_archivo": "buscar_y_extraer_anidados.py",
+        "clases": [
+            {
+                "nombre_clase": "BuscarYExtraerAnidados",
+                "cantidad_metodos": 5,
+                "lineas_fisicas": 45
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 5
+            }
+        ],
+        "total_lineas_fisicas": 50
+    },
+    "arbol_sintactico.py": {
+        "nombre_archivo": "arbol_sintactico.py",
+        "clases": [
+            {
+                "nombre_clase": "ArbolArchivoPython",
+                "cantidad_metodos": 5,
+                "lineas_fisicas": 32
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 4
+            }
+        ],
+        "total_lineas_fisicas": 36
+    },
+    "nodo.py": {
+        "nombre_archivo": "nodo.py",
+        "clases": [
+            {
+                "nombre_clase": "Nodo",
+                "cantidad_metodos": 3,
+                "lineas_fisicas": 21
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 2
+            }
+        ],
+        "total_lineas_fisicas": 23
+    },
+    "verificador_estandar_codigo.py": {
+        "nombre_archivo": "verificador_estandar_codigo.py",
+        "clases": [
+            {
+                "nombre_clase": "VerificadorEstandarCodigo",
+                "cantidad_metodos": 6,
+                "lineas_fisicas": 67
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 5
+            }
+        ],
+        "total_lineas_fisicas": 72
+    },
+    "analizador.py": {
+        "nombre_archivo": "analizador.py",
+        "clases": [
+            {
+                "nombre_clase": "ExcepcionAnalizador(Exception)",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 2
+            },
+            {
+                "nombre_clase": "ResultadoAnalisis",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 4
+            },
+            {
+                "nombre_clase": "AnalizadorCodigo",
+                "cantidad_metodos": 11,
+                "lineas_fisicas": 66
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 12
+            }
+        ],
+        "total_lineas_fisicas": 84
+    },
+    "contador_fisico.py": {
+        "nombre_archivo": "contador_fisico.py",
+        "clases": [
+            {
+                "nombre_clase": "ContadorLineasFisicas",
+                "cantidad_metodos": 4,
+                "lineas_fisicas": 30
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 4
+            }
+        ],
+        "total_lineas_fisicas": 34
+    },
+    "contador_logico.py": {
+        "nombre_archivo": "contador_logico.py",
+        "clases": [
+            {
+                "nombre_clase": "ContadorLineasLogicas",
+                "cantidad_metodos": 2,
+                "lineas_fisicas": 12
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 2
+            }
+        ],
+        "total_lineas_fisicas": 14
+    },
+    "almacenamiento_metricas.py": {
+        "nombre_archivo": "almacenamiento_metricas.py",
+        "clases": [
+            {
+                "nombre_clase": "AlmacenamientoMetricas",
+                "cantidad_metodos": 5,
+                "lineas_fisicas": 27
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 4
+            }
+        ],
+        "total_lineas_fisicas": 31
+    },
+    "lector_archivo.py": {
+        "nombre_archivo": "lector_archivo.py",
+        "clases": [
+            {
+                "nombre_clase": "LectorArchivoPython",
+                "cantidad_metodos": 3,
+                "lineas_fisicas": 14
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 4
+            }
+        ],
+        "total_lineas_fisicas": 18
+    },
+    "metricas.py": {
+        "nombre_archivo": "metricas.py",
+        "clases": [
+            {
+                "nombre_clase": "MetricasClase",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 4
+            },
+            {
+                "nombre_clase": "MetricasArchivo",
+                "cantidad_metodos": 1,
+                "lineas_fisicas": 6
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 4
+            }
+        ],
+        "total_lineas_fisicas": 14
+    },
+    "archivo_utils.py": {
+        "nombre_archivo": "archivo_utils.py",
+        "clases": [
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 31
+            }
+        ],
+        "total_lineas_fisicas": 31
+    },
+    "formateador_linea.py": {
+        "nombre_archivo": "formateador_linea.py",
+        "clases": [
+            {
+                "nombre_clase": "ExcepcionFormateo(Exception)",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 2
+            },
+            {
+                "nombre_clase": "FormateadorLinea",
+                "cantidad_metodos": 7,
+                "lineas_fisicas": 130
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 2
+            }
+        ],
+        "total_lineas_fisicas": 134
+    },
+    "formatters.py": {
+        "nombre_archivo": "formatters.py",
+        "clases": [
+            {
+                "nombre_clase": "MetricasFormatter",
+                "cantidad_metodos": 2,
+                "lineas_fisicas": 8
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 7
+            }
+        ],
+        "total_lineas_fisicas": 15
+    },
+    "impresion_arbol.py": {
+        "nombre_archivo": "impresion_arbol.py",
+        "clases": [
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 13
+            }
+        ],
+        "total_lineas_fisicas": 13
+    },
+    "node_analyzer.py": {
+        "nombre_archivo": "node_analyzer.py",
+        "clases": [
+            {
+                "nombre_clase": "TipoNodoAnalyzer",
+                "cantidad_metodos": 11,
+                "lineas_fisicas": 138
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 3
+            }
+        ],
+        "total_lineas_fisicas": 141
+    },
+    "tree_builder.py": {
+        "nombre_archivo": "tree_builder.py",
+        "clases": [
+            {
+                "nombre_clase": "TreeBuilder",
+                "cantidad_metodos": 7,
+                "lineas_fisicas": 121
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 6
+            }
+        ],
+        "total_lineas_fisicas": 127
+    },
+    "validador.py": {
+        "nombre_archivo": "validador.py",
+        "clases": [
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 21
+            }
+        ],
+        "total_lineas_fisicas": 21
+    },
+    "__main___comentado.py": {
+        "nombre_archivo": "__main___comentado.py",
+        "clases": [
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 57
+            }
+        ],
+        "total_lineas_fisicas": 57
+    },
+    "longitud_lineas_comentado.py": {
+        "nombre_archivo": "longitud_lineas_comentado.py",
+        "clases": [
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 1
+            }
+        ],
+        "total_lineas_fisicas": 1
+    },
+    "node_types_comentado.py": {
+        "nombre_archivo": "node_types_comentado.py",
+        "clases": [
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 6
+            }
+        ],
+        "total_lineas_fisicas": 6
+    },
+    "constantes_comentado.py": {
+        "nombre_archivo": "constantes_comentado.py",
+        "clases": [
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 3
+            }
+        ],
+        "total_lineas_fisicas": 3
+    },
+    "analizador_cadenas_comentado.py": {
+        "nombre_archivo": "analizador_cadenas_comentado.py",
+        "clases": [
+            {
+                "nombre_clase": "AnalizadorCadenas",
+                "cantidad_metodos": 5,
+                "lineas_fisicas": 115
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 0
+            }
+        ],
+        "total_lineas_fisicas": 115
+    },
+    "analizador_comprehension_comentado.py": {
+        "nombre_archivo": "analizador_comprehension_comentado.py",
+        "clases": [
+            {
+                "nombre_clase": "AnalizadorComprehension",
+                "cantidad_metodos": 4,
+                "lineas_fisicas": 50
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 6
+            }
+        ],
+        "total_lineas_fisicas": 56
+    },
+    "analizador_corchetes_comentado.py": {
+        "nombre_archivo": "analizador_corchetes_comentado.py",
+        "clases": [
+            {
+                "nombre_clase": "AnalizadorCorchetes",
+                "cantidad_metodos": 2,
+                "lineas_fisicas": 34
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 1
+            }
+        ],
+        "total_lineas_fisicas": 35
+    },
+    "analizador_expresiones_comentado.py": {
+        "nombre_archivo": "analizador_expresiones_comentado.py",
+        "clases": [
+            {
+                "nombre_clase": "AnalizadorExpresiones",
+                "cantidad_metodos": 2,
+                "lineas_fisicas": 12
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 3
+            }
+        ],
+        "total_lineas_fisicas": 15
+    },
+    "analizador_ternario_comentado.py": {
+        "nombre_archivo": "analizador_ternario_comentado.py",
+        "clases": [
+            {
+                "nombre_clase": "AnalizadorTernario",
+                "cantidad_metodos": 13,
+                "lineas_fisicas": 73
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 6
+            }
+        ],
+        "total_lineas_fisicas": 79
+    },
+    "buscar_y_extraer_anidados_comentado.py": {
+        "nombre_archivo": "buscar_y_extraer_anidados_comentado.py",
+        "clases": [
+            {
+                "nombre_clase": "BuscarYExtraerAnidados",
+                "cantidad_metodos": 5,
+                "lineas_fisicas": 45
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 5
+            }
+        ],
+        "total_lineas_fisicas": 50
+    },
+    "arbol_sintactico_comentado.py": {
+        "nombre_archivo": "arbol_sintactico_comentado.py",
+        "clases": [
+            {
+                "nombre_clase": "ArbolArchivoPython",
+                "cantidad_metodos": 2,
+                "lineas_fisicas": 6
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 2
+            }
+        ],
+        "total_lineas_fisicas": 8
+    },
+    "nodo_comentado.py": {
+        "nombre_archivo": "nodo_comentado.py",
+        "clases": [
+            {
+                "nombre_clase": "Nodo",
+                "cantidad_metodos": 2,
+                "lineas_fisicas": 10
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 2
+            }
+        ],
+        "total_lineas_fisicas": 12
+    },
+    "verificador_estandar_codigo_comentado.py": {
+        "nombre_archivo": "verificador_estandar_codigo_comentado.py",
+        "clases": [
+            {
+                "nombre_clase": "VerificadorEstandarCodigo",
+                "cantidad_metodos": 6,
+                "lineas_fisicas": 67
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 5
+            }
+        ],
+        "total_lineas_fisicas": 72
+    },
+    "analizador_comentado.py": {
+        "nombre_archivo": "analizador_comentado.py",
+        "clases": [
+            {
+                "nombre_clase": "ExcepcionAnalizador(Exception)",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 2
+            },
+            {
+                "nombre_clase": "ResultadoAnalisis",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 4
+            },
+            {
+                "nombre_clase": "AnalizadorCodigo",
+                "cantidad_metodos": 9,
+                "lineas_fisicas": 52
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 11
+            }
+        ],
+        "total_lineas_fisicas": 69
+    },
+    "contador_fisico_comentado.py": {
+        "nombre_archivo": "contador_fisico_comentado.py",
+        "clases": [
+            {
+                "nombre_clase": "ContadorLineasFisicas",
+                "cantidad_metodos": 4,
+                "lineas_fisicas": 30
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 4
+            }
+        ],
+        "total_lineas_fisicas": 34
+    },
+    "contador_logico_comentado.py": {
+        "nombre_archivo": "contador_logico_comentado.py",
+        "clases": [
+            {
+                "nombre_clase": "ContadorLineasLogicas",
+                "cantidad_metodos": 2,
+                "lineas_fisicas": 12
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 2
+            }
+        ],
+        "total_lineas_fisicas": 14
+    },
+    "almacenamiento_metricas_comentado.py": {
+        "nombre_archivo": "almacenamiento_metricas_comentado.py",
+        "clases": [
+            {
+                "nombre_clase": "AlmacenamientoMetricas",
+                "cantidad_metodos": 5,
+                "lineas_fisicas": 21
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 4
+            }
+        ],
+        "total_lineas_fisicas": 25
+    },
+    "lector_archivo_comentado.py": {
+        "nombre_archivo": "lector_archivo_comentado.py",
+        "clases": [
+            {
+                "nombre_clase": "LectorArchivoPython",
+                "cantidad_metodos": 3,
+                "lineas_fisicas": 14
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 4
+            }
+        ],
+        "total_lineas_fisicas": 18
+    },
+    "metricas_comentado.py": {
+        "nombre_archivo": "metricas_comentado.py",
+        "clases": [
+            {
+                "nombre_clase": "MetricasArchivo",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 4
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 2
+            }
+        ],
+        "total_lineas_fisicas": 6
+    },
+    "nodos_comentado.py": {
+        "nombre_archivo": "nodos_comentado.py",
+        "clases": [
+            {
+                "nombre_clase": "TipoNodo(Enum)",
+                "cantidad_metodos": 0,
                 "lineas_fisicas": 37
             },
             {
@@ -46,26 +784,177 @@
         ],
         "total_lineas_fisicas": 50
     },
-    "ejemplo_v1.py": {
-        "nombre_archivo": "ejemplo_v1.py",
+    "archivo_utils_comentado.py": {
+        "nombre_archivo": "archivo_utils_comentado.py",
         "clases": [
             {
                 "nombre_clase": "",
                 "cantidad_metodos": 0,
-                "lineas_fisicas": 6
+                "lineas_fisicas": 31
             }
         ],
-        "total_lineas_fisicas": 6
+        "total_lineas_fisicas": 31
     },
-    "ejemplo_v2.py": {
-        "nombre_archivo": "ejemplo_v2.py",
+    "formatters_comentado.py": {
+        "nombre_archivo": "formatters_comentado.py",
         "clases": [
+            {
+                "nombre_clase": "MetricasFormatter",
+                "cantidad_metodos": 2,
+                "lineas_fisicas": 8
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 7
+            }
+        ],
+        "total_lineas_fisicas": 15
+    },
+    "impresion_arbol_comentado.py": {
+        "nombre_archivo": "impresion_arbol_comentado.py",
+        "clases": [
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 13
+            }
+        ],
+        "total_lineas_fisicas": 13
+    },
+    "node_analyzer_comentado.py": {
+        "nombre_archivo": "node_analyzer_comentado.py",
+        "clases": [
+            {
+                "nombre_clase": "TipoNodoAnalyzer",
+                "cantidad_metodos": 11,
+                "lineas_fisicas": 136
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 3
+            }
+        ],
+        "total_lineas_fisicas": 139
+    },
+    "tree_builder_comentado.py": {
+        "nombre_archivo": "tree_builder_comentado.py",
+        "clases": [
+            {
+                "nombre_clase": "TreeBuilder",
+                "cantidad_metodos": 8,
+                "lineas_fisicas": 102
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 7
+            }
+        ],
+        "total_lineas_fisicas": 109
+    },
+    "validador_comentado.py": {
+        "nombre_archivo": "validador_comentado.py",
+        "clases": [
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 21
+            }
+        ],
+        "total_lineas_fisicas": 21
+    },
+    "__init__.py": {
+        "nombre_archivo": "__init__.py",
+        "clases": [
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": -1
+            }
+        ],
+        "total_lineas_fisicas": -1
+    },
+    "test_file_reader.py": {
+        "nombre_archivo": "test_file_reader.py",
+        "clases": [
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": -1
+            }
+        ],
+        "total_lineas_fisicas": -1
+    },
+    "test_json_handler.py": {
+        "nombre_archivo": "test_json_handler.py",
+        "clases": [
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": -1
+            }
+        ],
+        "total_lineas_fisicas": -1
+    },
+    "test_logical_counter.py": {
+        "nombre_archivo": "test_logical_counter.py",
+        "clases": [
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": -1
+            }
+        ],
+        "total_lineas_fisicas": -1
+    },
+    "formatters_v2.py": {
+        "nombre_archivo": "formatters_v2.py",
+        "clases": [
+            {
+                "nombre_clase": "MetricasFormatter",
+                "cantidad_metodos": 2,
+                "lineas_fisicas": 14
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 7
+            }
+        ],
+        "total_lineas_fisicas": 21
+    },
+    "node_analyzer_v2.py": {
+        "nombre_archivo": "node_analyzer_v2.py",
+        "clases": [
+            {
+                "nombre_clase": "TipoNodoAnalyzer",
+                "cantidad_metodos": 11,
+                "lineas_fisicas": 138
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 3
+            }
+        ],
+        "total_lineas_fisicas": 141
+    },
+    "tree_builder_v2.py": {
+        "nombre_archivo": "tree_builder_v2.py",
+        "clases": [
+            {
+                "nombre_clase": "TreeBuilder",
+                "cantidad_metodos": 7,
+                "lineas_fisicas": 146
+            },
             {
                 "nombre_clase": "",
                 "cantidad_metodos": 0,
                 "lineas_fisicas": 6
             }
         ],
-        "total_lineas_fisicas": 6
+        "total_lineas_fisicas": 152
     }
 }

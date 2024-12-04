@@ -28,6 +28,11 @@
     "ejemplo_v1.py": {
         "nombre_archivo": "ejemplo_v1.py",
         "lineas_logicas": 1,
-        "lineas_fisicas": 3
+        "lineas_fisicas": 11
+    },
+    "__main__.py": {
+        "nombre_archivo": "__main__.py",
+        "lineas_logicas": 15,
+        "lineas_fisicas": 58
     }
 }

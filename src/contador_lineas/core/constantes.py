@@ -1,6 +1,6 @@
 """
 Nombre del módulo: constantes.py
-Ruta: src/core/constantes.py
+Ruta: contador_lineas/core/constantes.py
 Descripción: Define constantes utilizadas en el análisis de código Python
 Proyecto: Sistema de Conteo de Líneas Físicas y Lógicas en Python
 Autor: Amílcar Pérez
@@ -13,7 +13,7 @@ Dependencias:
     - models.nodos.TipoNodo
 
 Uso:
-    from core.constantes import CORCHETES, TIPOS_COMPREHENSION
+    from contador_lineas.core.constantes import CORCHETES, TIPOS_COMPREHENSION
 
     tipo = TIPOS_COMPREHENSION.get('[')
     cierre = CORCHETES.get('(')

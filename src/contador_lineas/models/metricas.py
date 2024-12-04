@@ -1,6 +1,6 @@
 """
 Nombre del módulo: metricas.py
-Ruta: src/models/metricas.py
+Ruta: contador_lineas/models/metricas.py
 Descripción: Define la estructura de datos para almacenar métricas 
              (Líneas Físicas y Lógicas) de archivos Python
 Proyecto: Sistema de Conteo de Líneas Físicas y Lógicas en Python
@@ -14,7 +14,7 @@ Dependencias:
     - dataclasses
 
 Uso:
-    from models.metricas import MetricasArchivo
+    from contador_lineas.models.metricas import MetricasArchivo
     metricas = MetricasArchivo("archivo.py", 10, 20)
 
 Notas:
@@ -37,7 +37,7 @@ class MetricasArchivo:
     Example:
         >>> metricas = MetricasArchivo("test.py", 10, 20)
     """
-    
+
     nombre_archivo: str
     lineas_logicas: int
     lineas_fisicas: int

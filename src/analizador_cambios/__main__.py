@@ -32,11 +32,14 @@ import argparse
 from colorama import init, Fore, Style
 from pathlib import Path
 
+# mientras
+from contador_lineas.utils.impresion_arbol import imprimir_arbol
+
 from analizador_cambios.core.contadores.analizador import AnalizadorCodigo, ExcepcionAnalizador
 from analizador_cambios.core.gestion_archivos.almacenamiento_metricas import (
     AlmacenamientoMetricas
 )
-from analizador_cambios.utils.archivo_utils import escribir_python
+from contador_lineas.utils.archivo_utils import escribir_python
 from analizador_cambios.utils.formatters import display_metrics_table
 
 from analizador_cambios.core.arbol.comparador_principal import ComparadorVersiones

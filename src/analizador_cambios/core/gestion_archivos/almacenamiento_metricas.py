@@ -30,7 +30,7 @@ import os
 from typing import List, Optional
 
 from analizador_cambios.models.metricas import MetricasArchivo, MetricasClase
-from analizador_cambios.utils.archivo_utils import leer_json, escribir_json
+from contador_lineas.utils.archivo_utils import leer_json, escribir_json
 
 
 class AlmacenamientoMetricas:

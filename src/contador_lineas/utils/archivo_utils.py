@@ -1,6 +1,6 @@
 """
 Nombre del módulo: archivo_utils.py
-Ruta: src/utils/archivo_utils.py
+Ruta: contador_lineas/utils/archivo_utils.py
 Descripción: Utilidades para operaciones con archivos
 Proyecto: Sistema de Conteo de Líneas Físicas y Lógicas en Python
 Autor: Amílcar Pérez
@@ -15,7 +15,7 @@ Dependencias:
     - typing.Union, List, Optional, Tuple
 
 Uso:
-    from utils.archivo_utils import leer_archivo_texto
+    from contador_lineas.utils.archivo_utils import leer_archivo_texto
 
     contenido, error = leer_archivo_texto("C:/ejemplo.txt")
 
@@ -29,8 +29,8 @@ from typing import Union, List, Optional, Tuple
 
 
 def leer_archivo_texto(
-    ruta_archivo: Union[str, Path], 
-    codificacion: str = 'utf-8') -> Tuple[List[str], Optional[str]]:
+        ruta_archivo: Union[str, Path],
+        codificacion: str = 'utf-8') -> Tuple[List[str], Optional[str]]:
     """
     Lee el contenido de un archivo de texto.
 
@@ -52,9 +52,12 @@ def leer_archivo_texto(
     """
     try:
         with open(ruta_archivo, 'r', encoding=codificacion) as archivo:
+            # Usamos readlines() en lugar de read().splitlines() para preservar
+            # los saltos de línea originales del archivo
             return archivo.readlines(), None
     except UnicodeDecodeError:
-        return [], f"Error de codificación, codificación esperada: {codificacion}"
+        return [], f"Error de codificación, codificación esperada:\
+        {codificacion}"
     except Exception as e:
         return [], f"Error al leer el archivo: {str(e)}"
 
@@ -111,16 +114,21 @@ def escribir_python(
         >>> error = escribir_python("ejemplo.py", codigo)
         >>> if error:
         ...     print(f"Error: {error}")
-    """ 
+    """
     try:
         with open(ruta_archivo, 'w', encoding=codificacion) as archivo:
             for i, linea in enumerate(lineas):
+                # Mantenemos los saltos de línea existentes, pero aseguramos que
+                # cada línea termine con uno para mantener consistencia en el
+                # formato del archivo
                 if linea != '\n':
                     if linea.endswith('\n'):
                         archivo.write(linea)
                     else:
-                        archivo.write(linea + '\n')  # Escribir la línea actual
+                        archivo.write(linea + '\n')
                 else:
+                    # Preservamos las líneas en blanco para mantener el
+                    # espaciado original del código
                     archivo.write('\n')
         return None
     except Exception as e:

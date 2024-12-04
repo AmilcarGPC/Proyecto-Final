@@ -10,7 +10,7 @@ Fecha de Creación: 18-11-2024
 Última Actualización: 18-11-2024
 
 Dependencias:
-    - utils.tree_builder.TreeBuilder
+    - utils.constructor_arbol.ConstructorArbol
     - utils.impresion_arbol.imprimir_arbol
 
 Uso:
@@ -22,10 +22,10 @@ Notas:
     - Implementa representación jerárquica del código fuente
 """
 
-from analizador_cambios.utils.tree_builder import TreeBuilder
-from analizador_cambios.utils.impresion_arbol import imprimir_arbol
+from analizador_cambios.core.arbol.constructor_arbol import ConstructorArbol
+from contador_lineas.utils.impresion_arbol import imprimir_arbol
 from analizador_cambios.core.arbol.nodo import Nodo
-from analizador_cambios.models.nodos import TipoNodo
+from contador_lineas.models.nodos import TipoNodo
 
 
 class ArbolArchivoPython:
@@ -33,7 +33,7 @@ class ArbolArchivoPython:
     Representa un árbol sintáctico de un archivo Python.
 
     Attributes:
-        constructor (TreeBuilder): Constructor del árbol sintáctico
+        constructor (ConstructorArbol): Constructor del árbol sintáctico
         raiz (Nodo): Nodo raíz del árbol sintáctico
 
     Methods:
@@ -47,9 +47,9 @@ class ArbolArchivoPython:
     """
     
     def __init__(self, file_content: list[str]):
-        self.constructor = TreeBuilder()
-        self.raiz = self.constructor.build(file_content)
-        self.mapeo_lineas = self.constructor.tree_2_lines
+        self.constructor = ConstructorArbol()
+        self.raiz = self.constructor.construir(file_content)
+        self.mapeo_lineas = self.constructor.arbol_a_lineas
 
     def imprimir_arbol(self) -> None:
         """

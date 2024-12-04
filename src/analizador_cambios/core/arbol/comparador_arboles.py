@@ -3,7 +3,7 @@ from difflib import SequenceMatcher
 from typing import List
 from analizador_cambios.core.arbol.nodo import Nodo
 from analizador_cambios.models.cambios import TipoCambio, Cambio
-from analizador_cambios.models.nodos import TipoNodo
+from contador_lineas.models.nodos import TipoNodo
 
 class ComparadorArboles:
     UMBRAL_SIMILITUD = 0.6  # 60% de similitud
@@ -52,9 +52,9 @@ class ComparadorArboles:
             hijo2 = nodo2.hijos[idx2]
             
             similitud = self._calcular_similitud(hijo1.contenido, hijo2.contenido)
-
             
             if hijo1.contenido == hijo2.contenido: # Si los nodos son iguales, comparar recursivamente y avanzar
+                #print(f"SON IGUALES: {hijo1.contenido} ||| {hijo2.contenido}")
                 self._comparar_recursivamente(hijo1, hijo2)
                 idx1 += 1
                 idx2 += 1
@@ -68,7 +68,7 @@ class ComparadorArboles:
                         self.cambios.append(Cambio(TipoCambio.BORRADA, hijo1, None, hijo1.numero_nodo))
                         self._todo_modificado(hijo1, None, TipoCambio.BORRADA)
                         idx1 += 1
-                    elif similitud >= self.UMBRAL_SIMILITUD: 
+                    elif similitud >= self.UMBRAL_SIMILITUD:
                         # Si la similitud es mayor al umbral, se considera que pudo haber sido modificado                       
                         if not self._encontrar_similar(nodo1, nodo2, idx1, idx2-1):
                             # Se asegura que el nodo candidato de la versión 2 no se encuentre en la versión 1
@@ -87,13 +87,13 @@ class ComparadorArboles:
                             self.cambios.append(Cambio(TipoCambio.BORRADA, hijo1, None, hijo1.numero_nodo))
                             a_eliminar_totalmente.append(hijo1)
                             self._todo_modificado(hijo1, None, TipoCambio.BORRADA)
-                            print(f"Eliminado: {hijo1.contenido}")
                             idx1 += 1
                         else:
+                            self.cambios.append(Cambio(TipoCambio.AGREGADA, hijo1, hijo2, hijo2.numero_nodo))
+                            self._todo_modificado(None, hijo2, TipoCambio.AGREGADA)
                             idx2 += 1
                 else:
                     idx2 += 1     
-
         # Procesar restantes
         while idx1 < len(nodo1.hijos): # Se recorren los nodos restantes de la versión 1
             if nodo1.hijos[idx1].tipo == TipoNodo.WHITE_SPACE:
@@ -150,6 +150,7 @@ class ComparadorArboles:
                 self.cambios.append(Cambio(TipoCambio.AGREGADA, None, hijo2, hijo2.numero_nodo))
                 self._todo_modificado(None, hijo2, TipoCambio.AGREGADA)
                 return False
+  
         return True
     
     def existe_explicito(self, hijo, nodo):

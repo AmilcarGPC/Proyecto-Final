@@ -24,6 +24,9 @@ class EscribirCambios:
 
         # Crear comentarios en las líneas modificadas
         for cambio in cambios:
+            if int(cambio.medida_de_cambio*100) == 100: # Si la línea es 100% similar a una, quiere decir que nunca cambió
+                continue
+
             if cambio.tipo == TipoCambio.BORRADA:
                     linea = mapeo1[cambio.posicion][-1]
                     ajuste = f" (las {len(mapeo1[cambio.posicion])} líneas previas cuentan como 1)\n" if len(mapeo1[cambio.posicion]) > 1 else f"\n"
@@ -31,7 +34,7 @@ class EscribirCambios:
             elif cambio.tipo == TipoCambio.AGREGADA:
                     linea = mapeo2[cambio.posicion][-1]
                     ajuste = f" (las {len(mapeo2[cambio.posicion])} líneas previas cuentan como 1)\n" if len(mapeo2[cambio.posicion]) > 1 else f"\n"
-                    if cambio.medida_de_cambio != 100:
+                    if int(cambio.medida_de_cambio*100) != 0:
                         codigo2[linea] = f"{codigo2[linea].rstrip()} # AGREGADA PEQUEÑA MODIFICACIÓN DEL {cambio.medida_de_cambio}%" + ajuste
                     else:
                         codigo2[linea] = f"{codigo2[linea].rstrip()} # AGREGADA TOTALMENTE NUEVA" + ajuste

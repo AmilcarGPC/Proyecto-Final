@@ -40,8 +40,11 @@ class ComparadorVersiones:
         cantidad_borradas = 0
 
         for cambio in cambios:
+            if int(cambio.medida_de_cambio*100) == 100: # Si la línea es 100% similar a una, quiere decir que nunca cambió
+                continue
+
             if cambio.tipo == TipoCambio.AGREGADA:
-                if cambio.medida_de_cambio != 100:
+                if int(cambio.medida_de_cambio*100) != 0:
                     cantidad_agregadas_modificadas += 1
                 else:
                     cantidad_agregadas += 1

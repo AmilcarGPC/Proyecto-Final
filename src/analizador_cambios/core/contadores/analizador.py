@@ -33,15 +33,14 @@ from dataclasses import dataclass
 from typing import Optional, Tuple
 
 from analizador_cambios.core.arbol.nodo import Nodo
-from analizador_cambios.core.contadores.contador_fisico import ContadorLineasFisicas
-from analizador_cambios.core.contadores.contador_logico import ContadorLineasLogicas
-from analizador_cambios.core.gestion_archivos.lector_archivo import LectorArchivoPython
+from contador_lineas.core.contadores.contador_fisico import ContadorLineasFisicas
+from contador_lineas.core.gestion_archivos.lector_archivo import LectorArchivoPython
 from analizador_cambios.core.gestion_archivos.almacenamiento_metricas import AlmacenamientoMetricas
 from analizador_cambios.core.arbol.arbol_sintactico import ArbolArchivoPython
-from analizador_cambios.core.arbol.verificador_estandar_codigo import VerificadorEstandarCodigo
+from contador_lineas.core.arbol.verificador_estandar_codigo import VerificadorEstandarCodigo
 from analizador_cambios.models.metricas import MetricasClase, MetricasArchivo
 from analizador_cambios.utils.formateador_linea import FormateadorLinea
-from analizador_cambios.utils.impresion_arbol import imprimir_arbol
+from contador_lineas.utils.impresion_arbol import imprimir_arbol
 
 
 class ExcepcionAnalizador(Exception):
@@ -109,7 +108,6 @@ class AnalizadorCodigo:
         self.almacenamiento = AlmacenamientoMetricas()
         self.formateador = FormateadorLinea()
         self.contador_fisico = ContadorLineasFisicas()
-        self.contador_logico = ContadorLineasLogicas()
         self.verificador_estandar = VerificadorEstandarCodigo()
 
     def formatear_codigo(self, codigo: list[str]) -> list[str]:

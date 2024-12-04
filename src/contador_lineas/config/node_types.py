@@ -1,22 +1,26 @@
 """
 Nombre del módulo: node_types.py
-Ruta: src/config/node_types.py
-Descripción: Define los conjuntos de tipos de nodos permitidos para el análisis de código Python
+Ruta: contador_lineas/config/node_types.py
+Descripción: Define los conjuntos de tipos de nodos permitidos para el análisis 
+             de código Python
 Proyecto: Sistema de Conteo de Líneas Físicas y Lógicas en Python
 Autor: Amílcar Pérez
 Organización: Equipo 3
 Licencia: MIT
 Fecha de Creación: 18-11-2024
-Última Actualización: 18-11-2024
+Última Actualización: 19-11-2024
 
 Dependencias:
     - models.nodos.TipoNodo
 
 Uso:
-    from config.node_types import PARENT_NODE_TYPES, LOGICAL_NODE_TYPES
+    from contador_lineas.config.node_types import (
+        PARENT_NODE_TYPES, LOGICAL_NODE_TYPES
+    )
 
 Notas:
-    - Utiliza los tipos de nodos definidos para el árbol de análisis de código Python
+    - Utiliza los tipos de nodos definidos para el árbol de análisis de código 
+      Python
 """
 
 from contador_lineas.models.nodos import TipoNodo
@@ -24,15 +28,15 @@ from contador_lineas.models.nodos import TipoNodo
 # Tipos de nodos que pueden contener otros nodos
 PARENT_NODE_TYPES = {
     TipoNodo.ROOT,
-    TipoNodo.FUNCTION, 
-    TipoNodo.CLASS, 
+    TipoNodo.FUNCTION,
+    TipoNodo.CLASS,
     TipoNodo.METHOD,
-    TipoNodo.IF, 
-    TipoNodo.ELIF, 
-    TipoNodo.ELSE, 
-    TipoNodo.FOR, 
-    TipoNodo.WHILE, 
-    TipoNodo.MATCH, 
+    TipoNodo.IF,
+    TipoNodo.ELIF,
+    TipoNodo.ELSE,
+    TipoNodo.FOR,
+    TipoNodo.WHILE,
+    TipoNodo.MATCH,
     TipoNodo.CASE,
     TipoNodo.WITH,
     TipoNodo.TRY,

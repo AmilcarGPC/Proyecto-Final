@@ -7,7 +7,7 @@ class TipoCambio(Enum):
     BORRADA = "borrada"
 
 class Cambio:
-    def __init__(self, tipo: TipoCambio, nodo_original: Nodo =None, nodo_nuevo: Nodo=None, posicion: int=None, medida_de_cambio: float= 100):
+    def __init__(self, tipo: TipoCambio, nodo_original: Nodo =None, nodo_nuevo: Nodo=None, posicion: int=None, medida_de_cambio: float= 0.0):
         self.tipo = tipo
         self.nodo_original = nodo_original
         self.nodo_nuevo = nodo_nuevo

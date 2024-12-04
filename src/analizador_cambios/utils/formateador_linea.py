@@ -23,7 +23,19 @@ Notas:
 """
 
 from analizador_cambios.config.longitud_lineas import LONGITUD_MAXIMA_LINEA
-from analizador_cambios.core.analizadores.analizador_cadenas import AnalizadorCadenas
+from contador_lineas.core.analizadores.analizador_cadenas import AnalizadorCadenas
+
+class ExcepcionFormateo(Exception):
+    """
+    Excepción personalizada para errores en formateo.
+
+    Se lanza cuando una línea no puede ser formateada correctamente.
+
+    Example:
+        >>> raise ExcepcionFormateo("Línea demasiado larga")
+    """
+
+    pass
 
 class FormateadorLinea:
     """
@@ -42,46 +54,23 @@ class FormateadorLinea:
         ['def funcion( \\', '    param2, \\', '    param3):']
     """
     @staticmethod
-    def _extraer_codigo_y_comentario(linea: str) -> tuple[str, str]:
-        """
-        Separa el código del comentario en una línea.
-        
-        Args:
-            linea (str): Línea completa de código
-            
-        Returns:
-            tuple[str, str]: (código sin comentario, comentario)
-        """
-        pos_hash = AnalizadorCadenas.encontrar_sin_comillas(linea, '#', 0)
-        if pos_hash == -1:
-            return linea, ''
-        
-        return linea[:pos_hash].rstrip(), linea[pos_hash:]
-
-    @staticmethod
     def formatear_linea(linea: str) -> list[str]:
         """
-        Formatea una línea según su tipo y contenido.
-
-        Args:
-            linea (str): Línea de código a formatear
-
-        Returns:
-            list[str]: Lista de líneas formateadas
-
-        Example:
-            >>> formatear_linea("def funcion(param1, param2)")
-            ['def funcion(', '        param1,', '        param2):']
+        Formatea una línea considerando comentarios.
         """
         codigo, comentario = FormateadorLinea._extraer_codigo_y_comentario(linea)
-    
+
         if len(linea) <= LONGITUD_MAXIMA_LINEA:
             return [linea]
-                
+            
         indentacion = len(codigo) - len(codigo.lstrip())
         indentacion_str = ' ' * indentacion
+
+        if comentario and len(codigo) <= LONGITUD_MAXIMA_LINEA:
+            formateado = [codigo]
+            formateado.extend(FormateadorLinea._formatear_comentario(comentario, indentacion_str))
+            return formateado
         
-        # Formatear el código
         if codigo.strip().startswith(('from ', 'import ')):
             formateado = FormateadorLinea._formatear_importacion(codigo, indentacion_str)
         elif codigo.strip().startswith('def ') and '(' in codigo:
@@ -91,17 +80,51 @@ class FormateadorLinea:
         else:
             formateado = FormateadorLinea._formatear_generico(codigo, indentacion_str)
         
-        # Manejar el comentario de forma segura
         if comentario:
-            if '\\' in formateado[-1]:  # Si hay continuación de línea
-                formateado.append(indentacion_str + comentario)  # Comentario en nueva línea
-            else:
-                ultima_linea = formateado[-1].rstrip()
-                if len(ultima_linea + ' ' + comentario) <= LONGITUD_MAXIMA_LINEA:
-                    formateado[-1] = ultima_linea + ' ' + comentario
-                else:
-                    formateado.append(indentacion_str + comentario)
+            formateado.extend(FormateadorLinea._formatear_comentario(comentario, indentacion_str))
         
+        return formateado
+    
+    @staticmethod
+    def _extraer_codigo_y_comentario(linea: str) -> tuple[str, str]:
+        """
+        Separa código, comentario y posición del comentario.
+        """
+        pos_hash = AnalizadorCadenas.encontrar_sin_comillas(linea, '#', 0)
+        if pos_hash == -1:
+            return linea, ''
+        return linea[:pos_hash].rstrip(), linea[pos_hash:]
+    
+    @staticmethod
+    def _formatear_comentario(comentario: str, indentacion: str) -> list[str]:
+        """
+        Formatea comentarios que exceden la longitud máxima.
+        
+        Args:
+            comentario: Texto del comentario (con o sin #)
+            indentacion: Espacios de indentación
+        
+        Returns:
+            list[str]: Lista de líneas formateadas
+        """
+        comentario = comentario[1:].strip()
+        
+        linea_completa = indentacion + '# ' + comentario
+        if len(linea_completa) <= LONGITUD_MAXIMA_LINEA:
+            return [linea_completa]
+        
+        palabras = comentario.split()
+        linea_actual = indentacion + '# ' + palabras[0]
+        formateado = []
+        
+        for palabra in palabras[1:]:
+            if len(linea_actual + ' ' + palabra) <= LONGITUD_MAXIMA_LINEA:
+                linea_actual += ' ' + palabra
+            else:
+                formateado.append(linea_actual)
+                linea_actual = indentacion + '# ' + palabra
+                
+        formateado.append(linea_actual)
         return formateado
     
     @staticmethod
@@ -151,7 +174,7 @@ class FormateadorLinea:
             parte_elementos = linea[linea.index('import') + 6:].strip()
         
         elementos = [elem.strip() for elem in parte_elementos.split(',')]
-        formateado = [f"{parte_importacion.strip()} ("]
+        formateado = [f"{indentacion}{parte_importacion.strip()} ("]
         indentacion_elem = indentacion + ' ' * 4
 
         for i, elemento in enumerate(elementos):
@@ -264,7 +287,10 @@ class FormateadorLinea:
         linea_actual = indentacion
         formateado = []
 
-        for palabra in palabras:
+        for i, palabra in enumerate(palabras):
+            if i == 0 and len(palabra) + len(indentacion) + 2 > LONGITUD_MAXIMA_LINEA:
+                raise ExcepcionFormateo(f"La línea '{linea.strip()}' es muy " + 
+                "larga para ser formateada.")
             if len(linea_actual) + len(palabra) + 2 <= LONGITUD_MAXIMA_LINEA:
                 linea_actual += ((' ' if linea_actual != indentacion else '') 
                                  + palabra)
@@ -274,4 +300,5 @@ class FormateadorLinea:
 
         if linea_actual.strip():
             formateado.append(linea_actual)
+
         return formateado

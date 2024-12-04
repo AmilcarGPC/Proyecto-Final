@@ -1,13 +1,13 @@
 """
 Nombre del módulo: analizador.py
-Ruta: src/core/analizador.py
+Ruta: contador_lineas/core/contadores/analizador.py
 Descripción: Analiza archivos Python para obtener métricas de líneas de código
 Proyecto: Sistema de Conteo de Líneas Físicas y Lógicas en Python
 Autor: Amílcar Pérez
 Organización: Equipo 3
 Licencia: MIT
 Fecha de Creación: 18-11-2024
-Última Actualización: 18-11-2024
+Última Actualización: 19-11-2024
 
 Dependencias:
     - core.contadores.contador_fisico.ContadorLineasFisicas
@@ -19,7 +19,7 @@ Dependencias:
     - utils.formateador_linea.FormateadorLinea
 
 Uso:
-    from core.analizador import Analizador
+    from contador_lineas.core.contadores.analizador import Analizador
     
     analizador = Analizador()
     resultado = analizador.analizar_archivo("script.py", "script.py")
@@ -32,14 +32,23 @@ Notas:
 from dataclasses import dataclass
 from typing import Optional, Tuple
 
-from contador_lineas.core.contadores.contador_fisico import ContadorLineasFisicas
-from contador_lineas.core.contadores.contador_logico import ContadorLineasLogicas
-from contador_lineas.core.gestion_archivos.lector_archivo import LectorArchivoPython
-from contador_lineas.core.gestion_archivos.almacenamiento_metricas import AlmacenamientoMetricas
+from contador_lineas.core.contadores.contador_fisico import (
+    ContadorLineasFisicas
+)
+from contador_lineas.core.contadores.contador_logico import (
+    ContadorLineasLogicas
+)
+from contador_lineas.core.gestion_archivos.lector_archivo import (
+    LectorArchivoPython
+)
+from contador_lineas.core.gestion_archivos.almacenamiento_metricas import (
+    AlmacenamientoMetricas
+)
 from contador_lineas.core.arbol.arbol_sintactico import ArbolArchivoPython
-from contador_lineas.core.arbol.verificador_estandar_codigo import VerificadorEstandarCodigo
+from contador_lineas.core.arbol.verificador_estandar_codigo import (
+    VerificadorEstandarCodigo
+)
 from contador_lineas.models.metricas import MetricasArchivo
-from contador_lineas.utils.formateador_linea import FormateadorLinea
 
 
 class ExcepcionAnalizador(Exception):
@@ -100,37 +109,14 @@ class AnalizadorCodigo:
         >>> analizador = Analizador()
         >>> resultado = analizador.analizar_archivo("script.py", "script.py")
     """
-    
+
     def __init__(self):
         self.arbol = None
         self.codigo = None
         self.almacenamiento = AlmacenamientoMetricas()
-        self.formateador = FormateadorLinea()
         self.contador_fisico = ContadorLineasFisicas()
         self.contador_logico = ContadorLineasLogicas()
         self.verificador_estandar = VerificadorEstandarCodigo()
-
-    def formatear_codigo(self, codigo: list[str]) -> list[str]:
-        """
-        Formatea el código fuente para su análisis.
-
-        Args:
-            codigo (list[str]): Líneas de código a formatear
-
-        Returns:
-            list[str]: Líneas formateadas
-
-        Example:
-            >>> formatear_codigo(["def f():", "    pass"])
-        """
-        codigo_nuevo = []
-        for linea in codigo:
-            formateada = self.formateador.formatear_linea(linea)
-            if len(formateada) > 1:
-                codigo_nuevo.extend(formateada)
-            else:
-                codigo_nuevo.extend(formateada)
-        return codigo_nuevo
 
     def validate_syntax_tree(
             self, tree: ArbolArchivoPython) -> Tuple[bool, Optional[str]]:
@@ -163,6 +149,8 @@ class AnalizadorCodigo:
         Example:
             >>> analizar_archivo("script.py", "script.py")
         """
+        # El flujo de análisis sigue un orden específico para garantizar la
+        # validez del código antes de procesar y almacenar métricas
         self._validar_archivo(ruta_archivo)
         codigo = self._obtener_codigo(ruta_archivo)
         self.codigo = codigo
@@ -183,6 +171,8 @@ class AnalizadorCodigo:
         Example:
             >>> self._validar_archivo("script.py")
         """
+        # La validación se hace antes de cualquier procesamiento para fallar
+        # rápido y evitar cálculos innecesarios
         lector = LectorArchivoPython(ruta_archivo)
         es_valido, error = lector.validar()
         if not es_valido:
@@ -205,7 +195,7 @@ class AnalizadorCodigo:
         codigo, error = lector.leer_lineas()
         if error:
             raise ExcepcionAnalizador(f"Error al leer archivo: {error}")
-        return self.formatear_codigo(codigo)
+        return codigo
 
     def _procesar_codigo(
             self, codigo: list[str], nombre_archivo: str
@@ -223,19 +213,24 @@ class AnalizadorCodigo:
         Example:
             >>> metricas = self._procesar_codigo(codigo, "script.py")
         """
+        # Construimos y validamos el AST primero para asegurar que el código
+        # cumple con el estándar antes de calcular métricas
         arbol = ArbolArchivoPython(codigo)
         self._validar_arbol_sintaxis(arbol)
         self.arbol = arbol
-        
+
         return MetricasArchivo(
             nombre_archivo=nombre_archivo,
-            lineas_fisicas=self.contador_fisico.contar_lineas_fisicas(arbol.raiz),
-            lineas_logicas=self.contador_logico.contar_lineas_logicas(arbol.raiz)
+            lineas_fisicas = \
+            self.contador_fisico.contar_lineas_fisicas( arbol.raiz ),
+            lineas_logicas = \
+            self.contador_logico.contar_lineas_logicas( arbol.raiz )
         )
 
     def _validar_arbol_sintaxis(self, arbol: ArbolArchivoPython) -> None:
         """
-        Valida la estructura sintáctica del AST con respecto al estándar de codificación.
+        Valida la estructura sintáctica del AST con respecto al estándar de 
+        codificación.
 
         Args:
             arbol (ArbolArchivoPython): Árbol sintáctico a validar
@@ -246,7 +241,10 @@ class AnalizadorCodigo:
         Example:
             >>> self._validar_arbol_sintaxis(arbol)
         """
-        es_valido, error = self.verificador_estandar.es_arbol_sintactico_valido(arbol.raiz)
+        # La validación del árbol es necesaria para asegurar que el código
+        # cumple con los estándares de codificación antes de calcular métricas
+        es_valido, error = \
+        self.verificador_estandar.es_arbol_sintactico_valido(arbol.raiz)
         if not es_valido:
             raise ExcepcionAnalizador(f"Violación del estándar: {error}")
 

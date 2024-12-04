@@ -1,20 +1,20 @@
 """
 Nombre del módulo: arbol_sintactico.py
-Ruta: src/core/arbol_sintactico.py
+Ruta: contador_lineas/core/arbol/arbol_sintactico.py
 Descripción: Define la estructura del árbol sintáctico para archivos Python
 Proyecto: Sistema de Conteo de Líneas Físicas y Lógicas en Python
 Autor: Amílcar Pérez
 Organización: Equipo 3
 Licencia: MIT
 Fecha de Creación: 18-11-2024
-Última Actualización: 18-11-2024
+Última Actualización: 19-11-2024
 
 Dependencias:
-    - utils.tree_builder.TreeBuilder
+    - utils.constructor_arbol.ConstructorArbol
     - utils.impresion_arbol.imprimir_arbol
 
 Uso:
-    from core.arbol import ArbolArchivoPython
+    from contador_lineas.core.arbol.arbol_sintactico import ArbolArchivoPython
     arbol = ArbolArchivoPython(contenido_archivo)
     arbol.imprimir_arbol()
 
@@ -22,7 +22,7 @@ Notas:
     - Implementa representación jerárquica del código fuente
 """
 
-from contador_lineas.utils.tree_builder import TreeBuilder
+from contador_lineas.core.arbol.constructor_arbol import ConstructorArbol
 from contador_lineas.utils.impresion_arbol import imprimir_arbol
 
 
@@ -31,7 +31,7 @@ class ArbolArchivoPython:
     Representa un árbol sintáctico de un archivo Python.
 
     Attributes:
-        constructor (TreeBuilder): Constructor del árbol sintáctico
+        constructor (ConstructorArbol): Constructor del árbol sintáctico
         raiz (Nodo): Nodo raíz del árbol sintáctico
 
     Methods:
@@ -43,10 +43,13 @@ class ArbolArchivoPython:
         >>> arbol = ArbolArchivoPython(contenido)
         >>> arbol.imprimir_arbol()
     """
-    
+
     def __init__(self, file_content: list[str]):
-        self.constructor = TreeBuilder()
-        self.raiz = self.constructor.build(file_content)
+        # Usamos ConstructorArbol para construir el árbol sintáctico ya que la
+        # construcción requiere un análisis complejo del código que se mantiene
+        # separado de la representación del árbol
+        self.constructor = ConstructorArbol()
+        self.raiz = self.constructor.construir(file_content)
 
     def imprimir_arbol(self) -> None:
         """

@@ -23,7 +23,7 @@ Notas:
 
 from typing import List, Optional
 
-from analizador_cambios.models.nodos import TipoNodo
+from contador_lineas.models.nodos import TipoNodo
 
 
 class Nodo:
