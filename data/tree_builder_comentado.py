@@ -145,7 +145,6 @@ class TreeBuilder:
             ) +
                      AnalizadorCadenas.contar_sin_comillas(line, '[') +
                      AnalizadorCadenas.contar_sin_comillas(line, '{'))
-            
             self.open_delimiters -= (
                 AnalizadorCadenas.contar_sin_comillas(line,
                 ')'
