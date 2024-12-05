@@ -1,7 +1,8 @@
 """
 Nombre del módulo: formateador_linea.py
 Ruta: analizador_cambios/utils/formateador_linea.py
-Descripción: Formatea líneas de código Python para cumplir con límites de longitud
+Descripción: Formatea líneas de código Python para cumplir con límites de 
+             longitud
 Proyecto: Sistema de Conteo de Líneas Físicas y Lógicas en Python
 Autor: Amílcar Pérez
 Organización: Equipo 3
@@ -26,7 +27,9 @@ Notas:
 from typing import List, Tuple
 
 from analizador_cambios.config.longitud_lineas import LONGITUD_MAXIMA_LINEA
-from contador_lineas.core.analizadores.analizador_cadenas import AnalizadorCadenas
+from contador_lineas.core.analizadores.analizador_cadenas import (
+    AnalizadorCadenas
+)
 
 
 class ExcepcionFormateo(Exception):
@@ -63,7 +66,8 @@ class FormateadorLinea:
         """
         Formatea una línea considerando comentarios.
         """
-        codigo, comentario = FormateadorLinea._extraer_codigo_y_comentario(linea)
+        codigo, comentario = \
+        FormateadorLinea._extraer_codigo_y_comentario(linea)
 
         if len(linea) <= LONGITUD_MAXIMA_LINEA:
             return [linea]
@@ -283,7 +287,7 @@ class FormateadorLinea:
 
         print()
         return FormateadorLinea._formatear_generico(linea, indentacion)
-    
+
     @staticmethod
     def _formatear_asignacion(linea: str, indentacion: str) -> List[str]:
         """
@@ -314,7 +318,7 @@ class FormateadorLinea:
                 if pos_operador == -1 or pos < pos_operador:
                     pos_operador = pos
                     operador_encontrado = op
- 
+
         # Si no encontramos operador de asignación, usar el formato genérico
         if pos_operador == -1:
             return FormateadorLinea._formatear_generico(linea, indentacion)
@@ -322,7 +326,7 @@ class FormateadorLinea:
         # Si es un operador de comparación, usar el formato genérico
         if operador_encontrado == '==':
             return FormateadorLinea._formatear_generico(linea, indentacion)
-        
+
         izquierda = linea[:pos_operador]
         derecha = linea[pos_operador + len(operador_encontrado):]
 
