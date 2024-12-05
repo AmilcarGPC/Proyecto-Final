@@ -73,5 +73,10 @@
         "nombre_archivo": "__main__.py",
         "lineas_logicas": 15,
         "lineas_fisicas": 58
+    },
+    "formatters.py": {
+        "nombre_archivo": "formatters.py",
+        "lineas_logicas": 5,
+        "lineas_fisicas": 15
     }
 }

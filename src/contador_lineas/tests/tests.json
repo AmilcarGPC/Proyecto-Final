@@ -1,0 +1,42 @@
+{
+    "test.py": {
+        "nombre_archivo": "test.py",
+        "lineas_logicas": 1,
+        "lineas_fisicas": 2
+    },
+    "test1.py": {
+        "nombre_archivo": "test1.py",
+        "lineas_logicas": 1,
+        "lineas_fisicas": 2
+    },
+    "test2.py": {
+        "nombre_archivo": "test2.py",
+        "lineas_logicas": 1,
+        "lineas_fisicas": 2
+    },
+    "test3.py": {
+        "nombre_archivo": "test3.py",
+        "lineas_logicas": 1,
+        "lineas_fisicas": 2
+    },
+    "caso_poo": {
+        "nombre_archivo": "caso_poo",
+        "lineas_logicas": 8,
+        "lineas_fisicas": 13
+    },
+    "caso_funcional": {
+        "nombre_archivo": "caso_funcional",
+        "lineas_logicas": 4,
+        "lineas_fisicas": 7
+    },
+    "caso_archivos": {
+        "nombre_archivo": "caso_archivos",
+        "lineas_logicas": 4,
+        "lineas_fisicas": 7
+    },
+    "caso_avanzado": {
+        "nombre_archivo": "caso_avanzado",
+        "lineas_logicas": 5,
+        "lineas_fisicas": 14
+    }
+}

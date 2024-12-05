@@ -5,3 +5,9 @@ __pycache__/
 *.pyc
 *.pyo
 *.egg-info
+
+# Ignorar directorios de instalación
+build/
+
+# Ignorar caché tests
+.pytest_cache/

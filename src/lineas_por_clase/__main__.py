@@ -42,6 +42,7 @@ from lineas_por_clase.utils.formateador_metricas import mostrar_tabla_metricas
 from lineas_por_clase.core.gestion_archivos.almacenamiento_metricas import (
     AlmacenamientoMetricas
 )
+__version__ = "1.0.0"
 
 
 def obtener_nombre_archivo(ruta_archivo: str) -> str:
@@ -77,6 +78,12 @@ def procesar_argumentos() -> argparse.Namespace:
         description="Sistema de Conteo de Líneas Físicas y Lógicas en Python"
     )
     analizador.add_argument(
+        "--version",
+        action="version",
+        version=f"lineas_por_clase {__version__}",
+        help="Muestra la versión del programa"
+    )
+    analizador.add_argument(
         "ruta_archivo",
         type=str,
         nargs='?',
@@ -92,17 +99,19 @@ def procesar_argumentos() -> argparse.Namespace:
         action="store_true",
         help="Mostrar tabla de métricas de todos los archivos procesados"
     )
+    analizador.add_argument(
+        "--dev-db-path",
+        type=str,
+        help=argparse.SUPPRESS,
+        default="db/lineas_por_clase_registro.json"
+    )
     return analizador.parse_args()
 
 
-def imprimir_resultados() -> None:
+def imprimir_exito(mensaje_exito) -> None:
     """
     Imprime un mensaje de éxito al procesar un archivo
     """
-    mensaje_exito = (
-        "¡Archivo procesado exitosamente! "
-        "Las métricas guardadas en almacenamiento."
-    )
     print(f"{Fore.GREEN}{mensaje_exito}{Style.RESET_ALL}")
 
 
@@ -130,6 +139,7 @@ def validar_argumentos(args: argparse.Namespace) -> Tuple[bool, str]:
 
 def procesar_archivo(
         ruta_archivo: str,
+        ruta_almacenamiento: str,
         almacen: AlmacenamientoMetricas,
         mostrar_tabla: bool) -> None:
     """
@@ -146,7 +156,10 @@ def procesar_archivo(
     """
     nombre_archivo = obtener_nombre_archivo(ruta_archivo)
     analizador = AnalizadorCodigo()
-    resultado = analizador.analizar_archivo(ruta_archivo, nombre_archivo)
+    resultado = analizador.analizar_archivo(
+        ruta_archivo,
+        nombre_archivo,
+        ruta_almacenamiento)
 
     if mostrar_tabla:
         mostrar_tabla_metricas([
@@ -163,7 +176,7 @@ def main() -> None:
     """
     init()
     args = procesar_argumentos()
-    almacen = AlmacenamientoMetricas()
+    almacen = AlmacenamientoMetricas(args.dev_db_path)
 
     # Caso especial: si solo se pide tabla completa (-tc), mostramos todas las
     # métricas y terminamos
@@ -181,9 +194,12 @@ def main() -> None:
     try:
         # Procesamos el archivo actual y opcionalmente mostramos la tabla
         # histórica si se solicitó
-        procesar_archivo(args.ruta_archivo, almacen, args.t)
+        procesar_archivo(args.ruta_archivo, args.dev_db_path, almacen, args.t)
+        imprimir_exito("¡Archivo procesado exitosamente!")
         if args.tc:
             mostrar_tabla_metricas(almacen.obtener_todas_las_metricas())
+        else:
+            imprimir_exito("Métricas guardadas con éxito, consulte usando -tc.")
     except ExcepcionAnalizador as e:
         print(f"{Fore.RED}{str(e)}{Style.RESET_ALL}")
     except Exception as e:

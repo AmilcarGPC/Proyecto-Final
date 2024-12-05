@@ -74,7 +74,10 @@ class VerificadorEstandarCodigo:
             >>> es_valido, mensaje = \
             verificador.es_arbol_sintactico_valido(raiz)
         """
-        return self._validar_nodo(raiz)
+        try:
+            return self._validar_nodo(raiz)
+        except Exception as e:
+            return False, f"Error al validar nodo: {str(e)}"
 
     def _validar_nodo(self, nodo: Nodo) -> Tuple[bool, str]:
         """

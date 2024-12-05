@@ -112,7 +112,6 @@ class AnalizadorCodigo:
     def __init__(self):
         self.arbol = None
         self.codigo = None
-        self.almacenamiento = AlmacenamientoMetricas()
         self.formateador = FormateadorLinea()
         self.contador_fisico = ContadorLineasFisicas()
         self.verificador_estandar = VerificadorEstandarCodigo()
@@ -156,7 +155,11 @@ class AnalizadorCodigo:
         return self.verificador_estandar.es_arbol_sintactico_valido(tree.raiz)
 
     def analizar_archivo(
-            self, ruta_archivo: str, nombre_archivo: str) -> ResultadoAnalisis:
+            self, 
+            ruta_archivo: str, 
+            nombre_archivo: str, 
+            ruta_almacenamiento: str = "db/lineas_por_clase_registro.json"
+        ) -> ResultadoAnalisis:
         """
         Analiza un archivo Python y obtiene sus métricas.
 
@@ -176,7 +179,7 @@ class AnalizadorCodigo:
         codigo = self._obtener_codigo(ruta_archivo)
         self.codigo = codigo
         metricas = self._procesar_codigo(codigo, nombre_archivo)
-        self.almacenamiento.guardar_metricas(metricas)
+        AlmacenamientoMetricas(ruta_almacenamiento).guardar_metricas(metricas)
         return self._crear_resultado(metricas)
 
     def _validar_archivo(self, ruta_archivo: str) -> None:

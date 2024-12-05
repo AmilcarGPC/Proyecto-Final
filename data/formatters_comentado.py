@@ -2,7 +2,7 @@
 from typing import List
 from tabulate import tabulate
 from colorama import init, Fore, Style
-from contador_lineas.models.metricas import MetricasArchivo # ELIMINADA
+from contador_lineas.models.metricas import MetricasArchivo # BORRADA
 
 class MetricasFormatter:
     def __init__(self):
@@ -13,14 +13,14 @@ class MetricasFormatter:
             'logical': Fore.CYAN,
             'physical': Fore.YELLOW,
             'reset': Style.RESET_ALL
-        } # ELIMINADA (las 7 líneas previas cuentan como 1)
+        } # BORRADA (las 7 líneas previas cuentan como 1)
 
     def format_table(self, metricas: List[MetricasArchivo]) -> None:
         headers = [
             f"{self.theme['header']}PROGRAMA{self.theme['reset']}",
             f"{self.theme['header']}LOC Lógicas{self.theme['reset']}",
             f"{self.theme['header']}LOC Físicas{self.theme['reset']}"
-        ] # ELIMINADA (las 5 líneas previas cuentan como 1)
+        ] # BORRADA (las 5 líneas previas cuentan como 1)
 
         rows = [
             [
@@ -32,7 +32,7 @@ class MetricasFormatter:
                 f"{m.lineas_fisicas}{self.theme['reset']}"
             ]
             for m in metricas
-        ] # ELIMINADA (las 11 líneas previas cuentan como 1)
+        ] # BORRADA (las 11 líneas previas cuentan como 1)
 
         print("\n" + tabulate(rows, headers=headers, tablefmt="grid"))
 

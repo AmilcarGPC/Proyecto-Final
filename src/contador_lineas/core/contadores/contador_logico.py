@@ -28,7 +28,7 @@ Notas:
 
 from contador_lineas.core.arbol.nodo import Nodo
 from contador_lineas.config.node_types import LOGICAL_NODE_TYPES
-
+from contador_lineas.models.nodos import TipoNodo
 
 class ContadorLineasLogicas:
     """
@@ -78,6 +78,9 @@ class ContadorLineasLogicas:
             >>> _contar_lineas_nodo(nodo)
             1
         """
+        if nodo.tipo != TipoNodo.ROOT and len(nodo.contenido) == 0:
+            return 0
+        
         contador = 0
 
         # Solo contamos nodos que representan declaraciones ejecutables

@@ -2,7 +2,7 @@
 from typing import List
 from tabulate import tabulate
 from colorama import init, Fore, Style
-from analizador_cambios.models.metricas import MetricasArchivo # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.86%
+from analizador_cambios.models.metricas import MetricasArchivo # AÑADIDA EN UN 14%
 
 class MetricasFormatter:
     def __init__(self):
@@ -15,7 +15,7 @@ class MetricasFormatter:
             'loc': Fore.MAGENTA,
             'total': Fore.RED,
             'reset': Style.RESET_ALL
-        } # AGREGADA PEQUEÑA MODIFICACIÓN DEL 0.81% (las 9 líneas previas cuentan como 1)
+        } # AÑADIDA EN UN 19% (las 9 líneas previas cuentan como 1)
 
     def format_table(self, metricas: List[MetricasArchivo]) -> None:
         headers = [
@@ -26,12 +26,12 @@ class MetricasFormatter:
             CLASE{self.theme['reset']}",
             f"{self.theme['header']}" + "TOTAL DE LOC FÍSICA DEL PROGRAMA" + \
             f"{self.theme['reset']}"
-        ] # AGREGADA TOTALMENTE NUEVA (las 9 líneas previas cuentan como 1)
+        ] # AÑADIDA EN UN 100% (las 9 líneas previas cuentan como 1)
 
-        rows = [] # AGREGADA TOTALMENTE NUEVA
-        for m in metricas: # AGREGADA TOTALMENTE NUEVA
-            # Primera fila con el nombre del programa y primera clase # AGREGADA TOTALMENTE NUEVA
-            first_class = m.clases[0] if m.clases else None # AGREGADA TOTALMENTE NUEVA
+        rows = [] # AÑADIDA EN UN 100%
+        for m in metricas: # AÑADIDA EN UN 100%
+            # Primera fila con el nombre del programa y primera clase # AÑADIDA EN UN 100%
+            first_class = m.clases[0] if m.clases else None # AÑADIDA EN UN 100%
             rows.append([
                 f"{self.theme['filename']}{m.nombre_archivo}"+\
                 "{self.theme['reset']}",
@@ -42,10 +42,10 @@ class MetricasFormatter:
                 f"{self.theme['loc']}{first_class.lineas_fisicas if 
                 first_class else 0}{self.theme['reset']}",
                 ""  # El total irá en una fila separada
-            ]) # AGREGADA TOTALMENTE NUEVA (las 11 líneas previas cuentan como 1)
+            ]) # AÑADIDA EN UN 100% (las 11 líneas previas cuentan como 1)
             
-            # Filas para el resto de clases # AGREGADA TOTALMENTE NUEVA
-            for clase in m.clases[1:]: # AGREGADA TOTALMENTE NUEVA
+            # Filas para el resto de clases # AÑADIDA EN UN 100%
+            for clase in m.clases[1:]: # AÑADIDA EN UN 100%
                 rows.append([
                     "",
                     f"{self.theme['class_name']}{clase.nombre_clase}" + \
@@ -55,9 +55,9 @@ class MetricasFormatter:
                     f"{self.theme['loc']}{clase.lineas_fisicas}" + \
                     f"{self.theme['reset']}",
                     ""
-                ]) # AGREGADA TOTALMENTE NUEVA (las 10 líneas previas cuentan como 1)
+                ]) # AÑADIDA EN UN 100% (las 10 líneas previas cuentan como 1)
             
-            # Fila con el total de líneas físicas # AGREGADA TOTALMENTE NUEVA
+            # Fila con el total de líneas físicas # AÑADIDA EN UN 100%
             rows.append([
                 "",
                 "",
@@ -65,7 +65,7 @@ class MetricasFormatter:
                 "",
                 f"{self.theme['total']}{m.total_lineas_fisicas}" + \
                 f"{self.theme['reset']}"
-            ]) # AGREGADA TOTALMENTE NUEVA (las 8 líneas previas cuentan como 1)
+            ]) # AÑADIDA EN UN 100% (las 8 líneas previas cuentan como 1)
 
         print("\n" + tabulate(rows, headers=headers, tablefmt="grid"))
 

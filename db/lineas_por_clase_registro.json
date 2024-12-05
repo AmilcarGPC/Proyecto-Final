@@ -458,5 +458,37 @@
             }
         ],
         "total_lineas_fisicas": 21
+    },
+    "formatters.py": {
+        "nombre_archivo": "formatters.py",
+        "clases": [
+            {
+                "nombre_clase": "MetricasFormatter",
+                "cantidad_metodos": 2,
+                "lineas_fisicas": 8
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 7
+            }
+        ],
+        "total_lineas_fisicas": 15
+    },
+    "formatters_v2.py": {
+        "nombre_archivo": "formatters_v2.py",
+        "clases": [
+            {
+                "nombre_clase": "MetricasFormatter",
+                "cantidad_metodos": 2,
+                "lineas_fisicas": 14
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 7
+            }
+        ],
+        "total_lineas_fisicas": 21
     }
 }

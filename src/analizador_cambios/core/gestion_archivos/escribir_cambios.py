@@ -171,7 +171,7 @@ class EscribirCambios:
         # Esto ayuda a diferenciar entre código nuevo y modificaciones
         if int(cambio.medida_de_cambio*100) != 0:
             comentario = f"{codigo[linea].rstrip()}" + " # AÑADIDA EN UN " + \
-            f"{cambio.medida_de_cambio}%"
+            f"{100 - int(cambio.medida_de_cambio*100)}%"
         else:
             comentario = f"{codigo[linea].rstrip()} # AÑADIDA EN UN 100%"
 

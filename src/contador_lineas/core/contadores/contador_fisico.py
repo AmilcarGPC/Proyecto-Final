@@ -82,6 +82,10 @@ class ContadorLineasFisicas:
             >>> _contar_lineas_nodo(nodo)
             4
         """
+        if (nodo.tipo != TipoNodo.ROOT and nodo.tipo != TipoNodo.CLASS):
+            if len(nodo.contenido) == 0:
+                return 0
+        
         contador = 0
         if nodo.tipo == TipoNodo.IMPORT:
             contador += ContadorLineasFisicas._procesar_importacion(nodo)
@@ -143,7 +147,7 @@ class ContadorLineasFisicas:
         # siendo asignadas (lado izquierdo del =)
         if not "," in nodo.contenido.split("=")[0]:
             return 1
-
+        
         # Cada variable en una asignación múltiple cuenta como una línea física
         # separada, de acuerdo con el estándar de codificación
         elementos = nodo.contenido.split("=")[0].split(",")

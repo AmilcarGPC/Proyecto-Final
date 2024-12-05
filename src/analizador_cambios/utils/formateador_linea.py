@@ -383,8 +383,9 @@ class FormateadorLinea:
         for i, palabra in enumerate(palabras):
             if i == 0 and len(palabra) + len(indentacion) + 2 > \
                 LONGITUD_MAXIMA_LINEA:
-                raise ExcepcionFormateo(f"La línea '{linea.strip()}' es muy " +
-                "larga para ser formateada.")
+                error = f"La línea '{linea.strip()}' es muy larga para ser " + \
+                "formateada."
+                raise ExcepcionFormateo(f"Línea inválida: {error}")
             if len(linea_actual) + len(palabra) + 2 <= LONGITUD_MAXIMA_LINEA:
                 linea_actual += ((' ' if linea_actual != indentacion else '')
                                  + palabra)

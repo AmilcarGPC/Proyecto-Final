@@ -1,7 +1,8 @@
 """
 Nombre del módulo: nodos.py
 Ruta: contador_lineas/models/nodos.py
-Descripción: Define los tipos de nodos y su estructura para el análisis sintáctico
+Descripción: Define los tipos de nodos y su estructura para el análisis 
+             sintáctico
 Proyecto: Sistema de Conteo de Líneas Físicas y Lógicas en Python
 Autor: Amílcar Pérez
 Organización: Equipo 3

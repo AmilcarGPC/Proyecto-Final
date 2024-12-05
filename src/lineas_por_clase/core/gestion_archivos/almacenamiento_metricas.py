@@ -60,7 +60,7 @@ class AlmacenamientoMetricas:
 
     def __init__(
             self,
-            ruta_almacenamiento: str = "db/lineas_por_clase_registro.json"):
+            ruta_almacenamiento: str):
         # Usamos un archivo JSON por defecto en la carpeta db/ para mantener
         # persistencia entre ejecuciones
         self.ruta_almacenamiento = ruta_almacenamiento
