@@ -78,5 +78,15 @@
         "nombre_archivo": "formatters.py",
         "lineas_logicas": 5,
         "lineas_fisicas": 15
+    },
+    "violacion_estandar.py": {
+        "nombre_archivo": "violacion_estandar.py",
+        "lineas_logicas": 0,
+        "lineas_fisicas": 0
+    },
+    "violacion_estandar_falsos.py": {
+        "nombre_archivo": "violacion_estandar_falsos.py",
+        "lineas_logicas": 2,
+        "lineas_fisicas": 3
     }
 }

@@ -260,7 +260,7 @@ def funcion_larga_con_muchos_argumentos(
 
 ### Cálculo de Métricas
 
-> Todas las métricas siguen nuestro estándar de conteo personalizado definido en [`docs/standards/counting_standard.md`](docs/standards/counting_standard.md)
+> Todas las métricas siguen nuestro estándar de conteo personalizado definido en [`docs/estandares/estandar_conteo.md`](docs/estandares/estandar_conteo.md)
 
 #### Líneas Físicas (PLOC)
 Basado en la versión 1.2 de nuestro estándar de conteo, incluye:
@@ -320,7 +320,7 @@ Siguiendo las especificaciones de nuestro estándar de conteo:
 - Propiedades y decoradores
 
 Para reglas detalladas y especificaciones, consulte:
-- [Documentación del Estándar de Conteo](docs/standards/counting_standard.md)
+- [Documentación del Estándar de Conteo](docs/estandares/estandar_conteo.md)
 - [Documentación en Línea](https://docs-proyecto-final.vercel.app/)
 
 ### Clasificación de Cambios
@@ -427,7 +427,7 @@ Errores comunes y soluciones:
 
 Este proyecto implementa estándares personalizados documentados en:
 - [Documentación en Línea](https://docs-proyecto-final.vercel.app/)
-- [`docs/standards/coding_standard/`](docs/standards/coding_standard/1_naming_conventions.md)
+- [`docs/estandares/estandar_codificacion/`](docs/estandares/estandar_codificacion/1_convenciones_nombrado.md)
 
 #### Requisitos del Estándar de Codificación
 
@@ -476,7 +476,7 @@ Todos los archivos Python deben cumplir estrictamente estas reglas, de lo contra
    - No se permiten expresiones lambda
    - ❌ `lambda x: x + 1`
 
-Por favor, consulte nuestra documentación [`docs/standards/coding_standard/`](docs/standards/coding_standard/1_naming_conventions.md) para información detallada sobre los estándares específicos implementados en esta herramienta.
+Por favor, consulte nuestra documentación [`docs/estandares/estandar_codificacion/`](docs/estandares/estandar_codificacion/1_convenciones_nombrado.md) para información detallada sobre los estándares específicos implementados en esta herramienta.
 
 ### Almacenamiento
 
@@ -488,7 +488,7 @@ Por favor, consulte nuestra documentación [`docs/standards/coding_standard/`](d
 
 Este proyecto está licenciado bajo la Licencia MIT - consulte el archivo  [LICENSE](LICENSE) para más detalles.
 
-Copyright (c) 2024 AMILCAR PEREZ CANTO
+Copyright (c) 2024 EQUIPO 3
 
 La Licencia MIT te permite:
 - ✅ Uso comercial
