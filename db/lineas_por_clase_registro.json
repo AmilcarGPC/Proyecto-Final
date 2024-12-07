@@ -490,5 +490,419 @@
             }
         ],
         "total_lineas_fisicas": 21
+    },
+    "ejemplo_v1.py": {
+        "nombre_archivo": "ejemplo_v1.py",
+        "clases": [
+            {
+                "nombre_clase": "Token",
+                "cantidad_metodos": 2,
+                "lineas_fisicas": 6
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 0
+            }
+        ],
+        "total_lineas_fisicas": 6
+    },
+    "ejemplo_v2.py": {
+        "nombre_archivo": "ejemplo_v2.py",
+        "clases": [
+            {
+                "nombre_clase": "Token",
+                "cantidad_metodos": 2,
+                "lineas_fisicas": 7
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 1
+            }
+        ],
+        "total_lineas_fisicas": 8
+    },
+    "test_1_v2.py": {
+        "nombre_archivo": "test_1_v2.py",
+        "clases": [
+            {
+                "nombre_clase": "Token",
+                "cantidad_metodos": 2,
+                "lineas_fisicas": 6
+            },
+            {
+                "nombre_clase": "Lexer",
+                "cantidad_metodos": 5,
+                "lineas_fisicas": 30
+            },
+            {
+                "nombre_clase": "Parser",
+                "cantidad_metodos": 5,
+                "lineas_fisicas": 42
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 14
+            }
+        ],
+        "total_lineas_fisicas": 92
+    },
+    "almacenamiento_metricas_v1.py": {
+        "nombre_archivo": "almacenamiento_metricas_v1.py",
+        "clases": [
+            {
+                "nombre_clase": "AlmacenamientoMetricas",
+                "cantidad_metodos": 5,
+                "lineas_fisicas": 21
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 4
+            }
+        ],
+        "total_lineas_fisicas": 25
+    },
+    "almacenamiento_metricas_v2.py": {
+        "nombre_archivo": "almacenamiento_metricas_v2.py",
+        "clases": [
+            {
+                "nombre_clase": "AlmacenamientoMetricas",
+                "cantidad_metodos": 5,
+                "lineas_fisicas": 27
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 4
+            }
+        ],
+        "total_lineas_fisicas": 31
+    },
+    "analizador_v1.py": {
+        "nombre_archivo": "analizador_v1.py",
+        "clases": [
+            {
+                "nombre_clase": "ExcepcionAnalizador(Exception)",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 2
+            },
+            {
+                "nombre_clase": "ResultadoAnalisis",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 4
+            },
+            {
+                "nombre_clase": "AnalizadorCodigo",
+                "cantidad_metodos": 8,
+                "lineas_fisicas": 41
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 10
+            }
+        ],
+        "total_lineas_fisicas": 57
+    },
+    "analizador_v2.py": {
+        "nombre_archivo": "analizador_v2.py",
+        "clases": [
+            {
+                "nombre_clase": "ExcepcionAnalizador(Exception)",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 2
+            },
+            {
+                "nombre_clase": "ResultadoAnalisis",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 4
+            },
+            {
+                "nombre_clase": "AnalizadorCodigo",
+                "cantidad_metodos": 10,
+                "lineas_fisicas": 54
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 10
+            }
+        ],
+        "total_lineas_fisicas": 70
+    },
+    "arbol_sintactico_v1.py": {
+        "nombre_archivo": "arbol_sintactico_v1.py",
+        "clases": [
+            {
+                "nombre_clase": "ArbolArchivoPython",
+                "cantidad_metodos": 2,
+                "lineas_fisicas": 6
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 3
+            }
+        ],
+        "total_lineas_fisicas": 9
+    },
+    "arbol_sintactico_v2.py": {
+        "nombre_archivo": "arbol_sintactico_v2.py",
+        "clases": [
+            {
+                "nombre_clase": "ArbolArchivoPython",
+                "cantidad_metodos": 5,
+                "lineas_fisicas": 31
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 5
+            }
+        ],
+        "total_lineas_fisicas": 36
+    },
+    "constructor_arbol_v1.py": {
+        "nombre_archivo": "constructor_arbol_v1.py",
+        "clases": [
+            {
+                "nombre_clase": "ConstructorArbol",
+                "cantidad_metodos": 2,
+                "lineas_fisicas": 22
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 105
+            }
+        ],
+        "total_lineas_fisicas": 127
+    },
+    "constructor_arbol_v2.py": {
+        "nombre_archivo": "constructor_arbol_v2.py",
+        "clases": [
+            {
+                "nombre_clase": "ConstructorArbol",
+                "cantidad_metodos": 2,
+                "lineas_fisicas": 22
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 105
+            }
+        ],
+        "total_lineas_fisicas": 127
+    },
+    "formateador_metricas_v1.py": {
+        "nombre_archivo": "formateador_metricas_v1.py",
+        "clases": [
+            {
+                "nombre_clase": "FormateadorMetricas",
+                "cantidad_metodos": 1,
+                "lineas_fisicas": 3
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 14
+            }
+        ],
+        "total_lineas_fisicas": 17
+    },
+    "formateador_metricas_v2.py": {
+        "nombre_archivo": "formateador_metricas_v2.py",
+        "clases": [
+            {
+                "nombre_clase": "FormateadorMetricas",
+                "cantidad_metodos": 3,
+                "lineas_fisicas": 23
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 7
+            }
+        ],
+        "total_lineas_fisicas": 30
+    },
+    "metricas_v1.py": {
+        "nombre_archivo": "metricas_v1.py",
+        "clases": [
+            {
+                "nombre_clase": "MetricasArchivo",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 4
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 2
+            }
+        ],
+        "total_lineas_fisicas": 6
+    },
+    "metricas_v2.py": {
+        "nombre_archivo": "metricas_v2.py",
+        "clases": [
+            {
+                "nombre_clase": "MetricasClase",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 4
+            },
+            {
+                "nombre_clase": "MetricasArchivo",
+                "cantidad_metodos": 1,
+                "lineas_fisicas": 6
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 4
+            }
+        ],
+        "total_lineas_fisicas": 14
+    },
+    "nodo_v1.py": {
+        "nombre_archivo": "nodo_v1.py",
+        "clases": [
+            {
+                "nombre_clase": "Nodo",
+                "cantidad_metodos": 2,
+                "lineas_fisicas": 10
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 2
+            }
+        ],
+        "total_lineas_fisicas": 12
+    },
+    "nodo_v2.py": {
+        "nombre_archivo": "nodo_v2.py",
+        "clases": [
+            {
+                "nombre_clase": "Nodo",
+                "cantidad_metodos": 3,
+                "lineas_fisicas": 20
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 2
+            }
+        ],
+        "total_lineas_fisicas": 22
+    },
+    "__main___v1.py": {
+        "nombre_archivo": "__main___v1.py",
+        "clases": [
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 55
+            }
+        ],
+        "total_lineas_fisicas": 55
+    },
+    "__main___v2.py": {
+        "nombre_archivo": "__main___v2.py",
+        "clases": [
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 55
+            }
+        ],
+        "total_lineas_fisicas": 55
+    },
+    "analizador_v3.py": {
+        "nombre_archivo": "analizador_v3.py",
+        "clases": [
+            {
+                "nombre_clase": "ExcepcionAnalizador(Exception)",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 2
+            },
+            {
+                "nombre_clase": "ResultadoAnalisis",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 4
+            },
+            {
+                "nombre_clase": "AnalizadorCodigo",
+                "cantidad_metodos": 11,
+                "lineas_fisicas": 64
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 11
+            }
+        ],
+        "total_lineas_fisicas": 81
+    },
+    "arbol_sintactico_v3.py": {
+        "nombre_archivo": "arbol_sintactico_v3.py",
+        "clases": [
+            {
+                "nombre_clase": "ArbolArchivoPython",
+                "cantidad_metodos": 5,
+                "lineas_fisicas": 32
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 5
+            }
+        ],
+        "total_lineas_fisicas": 37
+    },
+    "constructor_arbol_v3.py": {
+        "nombre_archivo": "constructor_arbol_v3.py",
+        "clases": [
+            {
+                "nombre_clase": "ConstructorArbol",
+                "cantidad_metodos": 2,
+                "lineas_fisicas": 23
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 129
+            }
+        ],
+        "total_lineas_fisicas": 152
+    },
+    "nodo_v3.py": {
+        "nombre_archivo": "nodo_v3.py",
+        "clases": [
+            {
+                "nombre_clase": "Nodo",
+                "cantidad_metodos": 3,
+                "lineas_fisicas": 21
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 2
+            }
+        ],
+        "total_lineas_fisicas": 23
+    },
+    "__main___v3.py": {
+        "nombre_archivo": "__main___v3.py",
+        "clases": [
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 86
+            }
+        ],
+        "total_lineas_fisicas": 86
     }
 }

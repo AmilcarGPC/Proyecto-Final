@@ -10,7 +10,7 @@ description: Este documento describe las reglas y guías para contar líneas de 
 |-------|-------|-------|
 | Tipos de conteo | Físico y Lógico | Se soportan ambos tipos de conteo |
 | Versión | 1.2 | Incluye conteo lógico |
-| Última actualización | 24-11-2024 |  |
+| Última actualización | 16-11-2024 |  |
 | Herramientas recomendadas | Tarea 1 | Para conteo automático |
 
 ### 1.1 Estructuras Lógicas

@@ -1,0 +1,18 @@
+{
+    "test.py": {
+        "nombre_archivo": "test.py",
+        "clases": [
+            {
+                "nombre_clase": "Ejemplo",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 2
+            },
+            {
+                "nombre_clase": "",
+                "cantidad_metodos": 0,
+                "lineas_fisicas": 3
+            }
+        ],
+        "total_lineas_fisicas": 5
+    }
+}

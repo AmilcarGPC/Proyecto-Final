@@ -80,9 +80,9 @@ class ResultadoAnalisis:
         >>> resultado = ResultadoAnalisis(10, 8, "script.py")
     """
 
-    lineas_fisicas: int
-    lineas_logicas: int
     nombre_archivo: str
+    clases: List[MetricasClase]
+    total_lineas_fisicas: int
 
 
 class AnalizadorCodigo:
@@ -302,4 +302,8 @@ class AnalizadorCodigo:
         Example:
             >>> resultado = self._crear_resultado(metricas)
         """
-        return None
+        return ResultadoAnalisis(
+            clases=metricas.clases,
+            total_lineas_fisicas=metricas.total_lineas_fisicas,
+            nombre_archivo=metricas.nombre_archivo
+        )

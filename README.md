@@ -41,16 +41,22 @@ Una herramienta Python para contar líneas de código físicas y lógicas escrit
 ## Inicio Rápido
 
 ```bash
-# 1. Instala el paquete
+# 1. Clona el repositorio
+git clone https://github.com/AmilcarGPC/Proyecto-Final.git
+
+# 2. Navega al directorio
+cd Proyecto-Final
+
+# 3. Instala el paquete
 pip install .
 
-# 2. Ejecuta el análisis en un archivo
+# 4. Ejecuta el análisis en un archivo
 contador_lineas data/ejemplo.py
 
-# 3. Ejecuta el análisis por clases en un archivo
+# 5. Ejecuta el análisis por clases en un archivo
 lineas_por_clase data/ejemplo.py
 
-# 4. Compara cambios entre versiones
+# 6. Compara cambios entre versiones
 analizador_cambios data/version1.py data/version2.py
 ```
 
@@ -75,6 +81,12 @@ Las dependencias se instalan automáticamente al instalar el paquete, pero se in
 - pip package manager
 
 ```bash
+# Clona el repositorio
+git clone https://github.com/AmilcarGPC/Proyecto-Final.git
+
+# Navega al directorio
+cd Proyecto-Final
+
 # Instalar el paquete
 pip install .
 
@@ -83,6 +95,43 @@ contador_lineas --version
 lineas_por_clase --version
 analizador_cambios --version
 ```
+Based on the 
+
+README.md
+
+ content, I'll add a warning note about the PATH verification using GitHub Markdown syntax. Here's how the installation section should be updated:
+
+## Installation
+
+### Prerequisites 
+- Python 3.8 or higher
+- pip package manager
+- Git
+
+### Steps
+
+1. Clone the repository:
+```sh
+git clone https://github.com/AmilcarGPC/Proyecto-Final.git
+cd Proyecto-Final
+```
+
+2. Install the package:
+```sh
+pip install .
+```
+
+3. Verify installation:
+```sh
+contador_lineas --version
+lineas_por_clase --version
+analizador_cambios --version
+```
+
+> [!WARNING]
+> Si no se encuentran los comandos, verifique que el directorio Scripts de Python esté en su PATH del sistema:
+> - Compruebe si `C:\Users\<TU_USUARIO>\AppData\Local\Programs\Python\PythonXX\Scripts\` está en su PATH
+> - Agregue esta ruta a las variables de entorno PATH si no está presente
 
 ## Uso
 

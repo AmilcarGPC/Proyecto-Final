@@ -88,5 +88,10 @@
         "nombre_archivo": "violacion_estandar_falsos.py",
         "lineas_logicas": 2,
         "lineas_fisicas": 3
+    },
+    "test_1_v2.py": {
+        "nombre_archivo": "test_1_v2.py",
+        "lineas_logicas": 30,
+        "lineas_fisicas": 78
     }
 }
