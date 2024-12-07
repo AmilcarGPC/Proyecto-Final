@@ -95,38 +95,6 @@ contador_lineas --version
 lineas_por_clase --version
 analizador_cambios --version
 ```
-Based on the 
-
-README.md
-
- content, I'll add a warning note about the PATH verification using GitHub Markdown syntax. Here's how the installation section should be updated:
-
-## Installation
-
-### Prerequisites 
-- Python 3.8 or higher
-- pip package manager
-- Git
-
-### Steps
-
-1. Clone the repository:
-```sh
-git clone https://github.com/AmilcarGPC/Proyecto-Final.git
-cd Proyecto-Final
-```
-
-2. Install the package:
-```sh
-pip install .
-```
-
-3. Verify installation:
-```sh
-contador_lineas --version
-lineas_por_clase --version
-analizador_cambios --version
-```
 
 > [!WARNING]
 > Si no se encuentran los comandos, verifique que el directorio Scripts de Python esté en su PATH del sistema:
